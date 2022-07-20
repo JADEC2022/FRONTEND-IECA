@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { VacancyService } from './vacancy.service';
-import { SucursalesI } from '../../models/sucursales';
+import { SucursalesI } from '../../models/sucursal';
 import { AuthResponseI } from '../../models/auth-response';
 import { PerfilI } from '../../models/perfil';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';

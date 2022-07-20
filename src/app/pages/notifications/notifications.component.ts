@@ -1,7 +1,7 @@
 import { Component, Host, OnInit, resolveForwardRef } from '@angular/core';
 import { NotificationsService } from './notifications.service';
 import { AuthResponseI } from '../../models/auth-response';
-import { NotificationI } from '../../models/notifications';
+import { NotificationI } from '../../models/notificacion';
 import { Router } from '@angular/router';
 import { NavbarService } from 'app/shared/navbar/navbar.service';
 

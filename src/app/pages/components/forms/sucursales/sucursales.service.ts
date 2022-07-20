@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { SucursalesI } from '../../../../models/sucursales';
+import { SucursalesI } from '../../../../models/sucursal';
 import { environment } from '../../../../../environments/environment';
 
 

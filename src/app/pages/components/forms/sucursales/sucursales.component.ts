@@ -6,7 +6,7 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { SucursalesService } from './sucursales.service';
 
 import { AuthResponseI } from '../../../../models/auth-response';
-import { SucursalesI } from '../../../../models/sucursales';
+import { SucursalesI } from '../../../../models/sucursal';
 import { CompanyProfileComponent } from '../../../company-profile/company-profile.component';
 
 

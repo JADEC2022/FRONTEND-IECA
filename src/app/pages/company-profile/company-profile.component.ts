@@ -10,7 +10,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 
 import { AuthResponseI } from '../../models/auth-response';
 import { UsuarioI } from '../../models/usuario';
-import { SucursalesI } from '../../models/sucursales';
+import { SucursalesI } from '../../models/sucursal';
 import { SucursalesService } from '../components/forms/sucursales/sucursales.service';
 
 

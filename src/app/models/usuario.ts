@@ -11,7 +11,8 @@ export class UsuarioI {
   pass?: string;
   email_validado?: boolean;
   sups_notificacion?: string;
-  tipo_usuario?: string;
+  tipo_usuario?: string; 
+  activo?: number;
   foto_perfil?: string;
   calificacion?: number;
 
@@ -19,13 +20,13 @@ export class UsuarioI {
   apellido_paterno?: string;
   apellido_materno?: string;
   fecha_nacimiento?: Date;
+  sexo?: string;
   cv?: string;
   pais?: string;
   codigo_postal?: string;
   ciudad?: string;
   domicilio?: string;
   telefono_casa?: string;
-  sexo?: string;
   curp?: string;
 
   // Atributos de Empresa
