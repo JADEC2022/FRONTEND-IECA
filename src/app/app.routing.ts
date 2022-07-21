@@ -7,10 +7,14 @@ import { EmailValidadoGuard } from "./guards/email-validado.guard";
 import { TokenValidoGuard } from "./guards/token-valido.guard";
 import { ComponentsRoutingModule } from "./components/components-routing.module";
 import { PagesRoutingModule } from "./pages/pages.routing";
+import { CompanyAdministratorComponent } from "./pages/company-administrator/company-administrator.component";
+import { VacanciesAdministratorComponent } from "./pages/vacancies-administrator/vacancies-administrator.component";
+import { DashboardAdministratorComponent } from "./pages/dashboard-administrator/dashboard-administrator.component";
+import { PerfilAdministratorComponent } from "./pages/perfil-administrator/perfil-administrator.component";
 
 
 const routes: Routes = [
-  { path: "auth", component: AuthComponent },
+  { path: "auth", component: CompanyAdministratorComponent },
   {
     path: "",
     pathMatch: "full",
