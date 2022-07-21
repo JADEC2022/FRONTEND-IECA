@@ -1,5 +1,5 @@
 import { UsuarioI } from './usuario';
-import { VacantesI } from './vacantes';
+import { VacantesI } from './vacante';
 
 export class PostulacionI {
     id_postulacion?: number;

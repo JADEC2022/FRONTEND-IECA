@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VacantesI } from '../../models/vacantes';
+import { VacantesI } from '../../models/vacante';
 import { PostulateVacancyService } from './postulate-vacancy.service';
 import { AuthResponseI } from '../../models/auth-response';
 import Swal from 'sweetalert2';

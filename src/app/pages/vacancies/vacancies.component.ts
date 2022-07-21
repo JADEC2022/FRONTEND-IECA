@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VacanciesService } from './vacancies.service';
 import { AuthResponseI } from '../../models/auth-response';
-import { VacantesI } from '../../models/vacantes';
+import { VacantesI } from '../../models/vacante';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { VacantesFavI } from 'app/models/vacantes_favoritas';

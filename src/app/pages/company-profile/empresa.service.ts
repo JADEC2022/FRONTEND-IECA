@@ -4,12 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { VacantesI } from '../../models/vacantes';
+import { VacantesI } from '../../models/vacante';
 import { AuthResponseI } from '../../models/auth-response';
 import { UsuarioI } from '../../models/usuario';
 
 import { environment } from '../../../environments/environment';
-import { SucursalesI } from '../../models/sucursales';
+import { SucursalesI } from '../../models/sucursal';
 
 
 

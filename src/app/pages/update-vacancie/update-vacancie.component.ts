@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { VacantesI } from '../../models/vacantes';
+import { VacantesI } from '../../models/vacante';
 import { UpdateVacancieService } from './update-vacancie.service';
 import { PerfilI } from '../../models/perfil';
 import { AuthResponseI } from '../../models/auth-response';

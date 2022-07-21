@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthResponseI } from 'app/models/auth-response';
 import Swal from 'sweetalert2';
-import { SucursalesI } from '../../../../models/sucursales';
-import { VacantesI } from '../../../../models/vacantes';
+import { SucursalesI } from '../../../../models/sucursal';
+import { VacantesI } from '../../../../models/vacante';
 import { VacanteService } from './vacante.service';
 import { Router } from '@angular/router';
 

@@ -3,8 +3,8 @@ export class ExperienciaLaboralI {
     puesto?: string;
     empresa?: string;
     actividades?: string;
-    fecha_entrada?: string;
-    fecha_salida?: string;
+    fecha_entrada?: Date;
+    fecha_salida?: Date;
     trabajando?: boolean;
     id_usuario_fk?: number;
 }
