@@ -12,4 +12,4 @@ export class CompanyAdministratorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+  }
