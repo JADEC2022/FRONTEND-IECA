@@ -14,7 +14,7 @@ import { PerfilAdministratorComponent } from "./pages/perfil-administrator/perfi
 
 
 const routes: Routes = [
-  { path: "auth", component: CompanyAdministratorComponent },
+  { path: "auth", component: AuthComponent },
   {
     path: "",
     pathMatch: "full",

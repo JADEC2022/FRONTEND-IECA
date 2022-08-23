@@ -1,6 +1,6 @@
 import { Component, Host, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
-import { CursoCertificacionI } from '../../../../models/cursos_certificaciones';
+import { CursoCertificacionI } from '../../../../models/cursos-certificaciones';
 import { AuthResponseI } from '../../../../models/auth-response';
 import Swal from 'sweetalert2';
 import { UserProfileComponent } from 'app/pages/user-profile/user-profile.component';

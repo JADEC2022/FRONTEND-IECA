@@ -54,6 +54,15 @@ export class SidebarComponent implements OnInit {
                     { path: '/create-vacancie', title: 'Crear Vacante', icon: 'work', class: ''}
                 ];
                 break;
+            
+            case 'Administrador':
+                ROUTES = [
+                    { path: '/dashboard-administrator', title: 'Inicio', icon: 'dashboard', class: ''},
+                    { path: '/company-administrator', title: 'Empresas', icon: 'person', class: '' },
+                    { path: '/vacancies-administrator', title: 'Vacantes', icon: 'work', class: '' },
+                    { path: '/perfil-administrator', title: 'Perfil del Administrador', icon: 'account_circle', class: ''},
+                ];
+                break;
 
             default:
                 console.log(`Tipo no encontrado`);

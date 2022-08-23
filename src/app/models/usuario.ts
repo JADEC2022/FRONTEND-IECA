@@ -1,6 +1,6 @@
-import { CursoCertificacionI } from './cursos_certificaciones';
-import { ExperienciaAcademicaI } from './experiencia_academica';
-import { ExperienciaLaboralI } from './experiencia_laboral';
+import { CursoCertificacionI } from './cursos-certificaciones';
+import { ExperienciaAcademicaI } from './experiencia-academica';
+import { ExperienciaLaboralI } from './experiencia-laboral';
 
 export class UsuarioI {
   // Atributos generales entre Empresa y Postulante

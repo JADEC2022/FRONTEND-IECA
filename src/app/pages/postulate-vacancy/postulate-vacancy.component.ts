@@ -5,7 +5,7 @@ import { PostulateVacancyService } from './postulate-vacancy.service';
 import { AuthResponseI } from '../../models/auth-response';
 import Swal from 'sweetalert2';
 import { GuardsService } from '../../services/guards.service';
-import { VacantesFavI } from 'app/models/vacantes_favoritas';
+import { VacantesFavI } from 'app/models/vacantes-favoritas';
 
 @Component({
   selector: 'app-postulate-vacancy',

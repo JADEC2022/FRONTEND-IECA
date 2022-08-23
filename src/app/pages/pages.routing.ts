@@ -25,6 +25,11 @@ import { NotificationsComponent } from "./notifications/notifications.component"
 import { TipoPostulante } from "app/guards/tipo-postulante.guard";
 import { TipoEmpresa } from "app/guards/tipo-empresa.guard";
 
+import { CompanyAdministratorComponent } from './company-administrator/company-administrator.component';
+import { DashboardAdministratorComponent } from './dashboard-administrator/dashboard-administrator.component';
+import { PerfilAdministratorComponent } from './perfil-administrator/perfil-administrator.component';
+import { VacanciesAdministratorComponent } from './vacancies-administrator/vacancies-administrator.component';
+
 const tipo_usuario = localStorage.getItem("tipo_usuario") || "";
 export let ruta = "auth";
 if (tipo_usuario == "Postulante") {
@@ -32,6 +37,9 @@ if (tipo_usuario == "Postulante") {
 }
 if (tipo_usuario == "Empresa") {
     ruta = "my-vacancies";
+}
+if (tipo_usuario == "Administrador") {
+  ruta = "dashboard-administrator";
 }
 
 export const routes: Routes = [
@@ -60,7 +68,12 @@ export const routes: Routes = [
       { path: "see-company/:id", component: SeeCompanyComponent, canActivate: [TipoPostulante]},
       // { path: "reviews", component: ReviewsComponent },
       { path: "postulations/:id/:tipo", component: PostulationsComponent, canActivate: [TipoEmpresa]},
-      { path: "notifications", component: NotificationsComponent}
+      { path: "notifications", component: NotificationsComponent},
+
+      { path: "company-administrator", component: CompanyAdministratorComponent},
+      { path: "dashboard-administrator", component: DashboardAdministratorComponent},
+      { path: "perfil-administrator", component: PerfilAdministratorComponent},
+      { path: "vacancies-administrator", component: VacanciesAdministratorComponent},
     ],
   },
 ];

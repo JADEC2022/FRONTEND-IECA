@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
-import { CursoCertificacionI } from 'app/models/cursos_certificaciones';
+import { CursoCertificacionI } from 'app/models/cursos-certificaciones';
 
 const baseUrl = environment.baseUrl + '/cursos-certificaciones';
 

@@ -3,13 +3,13 @@ import { SeeProfileService } from './see-profile.service';
 import { UsuarioI } from '../../models/usuario';
 import { AuthResponseI } from '../../models/auth-response';
 import { ActivatedRoute } from '@angular/router';
-import { ExperienciaLaboralI } from '../../models/experiencia_laboral';
-import { ExperienciaAcademicaI } from 'app/models/experiencia_academica';
+import { ExperienciaLaboralI } from '../../models/experiencia-laboral';
+import { ExperienciaAcademicaI } from 'app/models/experiencia-academica';
 import { HabilidadI } from '../../models/habilidad';
 import { IdiomaI } from 'app/models/idioma';
 import { ValorI } from '../../models/valor';
 import { PerfilI } from '../../models/perfil';
-import { CursoCertificacionI } from '../../models/cursos_certificaciones';
+import { CursoCertificacionI } from '../../models/cursos-certificaciones';
 import Swal from 'sweetalert2';
 import { PostulacionI } from 'app/models/postulacion';
 

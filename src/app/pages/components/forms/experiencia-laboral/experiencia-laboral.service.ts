@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ExperienciaLaboralI } from '../../../../models/experiencia_laboral';
+import { ExperienciaLaboralI } from '../../../../models/experiencia-laboral';
 
 const baseUrl = environment.baseUrl + '/experiencias-laborales';
 

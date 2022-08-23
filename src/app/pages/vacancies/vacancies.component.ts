@@ -4,7 +4,7 @@ import { AuthResponseI } from '../../models/auth-response';
 import { VacantesI } from '../../models/vacante';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { VacantesFavI } from 'app/models/vacantes_favoritas';
+import { VacantesFavI } from 'app/models/vacantes-favoritas';
 import { PageEvent } from '@angular/material/paginator';
 import { PerfilI } from '../../models/perfil';
 import { FormBuilder, FormControl } from '@angular/forms';

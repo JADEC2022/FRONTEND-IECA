@@ -12,7 +12,7 @@ import {Moment} from 'moment';
 
 
 import { FormBuilder, Validators } from "@angular/forms";
-import { ExperienciaLaboralI } from '../../../../models/experiencia_laboral';
+import { ExperienciaLaboralI } from '../../../../models/experiencia-laboral';
 import { AuthResponseI } from '../../../../models/auth-response';
 import Swal from 'sweetalert2';
 import { UserProfileComponent } from 'app/pages/user-profile/user-profile.component';

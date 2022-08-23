@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthResponseI } from '../../models/auth-response';
 import { FavoritesService } from './favorites.service';
-import { VacantesFavI } from '../../models/vacantes_favoritas';
+import { VacantesFavI } from '../../models/vacantes-favoritas';
 import { PageEvent } from '@angular/material/paginator';
 import { VacanciesService } from '../vacancies/vacancies.service';
 import Swal from 'sweetalert2';
