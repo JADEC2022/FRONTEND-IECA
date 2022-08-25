@@ -12,7 +12,6 @@ import { VacanciesAdministratorComponent } from "./pages/vacancies-administrator
 import { DashboardAdministratorComponent } from "./pages/dashboard-administrator/dashboard-administrator.component";
 import { PerfilAdministratorComponent } from "./pages/perfil-administrator/perfil-administrator.component";
 
-
 const routes: Routes = [
   { path: "auth", component: AuthComponent },
   {

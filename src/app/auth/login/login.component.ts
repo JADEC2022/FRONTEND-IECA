@@ -182,6 +182,9 @@ export class LoginComponent implements OnInit {
         if (resp.data.tipo_usuario == 'Empresa') {
           ruta = '/my-vacancies';
         }
+        if (resp.data.tipo_usuario == 'Administrador') {
+          ruta = '/vacancies-administrator';
+        }
         loginForm.reset();
         return this.router.navigateByUrl(ruta);        
       }, ((error) => {
