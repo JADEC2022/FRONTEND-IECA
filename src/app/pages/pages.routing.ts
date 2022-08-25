@@ -39,7 +39,7 @@ if (tipo_usuario == "Empresa") {
     ruta = "my-vacancies";
 }
 if (tipo_usuario == "Administrador") {
-  ruta = "dashboard-administrator";
+  ruta = "vacancies-administrator";
 }
 
 export const routes: Routes = [

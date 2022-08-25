@@ -190,7 +190,7 @@ export class LoginComponent implements OnInit {
 					ruta = "/my-vacancies";
 				}
 				if (resp.data.tipo_usuario == "Administrador") {
-					ruta = "/company-administrator";
+					ruta = "/vacancies-administrator";
 				}
 				loginForm.reset();
 				return this.router.navigateByUrl(ruta);
