@@ -117,9 +117,25 @@ End Header -->
 									</div>
 								</div>
 								<div class="text-center">
-									<button type="submit" class="btn btn-success">Validar</button>
-									<button type="submit" class="btn btn-danger">Rechazar</button>
-									<button type="submit" class="btn btn-warning">
+									<button
+										type="submit"
+										class="btn btn-success"
+										(click)="aceptarEmpresa(empresa)"
+									>
+										Aceptar
+									</button>
+									<button
+										type="submit"
+										class="btn btn-danger"
+										(click)="rechazarEmpresa(empresa)"
+									>
+										Rechazar
+									</button>
+									<button
+										type="submit"
+										class="btn btn-warning"
+										(click)="enEsperaEmpresa(empresa)"
+									>
 										En Espera
 									</button>
 								</div>
@@ -135,5 +151,8 @@ End Header -->
 				</div>
 			</div>
 		</section>
+		<div *ngIf="empresas.length === 0" style="text-align: center">
+			No hay empresas por el momento
+		</div>
 	</div>
 </div>

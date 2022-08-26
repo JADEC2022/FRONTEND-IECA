@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import Swal from "sweetalert2";
 import { CompanyAdministratorService } from "./company-administrator.service";
 import { AuthResponseI } from "../../models/auth-response";
 import { EmpresaI } from "../../models/empresa";
@@ -10,18 +11,93 @@ import { EmpresaI } from "../../models/empresa";
 })
 export class CompanyAdministratorComponent implements OnInit {
 	empresas: EmpresaI[] = [];
+	estado: String = null;
 
 	constructor(
 		private companyAdministratorService: CompanyAdministratorService
 	) {}
 
 	ngOnInit(): void {
+		this.getEmpresasByEstado(this.estado);
+	}
+
+	getEmpresasByEstado(estado: String = null): void {
+		const formData = { estado: estado };
 		this.companyAdministratorService
-			.getCompanysByEstado(null)
+			.getCompanysByEstado(formData)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.empresas = resp.data;
 				}
 			});
+	}
+
+	aceptarEmpresa(empresa: EmpresaI): void {
+		this.companyAdministratorService
+			.aceptarEmpresa(empresa.id_empresa)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					this.empresas = [];
+					this.getEmpresasByEstado(this.estado);
+					this.doneMassage(
+						"Empresa ACEPTADA, se le ha mandado un correo a la empresa para notificarle de ello"
+					);
+				} else {
+					this.errorMassage("No fue posible ACEPTAR la empresa");
+				}
+			});
+	}
+
+	rechazarEmpresa(empresa: EmpresaI): void {
+		const idAdmin = parseInt(localStorage.getItem("id_usuario"));
+		this.companyAdministratorService
+			.rechazarEmpresa(empresa.id_empresa, idAdmin)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					this.empresas = [];
+					this.getEmpresasByEstado(this.estado);
+					this.doneMassage(
+						"Empresa RECHAZADA, se le ha mandado un correo a la empresa para notificarle de ello"
+					);
+				} else {
+					this.errorMassage("No fue posible RECHAZAR la empresa");
+				}
+			});
+	}
+
+	enEsperaEmpresa(empresa: EmpresaI): void {
+		this.companyAdministratorService
+			.enEsperaEmpresa(empresa.id_empresa)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					this.empresas = [];
+					this.getEmpresasByEstado(this.estado);
+					this.doneMassage(
+						"Empresa puesta EN ESPERA, se le ha mandado un correo a la empresa para notificarle de ello"
+					);
+				} else {
+					this.errorMassage("No fue posible poner EN ESPERA la empresa");
+				}
+			});
+	}
+
+	doneMassage(message: string): void {
+		Swal.fire({
+			icon: "success",
+			title: "Estado actualizado",
+			text: message,
+			showConfirmButton: false,
+			timer: 4000,
+		});
+	}
+
+	errorMassage(message: string): void {
+		Swal.fire({
+			icon: "error",
+			title: "Ocurrió un error",
+			text: message,
+			showConfirmButton: false,
+			timer: 4000,
+		});
 	}
 }
