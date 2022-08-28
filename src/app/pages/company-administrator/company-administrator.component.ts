@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { CompanyAdministratorService } from "./company-administrator.service";
 import { AuthResponseI } from "../../models/auth-response";
 import { EmpresaI } from "../../models/empresa";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
 	selector: "app-company-administrator",
@@ -12,6 +13,7 @@ import { EmpresaI } from "../../models/empresa";
 export class CompanyAdministratorComponent implements OnInit {
 	empresas: EmpresaI[] = [];
 	estado: String = null;
+	diasEnEspera: number = 15;
 
 	constructor(
 		private companyAdministratorService: CompanyAdministratorService
@@ -25,6 +27,16 @@ export class CompanyAdministratorComponent implements OnInit {
 		const formData = { estado: estado };
 		this.companyAdministratorService
 			.getCompanysByEstado(formData)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					this.empresas = resp.data;
+				}
+			});
+	}
+
+	getEmpresasEnEsperaXDias(dias: number): void {
+		this.companyAdministratorService
+			.getCompanysEnEsperaXDias(dias)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.empresas = resp.data;
@@ -79,6 +91,26 @@ export class CompanyAdministratorComponent implements OnInit {
 					this.errorMassage("No fue posible poner EN ESPERA la empresa");
 				}
 			});
+	}
+
+	changeEstado(estado: String) {
+		this.estado = estado;
+		this.getEmpresasByEstado(this.estado);
+		Swal.fire({
+			icon: "success",
+			title: "Empresas actualizadas",
+			text: "Se han actualizado los datos",
+			showConfirmButton: false,
+			timer: 2000,
+		});
+	}
+
+	changeDiasDespues(check: boolean) {
+		if (check) {
+			this.getEmpresasEnEsperaXDias(this.diasEnEspera);
+		} else {
+			this.getEmpresasByEstado(this.estado);
+		}
 	}
 
 	doneMassage(message: string): void {

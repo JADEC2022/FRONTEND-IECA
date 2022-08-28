@@ -17,6 +17,10 @@ export class CompanyAdministratorService {
 		return this.http.put(`${baseUrl}/empresa/1`, formData);
 	}
 
+	getCompanysEnEsperaXDias(dias: number) {
+		return this.http.get(`${baseUrl}/empresas-espera-sin-modificar/${dias}`);
+	}
+
 	aceptarEmpresa(id: number) {
 		return this.http.put(`${baseUrl}/aceptar/${id}`, formData);
 	}
