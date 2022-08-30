@@ -37,6 +37,13 @@ export class CompanyAdministratorService {
 		);
 	}
 
+	buscarEmpresas(palabra: string) {
+		const body = {
+			palabra: palabra,
+		};
+		return this.http.put(`${baseUrl}/buscar-por-nombre/Empresa`, body);
+	}
+
 	addAccionEmpresa(formData) {
 		return this.http.post(`${baseUrlAccion}/`, formData);
 	}

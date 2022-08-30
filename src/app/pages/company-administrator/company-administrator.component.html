@@ -1,44 +1,9 @@
-<!-- <header id="header" class="header fixed-top d-flex align-items-center">
-	<div class="search-bar">
-		<form
-			class="search-form d-flex align-items-center"
-			method="POST"
-			action="#"
-		>
-			<input
-				type="text"
-				name="query"
-				placeholder="Buscar empresa..."
-				title="Enter search keyword"
-			/>
-			<button type="submit" title="Search"><i class="bi bi-search"></i></button>
-		</form>
-	</div>
-
-
-	<nav class="header-nav ms-auto">
-		<ul class="d-flex align-items-center">
-			<li class="nav-item d-block d-lg-none">
-				<a class="nav-link nav-icon search-bar-toggle" href="#">
-					<i class="bi bi-search"></i>
-				</a>
-			</li>
-
-		</ul>
-	</nav>
-</header>
-End Header -->
 <div class="main-content">
 	<div class="container-fluid">
 		<!-- Filtros -->
 		<div class="card">
 			<div class="card-body">
 				<h4 class="text-primary" style="padding-top: 10px">Filtros</h4>
-				<!-- <form *ngIf="!filterForm">
-                    <h3 class="font-weight-bold text-center text-primary">¡No se han encontrado resultados!</h3>
-                    <img src="../../../assets/img/without_result.svg" class="img-fluid rounded mx-auto d-block" alt="Imagen para representar que no hay resultados">
-                </form> -->
-				<!-- <form [formGroup]="filterForm"> -->
 				<form>
 					<div class="row align-items-center justify-content-center">
 						<div class="col-md-4">
@@ -48,7 +13,7 @@ End Header -->
 									value=""
 									class="form-control"
 									placeholder="Buscar por nombre de empresa ..."
-									[formControl]=""
+									[formControl]="search"
 								/>
 								<button
 									mat-raised-button

@@ -3,6 +3,8 @@ import Swal from "sweetalert2";
 import { CompanyAdministratorService } from "./company-administrator.service";
 import { AuthResponseI } from "../../models/auth-response";
 import { EmpresaI } from "../../models/empresa";
+import { FormControl } from "@angular/forms";
+import { debounceTime } from "rxjs/operators";
 
 @Component({
 	selector: "app-company-administrator",
@@ -13,6 +15,10 @@ export class CompanyAdministratorComponent implements OnInit {
 	empresas: EmpresaI[] = [];
 	estado: String = null;
 	diasEnEspera: number = 15;
+	buscarPalabra: string = "";
+	diasDespues: boolean = false;
+
+	search = new FormControl("");
 
 	constructor(
 		private companyAdministratorService: CompanyAdministratorService
@@ -20,6 +26,10 @@ export class CompanyAdministratorComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.getEmpresasByEstado(this.estado);
+		this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
+			this.buscarPalabra = value;
+			this.buscarEmpresas(value);
+		});
 	}
 
 	getEmpresasByEstado(estado: String = null): void {
@@ -99,6 +109,25 @@ export class CompanyAdministratorComponent implements OnInit {
 					);
 				} else {
 					this.errorMassage("No fue posible poner EN ESPERA la empresa");
+				}
+			});
+	}
+
+	buscarEmpresas(palabra: string): void {
+		this.companyAdministratorService
+			.buscarEmpresas(palabra)
+			.subscribe((resp: AuthResponseI) => {
+				this.empresas = [];
+				if (resp.status) {
+					if (palabra !== "") {
+						this.empresas = resp.data;
+					} else {
+						if (this.estado === "EN ESPERA" && this.diasDespues) {
+							this.getEmpresasEnEsperaXDias(this.diasEnEspera);
+						} else {
+							this.getEmpresasByEstado(this.estado);
+						}
+					}
 				}
 			});
 	}

@@ -1,6 +1,5 @@
 <div class="main-content">
 	<div class="container-fluid">
-
 		<div class="card">
 			<div class="card-body">
 				<h4 class="text-primary" style="padding-top: 10px">Filtros</h4>
@@ -61,7 +60,6 @@
 						<div
 							class="card-body profile-card pt-4 d-flex flex-column align-items-center"
 						>
-
 							<div
 								class="card-avatar"
 								*ngIf="vacante.imagen === null; else noEsNulo"
@@ -81,12 +79,13 @@
 								<b>{{ vacante.estado }}</b>
 							</h4>
 							<h3>Empresa:</h3>
-							<h4><b>{{ vacante.Usuario.nombre | uppercase}}</b></h4>
+							<h4>
+								<b>{{ vacante.Usuario.nombre | uppercase }}</b>
+							</h4>
 							<h3 *ngIf="vacante.dias_transcurridos">Días transcurridos:</h3>
 							<h4 *ngIf="vacante.dias_transcurridos">
 								<b>{{ vacante.dias_transcurridos }}</b>
 							</h4>
-
 						</div>
 					</div>
 				</div>
@@ -179,10 +178,16 @@
 				</div>
 			</div>
 		</section>
-		<div *ngIf="vacantes.length === 0 && buscarPalabra === ''" style="text-align: center">
+		<div
+			*ngIf="vacantes.length === 0 && buscarPalabra === ''"
+			style="text-align: center"
+		>
 			No hay vacantes por el momento
 		</div>
-		<div *ngIf="vacantes.length === 0 && buscarPalabra !== ''" style="text-align: center">
+		<div
+			*ngIf="vacantes.length === 0 && buscarPalabra !== ''"
+			style="text-align: center"
+		>
 			No hay ningún puesto de alguna vacante que coincida con esta búsqueda
 		</div>
 	</div>
