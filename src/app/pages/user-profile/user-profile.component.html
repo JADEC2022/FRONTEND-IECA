@@ -1,241 +1,333 @@
 <div class="main-content">
+	<!-- Spinner -->
+	<div
+		*ngIf="!usuario"
+		class="row justify-content-center align-items-center vh-100"
+	>
+		<mat-spinner></mat-spinner>
+	</div>
 
-    <!-- Spinner -->
-    <div *ngIf="!usuario" class="row justify-content-center align-items-center vh-100">
-        <mat-spinner></mat-spinner>
-    </div>
+	<div *ngIf="usuario">
+		<div class="container-fluid">
+			<!-- ===== Primer Renglón ===== -->
+			<div class="row align-items-center">
+				<!-- ===== Columna de Perfil -->
+				<div class="col-md-4">
+					<!-- ===== Foto de Perfil ====== -->
+					<div class="card card-profile">
+						<div class="card-avatar" *ngIf="!foto_perfil">
+							<p
+								matTooltip="Cambiar foto de perfil"
+								(click)="inputFotoPerfil.click()"
+							>
+								Cambiar
+							</p>
+							<img
+								class="img"
+								src="./assets/img/faces/marc.jpg"
+								(click)="inputFotoPerfil.click()"
+							/>
+						</div>
+						<div class="card-avatar" *ngIf="foto_perfil">
+							<p (click)="inputFotoPerfil.click()">Cambiar</p>
+							<img
+								class="img"
+								[src]="foto_perfil"
+								(click)="inputFotoPerfil.click()"
+							/>
+						</div>
+						<!-- Cuerpo del card -->
+						<div class="card-body">
+							<h6 class="card-category text-gray">{{ nombreCompleto }}</h6>
+							<h4 class="card-title">{{ email }}</h4>
+							<p class="card-description">
+								{{ telefono }}
+							</p>
+							<input
+								type="file"
+								accept=".png, .jpg, .jpeg"
+								hidden
+								#inputFotoPerfil
+								(change)="capturarImage($event)"
+							/>
+							<p *ngIf="extensionValid" class="text-danger">
+								Formatos válidos '.png' '.jpg' '.jpeg'
+							</p>
+							<p *ngIf="tamnioValid" class="text-danger">
+								El archivo no debe exceder los 75 Kilobytes
+							</p>
+							<button
+								*ngIf="changeFoto"
+								class="btn btn-rose"
+								matTooltip="Guardar foto"
+								(click)="guardarFoto()"
+							>
+								Guardar foto
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- ===== Columna de Datos personales ===== -->
+				<div class="col-md-8">
+					<!-- ===== Card de Datos personales ===== -->
+					<div class="card">
+						<!-- ===== Encabezado de Card ===== -->
+						<div class="card-header card-header-bblue">
+							<h4 class="card-title">Editar Perfil</h4>
+							<p class="card-category">Completa tu perfil</p>
+						</div>
+						<!-- ===== Contenido de Card ===== -->
+						<div class="card-body">
+							<!-- ===== Formulario de Datos Personales ===== -->
+							<app-user-form [usuario]="usuario"></app-user-form>
+						</div>
+					</div>
+				</div>
+			</div>
 
-    <div *ngIf="usuario">
-        <div class="container-fluid">
+			<!-- ===== Segundo Renglón ===== -->
+			<div class="row align-items-center">
+				<!-- ===== Columna de Perfiles ===== -->
+				<div class="col-md-4">
+					<app-perfiles
+						[perfiles]="perfiles"
+						[id]="idUsuario"
+						[type]="'Postulante'"
+					></app-perfiles>
+				</div>
+				<!-- ===== Columna de Experiencia Laboral ===== -->
+				<div class="col-md-8">
+					<!-- ===== Card de Experiencia Laboral ===== -->
+					<div class="card">
+						<!-- ===== Encabezado de Experiencia Laboral ===== -->
+						<div class="card-header card-header-bdark">
+							<h4 class="card-title">Experiencia Laboral</h4>
+							<p class="card-category">Completa tu perfil</p>
+						</div>
+						<!-- ===== Cuerpo del card ===== -->
+						<div class="card-body">
+							<mat-accordion class="example-headers-align" multi>
+								<mat-expansion-panel
+									hideToggle
+									[expanded]="panelExpL"
+									(opened)="panelExpL = true"
+									(closed)="panelExpL = false"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title> Nueva </mat-panel-title>
+										<mat-panel-description>
+											Experiencia Laboral
+											<mat-icon
+												class="text-primary"
+												matTooltip="Agregar una nueva"
+												>add</mat-icon
+											>
+										</mat-panel-description>
+									</mat-expansion-panel-header>
+									<!-- ===== Formulario para agregar una experiencia laboral ===== -->
+									<app-experiencia-laboral-form
+										[tipo]="'add'"
+									></app-experiencia-laboral-form>
+								</mat-expansion-panel>
+								<div *ngFor="let expL of experienciasLaborales">
+									<mat-expansion-panel
+										class="m-t"
+										(opened)="panelOpenState = true"
+										(closed)="panelOpenState = false"
+									>
+										<mat-expansion-panel-header>
+											<mat-panel-title>
+												{{ expL.puesto }}
+											</mat-panel-title>
+											<mat-panel-description>
+												{{ expL.empresa }}
+												<mat-icon
+													*ngIf="expL.trabajando"
+													class="text-primary"
+													matTooltip="Empleo actual"
+													>done</mat-icon
+												>
+											</mat-panel-description>
+										</mat-expansion-panel-header>
+										<!-- ===== Formulario para editar experiencia laboral ===== -->
+										<app-experiencia-laboral-form
+											[tipo]="'update'"
+											[experienciaLaboral]="expL"
+										></app-experiencia-laboral-form>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <!-- ===== Primer Renglón ===== -->
-            <div class="row align-items-center">
-                <!-- ===== Columna de Perfil -->
-                <div class="col-md-4">
-                    <!-- ===== Foto de Perfil ====== -->
-                    <div class="card card-profile">
-                        <div class="card-avatar" *ngIf="!foto_perfil">
-                            <p matTooltip="Cambiar foto de perfil" (click)="inputFotoPerfil.click()">Cambiar</p>
-                            <img class="img" src="./assets/img/faces/marc.jpg" (click)="inputFotoPerfil.click()" />
-                        </div>
-                        <div class="card-avatar" *ngIf="foto_perfil">
-                            <p (click)="inputFotoPerfil.click()">Cambiar</p>
-                            <img class="img" [src]="foto_perfil" (click)="inputFotoPerfil.click()" />
-                        </div>
-                        <!-- Cuerpo del card -->
-                        <div class="card-body">
-                            <h6 class="card-category text-gray">{{nombreCompleto}}</h6>
-                            <h4 class="card-title">{{email}}</h4>
-                            <p class="card-description">
-                                {{telefono}}
-                            </p>
-                            <input type="file" accept=".png, .jpg, .jpeg" hidden #inputFotoPerfil (change)="capturarImage($event)">
-                            <p *ngIf="extensionValid" class="text-danger">Formatos válidos '.png' '.jpg' '.jpeg'</p>
-                            <p *ngIf="tamnioValid" class="text-danger">El archivo no debe exceder los 75 Kilobytes</p>
-                            <button *ngIf="changeFoto" class="btn btn-rose" matTooltip="Guardar foto" (click)="guardarFoto()">Guardar foto</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- ===== Columna de Datos personales ===== -->
-                <div class="col-md-8">
-                    <!-- ===== Card de Datos personales ===== -->
-                    <div class="card">
-                        <!-- ===== Encabezado de Card ===== -->
-                        <div class="card-header card-header-bblue">
-                            <h4 class="card-title">Editar Perfil</h4>
-                            <p class="card-category">Completa tu perfil</p>
-                        </div>
-                        <!-- ===== Contenido de Card ===== -->
-                        <div class="card-body">
-                            <!-- ===== Formulario de Datos Personales ===== -->
-                            <app-user-form [usuario]="usuario"></app-user-form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<!-- ===== Tercer Renglón ===== -->
+			<div class="row align-items-center">
+				<!-- ===== Columna de Habilidades ===== -->
+				<div class="col-md-4">
+					<app-habilidades [habilidades]="habilidades"></app-habilidades>
+				</div>
+				<!-- ===== Columna de Experiencia Academica ===== -->
+				<div class="col-md-8">
+					<div class="card">
+						<!-- ===== Encabezado de Card ===== -->
+						<div class="card-header card-header-bblue">
+							<h4 class="card-title">Experiencia Acádemica</h4>
+							<p class="card-catergory">Completa tu perfil</p>
+						</div>
+						<div class="card-body">
+							<mat-accordion class="example-headers-align" multi>
+								<mat-expansion-panel
+									hideToggle
+									[expanded]="panelExpA"
+									(opened)="panelExpA = true"
+									(closed)="panelExpA = false"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title> Nueva </mat-panel-title>
+										<mat-panel-description>
+											Experiencia Académica
+											<mat-icon
+												class="text-primary"
+												matTooltip="Agregar una nueva"
+												>add</mat-icon
+											>
+										</mat-panel-description>
+									</mat-expansion-panel-header>
+									<!-- ===== Formulario para agregar una experiencia academica ===== -->
+									<app-experiencia-academica-form
+										[tipo]="'add'"
+									></app-experiencia-academica-form>
+								</mat-expansion-panel>
 
-            <!-- ===== Segundo Renglón ===== -->
-            <div class="row align-items-center">
-                <!-- ===== Columna de Perfiles ===== -->
-                <div class="col-md-4">
-                    <app-perfiles [perfiles]="perfiles" [id]="idUsuario" [type]="'Postulante'"></app-perfiles>
-                </div>
-                <!-- ===== Columna de Experiencia Laboral ===== -->
-                <div class="col-md-8">
-                    <!-- ===== Card de Experiencia Laboral ===== -->
-                    <div class="card">
-                        <!-- ===== Encabezado de Experiencia Laboral ===== -->
-                        <div class="card-header card-header-bdark">
-                            <h4 class="card-title">Experiencia Laboral</h4>
-                            <p class="card-category">Completa tu perfil</p>
-                        </div>
-                        <!-- ===== Cuerpo del card ===== -->
-                        <div class="card-body">
-                            <mat-accordion class="example-headers-align" multi>
-                                <mat-expansion-panel hideToggle [expanded]="panelExpL" (opened)="panelExpL = true" (closed)="panelExpL = false">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            Nueva
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            Experiencia Laboral
-                                            <mat-icon class="text-primary" matTooltip="Agregar una nueva">add</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <!-- ===== Formulario para agregar una experiencia laboral ===== -->
-                                    <app-experiencia-laboral-form [tipo]="'add'"></app-experiencia-laboral-form>
-                                </mat-expansion-panel>
-                                <div *ngFor="let expL of experienciasLaborales">
-                                    <mat-expansion-panel class="m-t" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                                {{expL.puesto}}
-                                            </mat-panel-title>
-                                            <mat-panel-description>
-                                                {{expL.empresa}}
-                                                <mat-icon *ngIf="expL.trabajando" class="text-primary" matTooltip="Empleo actual">done</mat-icon>
-                                            </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <!-- ===== Formulario para editar experiencia laboral ===== -->
-                                        <app-experiencia-laboral-form [tipo]="'update'" [experienciaLaboral]="expL"></app-experiencia-laboral-form>
-                                    </mat-expansion-panel>
-                                </div>
-                            </mat-accordion>
-                        </div>
-                    </div>
-                </div>
-            </div>
+								<div *ngFor="let expA of experienciasAcademicas">
+									<mat-expansion-panel
+										class="m-t"
+										(opened)="panelOpenState = true"
+										(closed)="panelOpenState = false"
+									>
+										<mat-expansion-panel-header>
+											<mat-panel-title>
+												{{ expA.nivel }}
+											</mat-panel-title>
+											<mat-panel-description>
+												{{ expA.institucion }}
+												<mat-icon
+													*ngIf="expA.estudiando"
+													class="text-primary"
+													matTooltip="Estudio actual"
+													>done</mat-icon
+												>
+											</mat-panel-description>
+										</mat-expansion-panel-header>
+										<!-- ===== Formulario para editar experiencia academica ===== -->
+										<app-experiencia-academica-form
+											[tipo]="'update'"
+											[experienciaAcademica]="expA"
+										></app-experiencia-academica-form>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+					</div>
+				</div>
+			</div>
 
-            <!-- ===== Tercer Renglón ===== -->
-            <div class="row align-items-center">
-                <!-- ===== Columna de Habilidades ===== -->
-                <div class="col-md-4">
-                    <app-habilidades [habilidades]="habilidades"></app-habilidades>
-                </div>
-                <!-- ===== Columna de Experiencia Academica ===== -->
-                <div class="col-md-8">
-                    <div class="card">
-                        <!-- ===== Encabezado de Card ===== -->
-                        <div class="card-header card-header-bblue">
-                            <h4 class="card-title">
-                                Experiencia Acádemica
-                            </h4>
-                            <p class="card-catergory">
-                                Completa tu perfil
-                            </p>
-                        </div>
-                        <div class="card-body">
+			<!-- ===== Cuarto Renglón ===== -->
+			<div class="row align-items-center">
+				<!-- ==== Columna de Idiomas ====-->
+				<div class="col-md-4">
+					<app-idiomas [idiomas]="idiomas"></app-idiomas>
+				</div>
 
-                            <mat-accordion class="example-headers-align" multi>
-                                <mat-expansion-panel hideToggle [expanded]="panelExpA" (opened)="panelExpA = true" (closed)="panelExpA = false">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            Nueva
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            Experiencia Académica
-                                            <mat-icon class="text-primary" matTooltip="Agregar una nueva">add</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <!-- ===== Formulario para agregar una experiencia academica ===== -->
-                                    <app-experiencia-academica-form [tipo]="'add'"></app-experiencia-academica-form>
-                                </mat-expansion-panel>
+				<!-- ===== Cursos y/o Certificados =====-->
+				<div class="col-md-8">
+					<div class="card">
+						<!-- ===== Encabezado de Card ===== -->
+						<div class="card-header card-header-bdark">
+							<h4 class="card-title">Cursos y/o Certificados</h4>
+							<p class="card-catergory">Completa tu perfil</p>
+						</div>
+						<div class="card-body">
+							<mat-accordion class="example-headers-align" multi>
+								<mat-expansion-panel
+									hideToggle
+									[expanded]="panelCurC"
+									(opened)="panelCurC = true"
+									(closed)="panelCurC = false"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title> Agregar </mat-panel-title>
+										<mat-panel-description>
+											Nuevo curso o certificacion
+											<mat-icon
+												class="text-primary"
+												matTooltip="Agregar una nueva"
+												>add</mat-icon
+											>
+										</mat-panel-description>
+									</mat-expansion-panel-header>
+									<!-- ===== Formulario para agregar un curso o certificacion ===== -->
+									<app-curso-certificacion-form
+										[tipo]="'add'"
+									></app-curso-certificacion-form>
+								</mat-expansion-panel>
 
-                                <div *ngFor="let expA of experienciasAcademicas">
-                                    <mat-expansion-panel class="m-t" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                                {{expA.nivel}}
-                                            </mat-panel-title>
-                                            <mat-panel-description>
-                                                {{expA.institucion}}
-                                                <mat-icon *ngIf="expA.estudiando" class="text-primary" matTooltip="Estudio actual">done</mat-icon>
-                                            </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <!-- ===== Formulario para editar experiencia academica ===== -->
-                                        <app-experiencia-academica-form [tipo]="'update'" [experienciaAcademica]="expA"></app-experiencia-academica-form>
-                                    </mat-expansion-panel>
-                                </div>
+								<div *ngFor="let curC of cursosCertificaciones">
+									<mat-expansion-panel
+										class="m-t"
+										(opened)="panelOpenState = true"
+										(closed)="panelOpenState = false"
+									>
+										<mat-expansion-panel-header>
+											<mat-panel-title>
+												{{ curC.nombre }}
+											</mat-panel-title>
+											<mat-panel-description>
+												<!-- {{curC.constancia}} -->
+											</mat-panel-description>
+										</mat-expansion-panel-header>
+										<!-- ===== Formulario para agregar un curso o certificacion ===== -->
+										<app-curso-certificacion-form
+											[tipo]="'update'"
+											[cursoCertificacion]="curC"
+										></app-curso-certificacion-form>
+									</mat-expansion-panel>
+								</div>
+							</mat-accordion>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                            </mat-accordion>
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class="row align-items-center">
+				<!-- Columna de Valores -->
+				<div class="col-md-4">
+					<app-valores [valores]="valores"></app-valores>
+				</div>
 
-            <!-- ===== Cuarto Renglón ===== -->
-            <div class="row align-items-center">
-                <!-- ==== Columna de Idiomas ====-->
-                <div class="col-md-4">
-                    <app-idiomas [idiomas]="idiomas"></app-idiomas>
-                </div>
-
-                <!-- ===== Cursos y/o Certificados =====-->
-                <div class="col-md-8">
-                    <div class="card">
-                        <!-- ===== Encabezado de Card ===== -->
-                        <div class="card-header card-header-bdark">
-                            <h4 class="card-title">
-                                Cursos y/o Certificados
-                            </h4>
-                            <p class="card-catergory">
-                                Completa tu perfil
-                            </p>
-                        </div>
-                        <div class="card-body">
-
-                            <mat-accordion class="example-headers-align" multi>
-                                <mat-expansion-panel hideToggle [expanded]="panelCurC" (opened)="panelCurC = true" (closed)="panelCurC = false">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            Agregar
-                                        </mat-panel-title>
-                                        <mat-panel-description>
-                                            Nuevo curso o certificacion
-                                            <mat-icon class="text-primary" matTooltip="Agregar una nueva">add</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-                                    <!-- ===== Formulario para agregar un curso o certificacion ===== -->
-                                    <app-curso-certificacion-form [tipo]="'add'"></app-curso-certificacion-form>
-                                </mat-expansion-panel>
-
-                                <div *ngFor="let curC of cursosCertificaciones">
-                                    <mat-expansion-panel class="m-t" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                                        <mat-expansion-panel-header>
-                                            <mat-panel-title>
-                                                {{curC.nombre}}
-                                            </mat-panel-title>
-                                            <mat-panel-description>
-                                                <!-- {{curC.constancia}} -->
-                                            </mat-panel-description>
-                                        </mat-expansion-panel-header>
-                                        <!-- ===== Formulario para agregar un curso o certificacion ===== -->
-                                        <app-curso-certificacion-form [tipo]="'update'" [cursoCertificacion]="curC"></app-curso-certificacion-form>
-                                    </mat-expansion-panel>
-                                </div>
-                            </mat-accordion>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row align-items-center">
-                <!-- Columna de Valores -->
-                <div class="col-md-4">
-                    <app-valores [valores]="valores"></app-valores>
-                </div>
-
-                <!-- Columna descargar Curriculum Vitae -->
-                <div class="col-md-8">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-md-12 text-center">
-                            <img src="../../../assets/img/log.svg" class="img-fluid" alt="..." width="50%">
-                        </div>
-                        <button class="btn btn-primary m-t" type="button" matTooltip="Descargar Curriculum Vitae">Descargar CV</button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<!-- Columna descargar Curriculum Vitae -->
+				<div class="col-md-8">
+					<div class="row justify-content-center align-items-center">
+						<div class="col-md-12 text-center">
+							<img
+								src="../../../assets/img/log.svg"
+								class="img-fluid"
+								alt="..."
+								width="50%"
+							/>
+						</div>
+						<button
+							class="btn btn-primary m-t"
+							type="button"
+							matTooltip="Descargar Curriculum Vitae"
+						>
+							Descargar CV
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
