@@ -53,6 +53,7 @@ export class VacanciesAdministratorComponent implements OnInit {
   aceptarVacante(vacante: VacantesI): void {
     this.vacantesAdministradorService.aceptarVacante(vacante.id_vacante).subscribe((resp: AuthResponseI) => {
       if (resp.status) {
+        this.addAccionVacante("ACEPTADA", vacante.estado, vacante.id_vacante);
         this.vacantes = [];
         this.getVacantesByEstado(this.estado);
         this.doneMassage("Vacante ACEPTADA, se le ha mandado un correo a la empresa para notificarle de ello");
@@ -66,6 +67,7 @@ export class VacanciesAdministratorComponent implements OnInit {
     const idAdmin = parseInt(localStorage.getItem("id_usuario"));
     this.vacantesAdministradorService.rechazarVacante(vacante.id_vacante, idAdmin).subscribe((resp: AuthResponseI) => {
       if (resp.status) {
+        this.addAccionVacante("RECHAZADA", vacante.estado, vacante.id_vacante);
         this.vacantes = [];
         this.getVacantesByEstado(this.estado);
         this.doneMassage("Vacante RECHAZADA, se le ha mandado un correo a la empresa para notificarle de ello");
@@ -78,6 +80,7 @@ export class VacanciesAdministratorComponent implements OnInit {
   enEsperaVacante(vacante: VacantesI): void {
     this.vacantesAdministradorService.enEsperaVacante(vacante.id_vacante).subscribe((resp: AuthResponseI) => {
       if (resp.status) {
+        this.addAccionVacante("EN ESPERA", vacante.estado, vacante.id_vacante);
         this.vacantes = [];
         this.getVacantesByEstado(this.estado);
         this.doneMassage("Vacante puesta EN ESPERA, se le ha mandado un correo a la empresa para notificarle de ello");
@@ -109,7 +112,7 @@ export class VacanciesAdministratorComponent implements OnInit {
 		this.getVacantesByEstado(this.estado);
 		Swal.fire({
 			icon: "success",
-			title: "Empresas actualizadas",
+			title: "Vacantes actualizadas",
 			text: "Se han actualizado los datos",
 			showConfirmButton: false,
 			timer: 2000,
@@ -124,6 +127,17 @@ export class VacanciesAdministratorComponent implements OnInit {
       this.diasDespues = false;
 			this.getVacantesByEstado(this.estado);
 		}
+	}
+
+  addAccionVacante(estado: string, estadoAnterior: string, idVacante: number) {
+		const idAdministrador = parseInt(localStorage.getItem("id_usuario"));
+		const formData = {
+			idAdministrador,
+			estadoAnterior,
+			estado,
+			idVacante,
+		};
+		this.vacantesAdministradorService.addAccionVacante(formData).subscribe();
 	}
 
   doneMassage(message: string): void {

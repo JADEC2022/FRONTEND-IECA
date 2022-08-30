@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-const baseUrl = environment.baseUrl + '/vacantes'
+const baseUrl = environment.baseUrl + '/vacantes';
+const baseUrlAccion = environment.baseUrl + "/administrador-acciones";
 const formData = {
   estado: null
 }
@@ -39,5 +40,9 @@ export class VacanciesAdministratorService {
       palabra
     }
 		return this.http.put(`${baseUrl}/buscar-por-puesto`, body);
+	}
+
+  addAccionVacante(formData) {
+		return this.http.post(`${baseUrlAccion}/`, formData);
 	}
 }
