@@ -1,5 +1,59 @@
 <div class="main-content">
 	<div class="container-fluid">
+
+		<div class="card">
+			<div class="card-body">
+				<h4 class="text-primary" style="padding-top: 10px">Filtros</h4>
+				<form>
+					<div class="row align-items-center justify-content-center">
+						<div class="col-md-4">
+							<div class="input-group no-border">
+								<input
+									type="text"
+									value=""
+									class="form-control"
+									placeholder="Buscar por puesto de vacante ..."
+									[formControl]="search"
+								/>
+								<button
+									mat-raised-button
+									type="submit"
+									class="btn btn-white btn-round btn-just-icon"
+									matTooltip="Buscar"
+								>
+									<i class="material-icons">search</i>
+									<div class="ripple-container"></div>
+								</button>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<mat-form-field appearance="">
+								<mat-label>Vacantes</mat-label>
+								<mat-select
+									formControlName="estadoVacante"
+									(selectionChange)="changeEstado($event.value)"
+								>
+									<mat-option [value]="null">Sin estado</mat-option>
+									<mat-option value="ACEPTADA">Aceptadas</mat-option>
+									<mat-option value="EN ESPERA">En espera</mat-option>
+									<mat-option value="RECHAZADA">Rechazadas</mat-option>
+								</mat-select>
+							</mat-form-field>
+						</div>
+						<div *ngIf="estado === 'EN ESPERA'" class="col-md-2">
+							<div class="row justify-content-center">
+								<mat-checkbox
+									formControlName="diasDespues"
+									(change)="changeDiasDespues($event.checked)"
+									>Mas de {{ diasEnEspera }} dias</mat-checkbox
+								>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
 		<section class="section profile" *ngIf="vacantes.length > 0">
 			<div class="row" *ngFor="let vacante of vacantes">
 				<div class="col-xl-4">
@@ -9,7 +63,20 @@
 						>
 							<img src=" " alt="Profile" class="rounded-circle" />
 							<h2>{{ vacante.puesto }}</h2>
-							<h3>Estatus: Sin Estatus</h3>
+							<h3>Estatus:</h3>
+							<h4 *ngIf="vacante.estado === null">
+								<b>SIN ESTADO</b>
+							</h4>
+							<h4>
+								<b>{{ vacante.estado }}</b>
+							</h4>
+							<h3>Empresa:</h3>
+							<h4><b>{{ vacante.Usuario.nombre | uppercase}}</b></h4>
+							<h3 *ngIf="vacante.dias_transcurridos">Días transcurridos:</h3>
+							<h4 *ngIf="vacante.dias_transcurridos">
+								<b>{{ vacante.dias_transcurridos }}</b>
+							</h4>
+
 						</div>
 					</div>
 				</div>
@@ -102,8 +169,11 @@
 				</div>
 			</div>
 		</section>
-		<div *ngIf="vacantes.length === 0" style="text-align: center">
+		<div *ngIf="vacantes.length === 0 && buscarPalabra === ''" style="text-align: center">
 			No hay vacantes por el momento
+		</div>
+		<div *ngIf="vacantes.length === 0 && buscarPalabra !== ''" style="text-align: center">
+			No hay ningún puesto de alguna vacante que coincida con esta búsqueda
 		</div>
 	</div>
 </div>

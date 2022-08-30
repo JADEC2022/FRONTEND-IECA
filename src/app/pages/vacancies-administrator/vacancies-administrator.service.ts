@@ -18,6 +18,10 @@ export class VacanciesAdministratorService {
     return this.http.put(`${baseUrl}/estado`, formDataX);
   }
 
+  getVacantesEnEsperaXDias(dias: number) {
+		return this.http.get(`${baseUrl}/vacantes-espera-sin-modificar/${dias}`);
+	}
+
   aceptarVacante (id: number) {
     return this.http.put(`${baseUrl}/aceptar/${id}`, formData);
   }
@@ -29,4 +33,11 @@ export class VacanciesAdministratorService {
   rechazarVacante (idVacante: number, idAdmin: number) {
     return this.http.put(`${baseUrl}/rechazar/${idVacante}/${idAdmin}`, formData);
   }
+
+  buscarVacantes(palabra: string) {
+    const body = {
+      palabra
+    }
+		return this.http.put(`${baseUrl}/buscar-por-puesto`, body);
+	}
 }
