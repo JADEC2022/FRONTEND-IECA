@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "environments/environment";
 
 const baseUrl = environment.baseUrl + "/usuarios";
+const baseUrlAccion = environment.baseUrl + "/administrador-acciones";
 const formData = {
 	estado: null,
 };
@@ -34,5 +35,9 @@ export class CompanyAdministratorService {
 			`${baseUrl}/rechazar/${idEmpresa}/${idAdmin}`,
 			formData
 		);
+	}
+
+	addAccionEmpresa(formData) {
+		return this.http.post(`${baseUrlAccion}/`, formData);
 	}
 }

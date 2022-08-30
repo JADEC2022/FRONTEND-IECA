@@ -3,7 +3,6 @@ import Swal from "sweetalert2";
 import { CompanyAdministratorService } from "./company-administrator.service";
 import { AuthResponseI } from "../../models/auth-response";
 import { EmpresaI } from "../../models/empresa";
-import { FormBuilder } from "@angular/forms";
 
 @Component({
 	selector: "app-company-administrator",
@@ -49,6 +48,7 @@ export class CompanyAdministratorComponent implements OnInit {
 			.aceptarEmpresa(empresa.id_empresa)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
+					this.addAccionEmpresa("ACEPTADA", empresa.estado, empresa.id_empresa);
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -66,6 +66,11 @@ export class CompanyAdministratorComponent implements OnInit {
 			.rechazarEmpresa(empresa.id_empresa, idAdmin)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
+					this.addAccionEmpresa(
+						"RECHAZADA",
+						empresa.estado,
+						empresa.id_empresa
+					);
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -82,6 +87,11 @@ export class CompanyAdministratorComponent implements OnInit {
 			.enEsperaEmpresa(empresa.id_empresa)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
+					this.addAccionEmpresa(
+						"EN ESPERA",
+						empresa.estado,
+						empresa.id_empresa
+					);
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -111,6 +121,17 @@ export class CompanyAdministratorComponent implements OnInit {
 		} else {
 			this.getEmpresasByEstado(this.estado);
 		}
+	}
+
+	addAccionEmpresa(estado: string, estadoAnterior: string, idEmpresa: number) {
+		const idAdmin = parseInt(localStorage.getItem("id_usuario"));
+		const formData = {
+			idAdministrador: idAdmin,
+			estadoAnterior: estadoAnterior,
+			estado: estado,
+			idEmpresa: idEmpresa,
+		};
+		this.companyAdministratorService.addAccionEmpresa(formData).subscribe();
 	}
 
 	doneMassage(message: string): void {
