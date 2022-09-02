@@ -55,7 +55,7 @@
 		</div>
 
 		<section class="section profile">
-			<div class="row" *ngFor="let empresa of empresas">
+			<div class="row" *ngFor="let empresa of empresas | paginate:page_size:page_number">
 				<div class="col-xl-4">
 					<div class="card">
 						<div
@@ -195,5 +195,13 @@
 		<div *ngIf="empresas.length === 0" style="text-align: center">
 			No hay empresas por el momento
 		</div>
+
+		<!-- Paginación -->
+        <div class="row justify-content-end m-t-2" *ngIf="empresas.length > 0">
+            <div class="col-md-12">
+                <mat-paginator [length]="empresas.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                </mat-paginator>
+            </div>
+        </div>
 	</div>
 </div>

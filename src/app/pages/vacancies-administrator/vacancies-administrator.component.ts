@@ -5,6 +5,7 @@ import { AuthResponseI } from '../../models/auth-response';
 import Swal from 'sweetalert2';
 import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-vacancies-administrator',
@@ -18,6 +19,9 @@ export class VacanciesAdministratorComponent implements OnInit {
 	diasEnEspera: number = 15;
   buscarPalabra: string = '';
   diasDespues: boolean = false;
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions: number[] = [5, 10, 20, 50, 100];
 
   search = new FormControl('');
 
@@ -139,6 +143,11 @@ export class VacanciesAdministratorComponent implements OnInit {
 		};
 		this.vacantesAdministradorService.addAccionVacante(formData).subscribe();
 	}
+
+  handlePage(e: PageEvent) {
+    this.page_size = e.pageSize;
+    this.page_number = e.pageIndex + 1;
+  }
 
   doneMassage(message: string): void {
     Swal.fire({

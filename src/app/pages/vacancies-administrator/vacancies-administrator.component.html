@@ -54,7 +54,7 @@
 		</div>
 
 		<section class="section profile" *ngIf="vacantes.length > 0">
-			<div class="row" *ngFor="let vacante of vacantes">
+			<div class="row" *ngFor="let vacante of vacantes | paginate:page_size:page_number">
 				<div class="col-xl-4">
 					<div class="card">
 						<div
@@ -190,5 +190,13 @@
 		>
 			No hay ningún puesto de alguna vacante que coincida con esta búsqueda
 		</div>
+
+		<!-- Paginación -->
+        <div class="row justify-content-end m-t-2" *ngIf="vacantes.length > 0">
+            <div class="col-md-12">
+                <mat-paginator [length]="vacantes.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                </mat-paginator>
+            </div>
+        </div>
 	</div>
 </div>

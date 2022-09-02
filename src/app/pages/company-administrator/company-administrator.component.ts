@@ -5,6 +5,7 @@ import { AuthResponseI } from "../../models/auth-response";
 import { EmpresaI } from "../../models/empresa";
 import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
+import { PageEvent } from "@angular/material/paginator";
 
 @Component({
 	selector: "app-company-administrator",
@@ -17,6 +18,9 @@ export class CompanyAdministratorComponent implements OnInit {
 	diasEnEspera: number = 15;
 	buscarPalabra: string = "";
 	diasDespues: boolean = false;
+	page_size: number = 5;
+	page_number: number = 1;
+	pageSizeOptions: number[] = [5, 10, 20, 50, 100];
 
 	search = new FormControl("");
 
@@ -161,6 +165,11 @@ export class CompanyAdministratorComponent implements OnInit {
 			idEmpresa: idEmpresa,
 		};
 		this.companyAdministratorService.addAccionEmpresa(formData).subscribe();
+	}
+
+	handlePage(e: PageEvent) {
+		this.page_size = e.pageSize;
+		this.page_number = e.pageIndex + 1;
 	}
 
 	doneMassage(message: string): void {
