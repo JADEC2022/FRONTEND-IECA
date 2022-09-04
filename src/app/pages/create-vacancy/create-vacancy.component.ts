@@ -106,6 +106,7 @@ export class CreateVacancyComponent implements OnInit {
     this.cargarData(tipo);
     this.formSubmitted = true;
     if (this.vacanteForm.valid) {
+      console.log('INFOOOOO:', this.vacanteForm.value);
       this.vacanteService.addVacante(this.vacanteForm.value).subscribe(
         (resp: AuthResponseI) => {
           if (resp.status) {
@@ -114,10 +115,15 @@ export class CreateVacancyComponent implements OnInit {
                 console.log(resp);
               }
             );
+            let publicar: string = '';
+            if (this.vacanteForm.value.publicada) {
+              publicar = ' y se publicó';
+            }
             this.negociable = false;
             this.elegirSucursal = false;
             this.vacanteForm.reset();
-            this.doneMassage('Experiencia Laboral guardada');
+            let mensaje: string = `La vacante se creó${publicar} exitosamente. Ahora está en proceso de revisión por parte de los administradores. Se le notificará por correo cuando sea ACEPTADA o se necesiten realizar cambios`
+            this.doneMassage(mensaje);
             this.router.navigateByUrl('/my-vacancies');
           }
         })
@@ -239,13 +245,19 @@ export class CreateVacancyComponent implements OnInit {
     });
   }
   
-  doneMassage(message: string): void {
+  doneMassage(divTexto: string): void {
+    let html: string = `
+        <style type="text/css">
+          div{
+            text-align: justify;
+          }
+        </style>
+        <div>${divTexto}</div>`;
     Swal.fire({
       icon: 'success',
-      title: 'Cambios Actualizados',
-      text: message,
-      showConfirmButton: false,
-      timer: 2700
+      title: 'Registro exitoso',
+      html,
+      showConfirmButton: true
     });
   }
 
