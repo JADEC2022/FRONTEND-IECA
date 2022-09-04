@@ -98,7 +98,7 @@ export class CompanyAdministratorComponent implements OnInit {
 
 	enEsperaEmpresa(empresa: EmpresaI): void {
 		this.companyAdministratorService
-			.enEsperaEmpresa(empresa.id_empresa)
+			.enEsperaEmpresa(empresa.id_empresa, this.diasEnEspera)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.addAccionEmpresa(

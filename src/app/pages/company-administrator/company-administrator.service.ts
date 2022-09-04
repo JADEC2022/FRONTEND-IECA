@@ -26,7 +26,10 @@ export class CompanyAdministratorService {
 		return this.http.put(`${baseUrl}/aceptar/${id}`, formData);
 	}
 
-	enEsperaEmpresa(id: number) {
+	enEsperaEmpresa(id: number, dias: number) {
+		const formData = {
+			dias: dias,
+		};
 		return this.http.put(`${baseUrl}/en-espera/${id}`, formData);
 	}
 
