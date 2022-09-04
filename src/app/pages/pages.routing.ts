@@ -7,6 +7,7 @@ import { CreateVacancyComponent } from "./create-vacancy/create-vacancy.componen
 import { CompanyProfileComponent } from "./company-profile/company-profile.component";
 import { PerfilCompletoGuard } from "../guards/perfil-completo.guard";
 import { TokenValidoGuard } from "../guards/token-valido.guard";
+import { EmpresaAceptadaGuard } from '../guards/empresa-aceptada.guard';
 import { VacanciesComponent } from "./vacancies/vacancies.component";
 
 import { PagesComponent } from "./pages.component";
@@ -57,7 +58,7 @@ export const routes: Routes = [
       // { path: "dashboard", component: DashboardComponent },
       { path: "user-profile", component: UserProfileComponent, canActivate: [TipoPostulante] },
       { path: "company-profile", component: CompanyProfileComponent, canActivate: [TipoEmpresa] },
-      { path: "create-vacancie", component: CreateVacancyComponent, canActivate: [TipoEmpresa, PerfilCompletoGuard] },
+      { path: "create-vacancie", component: CreateVacancyComponent, canActivate: [TipoEmpresa, PerfilCompletoGuard, EmpresaAceptadaGuard] },
       { path: "update-vacancie/:id", component: UpdateVacancieComponent, canActivate: [TipoEmpresa, PerfilCompletoGuard] },
       { path: "vacancies", component: VacanciesComponent, canActivate: [TipoPostulante] },
       { path: "my-vacancies", component: MyVacanciesComponent, canActivate: [TipoEmpresa] },

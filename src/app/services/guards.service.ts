@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 const baseUrl = environment.baseUrl + '/validar';
+const baseUrl2 = environment.baseUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,17 @@ export class GuardsService {
     .pipe(map((resp: any ) => {
       return resp;
     })) 
+  }
+
+  validarEmpresaAceptada() {
+    const id = localStorage.getItem('id_usuario');
+    return this.http.get(`${baseUrl2}/usuarios/${id}`)
+    .pipe(map((resp: any) => {
+      /*if (resp.status && resp.data.estado === 'ACEPTADA') {
+        return true;
+      }
+      return false;*/
+      return resp;
+    }));
   }
 }

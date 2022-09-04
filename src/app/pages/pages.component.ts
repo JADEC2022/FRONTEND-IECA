@@ -2,11 +2,14 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
+import { AuthResponseI } from '../models/auth-response';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from 'jquery';
 import { AuthUserService } from '../auth/auth-user.service';
+import Swal from 'sweetalert2';
+import { UserProfileService } from './user-profile/user-profile.service';
 
 @Component({
     selector: 'app-admin-layout',
@@ -20,6 +23,7 @@ export class PagesComponent implements OnInit {
 
     constructor(public location: Location,
                 public authService: AuthUserService,
+                private userProfileService: UserProfileService,
                 private router: Router) {
     }
 
@@ -133,6 +137,8 @@ export class PagesComponent implements OnInit {
                 $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
             }
         });
+
+        this.empresaSinEstado();
     }
 
     // tslint:disable-next-line:use-life-cycle-interface
@@ -164,6 +170,33 @@ export class PagesComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+
+    empresaSinEstado(): void {
+        if (localStorage.getItem('tipo_usuario') === 'Empresa') {
+            this.userProfileService.getUsuario().subscribe((resp: AuthResponseI) => {
+                let divTexto: string = `Actualmente su empresa está EN REVISIÓN. Espere a que los administradores validen su información y se le avise por correo.`;
+                let html: string = `
+                    <style type="text/css">
+                      div{
+                        text-align: justify;
+                      }
+                    </style>
+                    <div>${divTexto}</div>`;
+                if (resp.status && !resp.data.estado) {
+                    this.infoMassage(html);
+                }
+            });
+        }
+    }
+
+    infoMassage(html: string): void {
+        Swal.fire({
+          icon: 'info',
+          title: '¡Atención!',
+          html,
+          showConfirmButton: true
+        });
     }
 
 }
