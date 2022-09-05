@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 import { AuthUserService } from "../auth-user.service";
 import { AuthResponseI } from "../../models/auth-response";
+import { UsuarioI } from "../../models/usuario";
 
 @Component({
 	selector: "app-login",
@@ -129,6 +130,16 @@ export class LoginComponent implements OnInit {
 		});
 	}
 
+	emailNoValidado(): void {
+		Swal.fire({
+			icon: "error",
+			title: "Email no validado",
+			text: "Revisa tu bandeja de entrada y valida tu correo antes de iniciar sesión",
+			showConfirmButton: false,
+			timer: 3500,
+		});
+	}
+
 	emailEnviado(): void {
 		Swal.fire({
 			icon: "success",
@@ -174,26 +185,31 @@ export class LoginComponent implements OnInit {
 					return this.errorMassageLogin(resp.data);
 				}
 
-				if (loginForm.value.rememberMe) {
-					localStorage.setItem("email", data.email);
-					localStorage.setItem("type", data.type);
-				} else {
-					localStorage.removeItem("email");
-					localStorage.removeItem("type");
-				}
+				const emailValidado: boolean = resp.data.email_validado;
+				if (emailValidado) {
+					if (loginForm.value.rememberMe) {
+						localStorage.setItem("email", data.email);
+						localStorage.setItem("type", data.type);
+					} else {
+						localStorage.removeItem("email");
+						localStorage.removeItem("type");
+					}
 
-				let ruta = "";
-				if (resp.data.tipo_usuario == "Postulante") {
-					ruta = "/vacancies";
+					let ruta = "";
+					if (resp.data.tipo_usuario == "Postulante") {
+						ruta = "/vacancies";
+					}
+					if (resp.data.tipo_usuario == "Empresa") {
+						ruta = "/my-vacancies";
+					}
+					if (resp.data.tipo_usuario == "Administrador") {
+						ruta = "/vacancies-administrator";
+					}
+					loginForm.reset();
+					return this.router.navigateByUrl(ruta);
+				} else {
+					this.emailNoValidado();
 				}
-				if (resp.data.tipo_usuario == "Empresa") {
-					ruta = "/my-vacancies";
-				}
-				if (resp.data.tipo_usuario == "Administrador") {
-					ruta = "/vacancies-administrator";
-				}
-				loginForm.reset();
-				return this.router.navigateByUrl(ruta);
 			},
 			(error) => {
 				/* Mensaje de error si el servidor no recibe la petición */

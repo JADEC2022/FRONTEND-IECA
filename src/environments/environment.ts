@@ -4,9 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  // URL del BackEnd
-  baseUrl: 'http://localhost:3000/api',
-  // Google Places Autocomplete
-  claveAPI: 'AIzaSyBPfgwzF5SimI6ITmBN0P6fFOJOy9yHPRo'
+	production: false,
+	// URL del BackEnd
+	baseUrl: "http://localhost:3000/api",
+	// Google Places Autocomplete
+	claveAPI: "AIzaSyBPfgwzF5SimI6ITmBN0P6fFOJOy9yHPRo",
 };
