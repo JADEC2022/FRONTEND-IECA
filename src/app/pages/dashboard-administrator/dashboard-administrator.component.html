@@ -1,144 +1,6 @@
-<header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="dashboard-administrator.component.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">IECA</span>
-      </a>
-    </div><!-- End Logo -->
-
-    <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div> End Search Bar -->
-
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
-
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              Tienes 4 notificaciones
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Ver todo</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-
-          </ul><!-- End caja de notificaciones -->
-
-        </li>
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">IECA</span>
-          </a><!-- End Foto de perfil -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>IECA</h6>
-              <span>Capacitación y Formación</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <!--Caja de perfil-->
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="perfil-administrator.component.html">
-                <i class="bi bi-person"></i>
-                <span>Mi Perfil</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Cerrar Sesión</span>
-              </a>
-            </li>
-
-          </ul><!-- End Caja de perfil -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
-  </header><!-- End Header -->
-
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar" style="background-image: url('assets/img/menú.jpg');">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-heading">Menú</li>
-
-      <li class="nav-item">
-        <a class="nav-link " href="dashboard-administrator.component.html">
-          <i class="bi bi-grid-fill"></i>
-          <span>Inicio</span>
-
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="company-administrator.component.html">
-          <i class="bi bi-menu-button-wide"></i>
-          <span>Empresas</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link " href="vacancies-administrator.component.html">
-          <i class="bi bi-journal-text"></i>
-          <span>Vacantes</span>
-        </a>
-      </li>
-
-      <li class="nav-heading">Usaurio</li>
-
-      <li class="nav-item">
-        <a class="nav-link " href="perfil-administrator.component.html">
-          <i class="bi bi-person"></i>
-          <span>Mi perfil</span>
-        </a>
-      </li>
-    </ul>
-    
-    <!-- End Dashboard Nav -->
-  </aside><!-- End Sidebar-->
-
-  <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Inicio</h1>
-      <nav>
-
-      </nav>
-    </div><!-- End Page Title -->
+<div class="main-content">
+	<div class="container-fluid">
+    <!-- <main id="main" class="main"> -->
 
     <section class="section dashboard">
       <div class="row">
@@ -171,7 +33,7 @@
                       <i class="bi bi-check-square-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>189</h6>
+                      <h6>{{empresasAceptadas.length}}</h6>
                       <span class="text-success small pt-1 fw-bold"></span> <span
                         class="text-muted small pt-2 ps-1"></span>
 
@@ -200,14 +62,14 @@
                 </div>
 
                 <div class="card-body">
-                  <h5 class="card-title">Rechazadas <span>| Vacantes</span></h5>
+                  <h5 class="card-title">Rechazadas <span>| Empresas</span></h5>
 
                   <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen8.png')">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                       <i class="bi bi-file-excel-fill"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>309</h6>
+                      <h6>{{empresasRechazadas.length}}</h6>
                       <span class="text-success small pt-1 fw-bold"></span> <span
                         class="text-muted small pt-2 ps-1"></span>
 
@@ -243,7 +105,7 @@
                       <i class="bi bi-hourglass-split"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>309</h6>
+                      <h6>{{empresasEnEspera.length}}</h6>
                       <span class="text-success small pt-1 fw-bold"></span> <span
                         class="text-muted small pt-2 ps-1"></span>
 
@@ -284,36 +146,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/intel.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#245</a></th>
-                        <td><a href="#" class="text-primary">Intel</a></td>
-                        <td><span class="badge bg-warning">En espera</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/microsoft.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#2345</a></th>
-                        <td><a href="#" class="text-primary">Microsoft</a></td>
-                        <td><span class="badge bg-success">Aprobada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#3457</a></th>
-                        <td><a href="#" class="text-primary">Apple</a></td>
-                        <td><span class="badge bg-danger">Rechazada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#908</a></th>
-                        <td><a href="#" class="text-primary">Amazon</a></td>
-                        <td><span class="badge bg-success">Aprobada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#670</a></th>
-                        <td><a href="#" class="text-primary">ITSPR</a></td>
-                        <td><span class="badge bg-warning">En espera</span></td>
+                      <tr *ngFor="let empresaAceptada of empresasRechazadas">
+                        <th scope="row"><a href="#"><img src= "../../../assets/img/unknown-user.jpg" alt=""></a></th>
+                        <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
+                        <th scope="row"><a href="#">{{empresaAceptada.id_empresa}}</a></th>
+                        <td><a href="#" class="text-primary">{{empresaAceptada.nombre}}</a></td>
+                        <td><span class="badge bg-success">{{empresaAceptada.estado}}</span></td>
                       </tr>
                     </tbody>
                   </table>
@@ -419,51 +257,12 @@
 
               <div class="activity">
 
-                <div class="activity-item d-flex">
-                  <div class="activite-label">32 min</div>
+                <div class="activity-item d-flex" *ngFor="let administradorAccion of administradorAcciones">
+                  <div class="activite-label">{{administradorAccion.fecha_modificacion}}</div>
                   <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
                   <div class="activity-content">
-                    En espera <a href="#" class="fw-bold text-dark">Empresa SOTF</a>
-                  </div>
-                </div>
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">56 min</div>
-                  <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                  <div class="activity-content">
-                    Vacante validada <a href="#" class="fw-bold text-dark">Desarrollador web</a>
-                  </div>
-                </div>
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 hrs</div>
-                  <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                  <div class="activity-content">
-                    Vacante validada <a href="#" class="fw-bold text-dark">Full Stack Developer</a>
-                  </div>
-                </div>
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 día</div>
-                  <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                  <div class="activity-content">
-                    Empresa validada <a href="#" class="fw-bold text-dark">Intel</a>
-                  </div>
-                </div>
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">2 días</div>
-                  <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                  <div class="activity-content">
-                    Vacante en espera <a href="#" class="fw-bold text-dark">Auxiliar contable</a>
-                  </div>
-                </div>
-
-                <div class="activity-item d-flex">
-                  <div class="activite-label">1 mes</div>
-                  <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                  <div class="activity-content">
-                    Empresa rechazada <a href="#" class="fw-bold text-dark">Apple</a>
+                    {{administradorAccion.estado_actual}} <a href="#" class="fw-bold text-dark" *ngIf="administradorAccion.id_usuario_empresa_fk">{{administradorAccion.Usuario.nombre}}</a>
+                    <a href="#" class="fw-bold text-dark" *ngIf="administradorAccion.id_vacante_fk">{{administradorAccion.Vacante.puesto}}</a>
                   </div>
                 </div>
 
@@ -476,3 +275,5 @@
       </div><!-- End Left side columns -->
 
     </section>
+  </div>
+</div>
