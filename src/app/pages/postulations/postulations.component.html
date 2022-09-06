@@ -1,47 +1,97 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-10">
-                <mat-icon class="m-l-5" style="cursor:pointer" [routerLink]="ruta">arrow_back_ios</mat-icon>
-            </div>
-        </div>
-        <div class="row m-t-2">
-            <!-- ===== Columna de Perfil -->
-            <div class="col-md-4" *ngFor="let postulante of postulantes | paginate:page_size:page_number ">
-                <!-- ===== Foto de Perfil ====== -->
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <p (click)="verPerfil(postulante.id_postulacion)">Ver Perfil</p>
-                        <img *ngIf="!postulante.Usuario.foto_perfil" class="img" src="./assets/img/faces/marc.jpg" />
-                        <img *ngIf="postulante.Usuario.foto_perfil" class="img" [src]="postulante.Usuario.foto_perfil" />
-                    </div>
-                    <!-- Cuerpo del card -->
-                    <div class="card-body">
-                        <h6 class="card-category text-gray">{{postulante.Usuario.nombre}}</h6>
-                        <h4 class="card-title">{{postulante.Usuario.email}}</h4>
-                        <p class="card-description">{{postulante.Usuario.telefono}}</p>
-                        <p *ngIf="postulante.rechazada" class="card-description">Status: <span class="text-danger">Rechazada</span></p>
-                        <p *ngIf="postulante.aceptada" class="card-description">Status: <span class="text-success">Aceptada</span></p>
-                        <p *ngIf="!postulante.rechazada && !postulante.aceptada" class="card-description">Status: <span class="text-info">Pendiente</span></p>
-                        <p class="card-description"><small> Fecha de Postulacion: {{postulante.fecha_postulacion}}</small></p>
-                    </div>
-                    <div class="col-md-12 m-b">
-                        <button *ngIf="!postulante.rechazada" class="btn btn-danger btn-sm m-r" (click)="confirmarRechazarPostulacion(postulante.id_postulacion, postulante.Usuario.id_usuario)">
-                            <i class="material-icons">cancel</i> Rechazar
-                        </button>
-                        <button *ngIf="!postulante.aceptada" class="btn btn-primary btn-sm m-r" (click)="confirmarAceptarPostulacion(postulante.id_postulacion, postulante.Usuario.id_usuario)">
-                            <i class="material-icons">done</i> Aceptar
-                        </button>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="row justify-content-end m-t-2">
-            <div class="col-md-12">
-                <mat-paginator [length]="postulantes.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)"></mat-paginator>
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-10">
+				<mat-icon class="m-l-5" style="cursor: pointer" [routerLink]="ruta"
+					>arrow_back_ios</mat-icon
+				>
+			</div>
+		</div>
+		<div class="row m-t-2">
+			<!-- ===== Columna de Perfil -->
+			<div
+				class="col-md-4"
+				*ngFor="let postulante of postulantes | paginate: page_size:page_number"
+			>
+				<!-- ===== Foto de Perfil ====== -->
+				<div class="card card-profile">
+					<div class="card-avatar">
+						<p (click)="verPerfil(postulante.id_postulacion)">Ver Perfil</p>
+						<img
+							*ngIf="!postulante.Usuario.foto_perfil"
+							class="img"
+							src="./assets/img/unknown-user.jpg"
+						/>
+						<img
+							*ngIf="postulante.Usuario.foto_perfil"
+							class="img"
+							[src]="postulante.Usuario.foto_perfil"
+						/>
+					</div>
+					<!-- Cuerpo del card -->
+					<div class="card-body">
+						<h6 class="card-category text-gray">
+							{{ postulante.Usuario.nombre }}
+						</h6>
+						<h4 class="card-title">{{ postulante.Usuario.email }}</h4>
+						<p class="card-description">{{ postulante.Usuario.telefono }}</p>
+						<p *ngIf="postulante.rechazada" class="card-description">
+							Status: <span class="text-danger">Rechazada</span>
+						</p>
+						<p *ngIf="postulante.aceptada" class="card-description">
+							Status: <span class="text-success">Aceptada</span>
+						</p>
+						<p
+							*ngIf="!postulante.rechazada && !postulante.aceptada"
+							class="card-description"
+						>
+							Status: <span class="text-info">Pendiente</span>
+						</p>
+						<p class="card-description">
+							<small>
+								Fecha de Postulacion: {{ postulante.fecha_postulacion }}</small
+							>
+						</p>
+					</div>
+					<div class="col-md-12 m-b">
+						<button
+							*ngIf="!postulante.rechazada"
+							class="btn btn-danger btn-sm m-r"
+							(click)="
+								confirmarRechazarPostulacion(
+									postulante.id_postulacion,
+									postulante.Usuario.id_usuario
+								)
+							"
+						>
+							<i class="material-icons">cancel</i> Rechazar
+						</button>
+						<button
+							*ngIf="!postulante.aceptada"
+							class="btn btn-primary btn-sm m-r"
+							(click)="
+								confirmarAceptarPostulacion(
+									postulante.id_postulacion,
+									postulante.Usuario.id_usuario
+								)
+							"
+						>
+							<i class="material-icons">done</i> Aceptar
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row justify-content-end m-t-2">
+			<div class="col-md-12">
+				<mat-paginator
+					[length]="postulantes.length"
+					[pageSize]="page_size"
+					[pageSizeOptions]="pageSizeOptions"
+					showFirstLastButtons
+					(page)="handlePage($event)"
+				></mat-paginator>
+			</div>
+		</div>
+	</div>
 </div>

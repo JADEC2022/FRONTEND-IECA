@@ -1,54 +1,119 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div *ngFor="let notificacion of notificaciones" class="row justify-content-center">
-            <div class="col-md-8">
-                <div *ngIf="!notificacion.visto" class="card sin-ver" style="cursor: pointer; margin: 5px 0px;" (click)="verNotificacion(notificacion.id_notificacion, notificacion.url)">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body" style="padding: 5px 10px !important;">
-                                <small class="posicion-t-r">{{notificacion.fecha_creacion}}</small>
-                                <div class="row align-items-center">
-                                    <div *ngIf="notificacion.Vacante" class="col-2">
-                                        <img *ngIf="!notificacion.Vacante.Usuario.foto_perfil" src="../../../assets/img/IECA-Blanco.jpg" class="card-img-bottom">
-                                        <img *ngIf="notificacion.Vacante.Usuario.foto_perfil" [src]="notificacion.Vacante.Usuario.foto_perfil" class="card-img-bottom">
-                                    </div>
-                                    <div *ngIf="notificacion.Postulacione" class="col-2">
-                                        <img *ngIf="!notificacion.Postulacione.Usuario.foto_perfil" src="../../../assets/img/IECA-Blanco.jpg" class="card-img-bottom">
-                                        <img *ngIf="notificacion.Postulacione.Usuario.foto_perfil" [src]="notificacion.Postulacione.Usuario.foto_perfil" class="card-img-bottom">
-                                    </div>
-                                    <div class="col-10">
-                                        <h4 style="margin-top: 10px;">{{notificacion.titulo}}</h4>
-                                        <p>{{notificacion.mensaje}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="notificacion.visto" class="card" style="cursor: pointer; margin: 5px 0px;" (click)="verNotificacion(notificacion.id_notificacion, notificacion.url)">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-body" style="padding: 5px 10px !important;">
-                                <small class="posicion-t-r card-description">{{notificacion.fecha_creacion}}</small>
-                                <div class="row align-items-center">
-                                    <div *ngIf="notificacion.Vacante" class="col-2">
-                                        <img *ngIf="!notificacion.Vacante.Usuario.foto_perfil" src="../../../assets/img/IECA-Blanco.jpg" class="card-img-bottom">
-                                        <img *ngIf="notificacion.Vacante.Usuario.foto_perfil" [src]="notificacion.Vacante.Usuario.foto_perfil" class="card-img-bottom">
-                                    </div>
-                                    <div *ngIf="notificacion.Postulacione" class="col-2">
-                                        <img *ngIf="!notificacion.Postulacione.Usuario.foto_perfil" src="../../../assets/img/IECA-Blanco.jpg" class="card-img-bottom">
-                                        <img *ngIf="notificacion.Postulacione.Usuario.foto_perfil" [src]="notificacion.Postulacione.Usuario.foto_perfil" class="card-img-bottom">
-                                    </div>
-                                    <div class="col-10">
-                                        <h4 style="margin-top: 10px;" class="card-description">{{notificacion.titulo}}</h4>
-                                        <p class="card-description">{{notificacion.mensaje}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container-fluid">
+		<div
+			*ngFor="let notificacion of notificaciones"
+			class="row justify-content-center"
+		>
+			<div class="col-md-8">
+				<div
+					*ngIf="!notificacion.visto"
+					class="card sin-ver"
+					style="cursor: pointer; margin: 5px 0px"
+					(click)="
+						verNotificacion(notificacion.id_notificacion, notificacion.url)
+					"
+				>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card-body" style="padding: 5px 10px !important">
+								<small class="posicion-t-r">{{
+									notificacion.fecha_creacion
+								}}</small>
+								<div class="row align-items-center">
+									<div *ngIf="notificacion.Vacante" class="col-2">
+										<img
+											*ngIf="!notificacion.Vacante.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Vacante.Usuario.foto_perfil"
+											[src]="notificacion.Vacante.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
+									<div *ngIf="notificacion.Postulacione" class="col-2">
+										<img
+											*ngIf="!notificacion.Postulacione.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Postulacione.Usuario.foto_perfil"
+											[src]="notificacion.Postulacione.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
+									<div class="col-10">
+										<h4 style="margin-top: 10px">{{ notificacion.titulo }}</h4>
+										<p>{{ notificacion.mensaje }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div
+					*ngIf="notificacion.visto"
+					class="card"
+					style="cursor: pointer; margin: 5px 0px"
+					(click)="
+						verNotificacion(notificacion.id_notificacion, notificacion.url)
+					"
+				>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="card-body" style="padding: 5px 10px !important">
+								<small class="posicion-t-r card-description">{{
+									notificacion.fecha_creacion
+								}}</small>
+								<div class="row align-items-center">
+									<div *ngIf="notificacion.Vacante" class="col-2">
+										<img
+											*ngIf="!notificacion.Vacante.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Vacante.Usuario.foto_perfil"
+											[src]="notificacion.Vacante.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
+									<div *ngIf="notificacion.Postulacione" class="col-2">
+										<img
+											*ngIf="!notificacion.Postulacione.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Postulacione.Usuario.foto_perfil"
+											[src]="notificacion.Postulacione.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
+									<div class="col-10">
+										<h4 style="margin-top: 10px" class="card-description">
+											{{ notificacion.titulo }}
+										</h4>
+										<p class="card-description">{{ notificacion.mensaje }}</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div *ngIf="notificaciones.length === 0" style="text-align: center">
+				<h3 class="font-weight-bold text-center text-primary">
+					¡No hay ninguna notificación!
+				</h3>
+				<img
+					src="../../../assets/img/without_result.svg"
+					class="img-fluid rounded mx-auto d-block"
+					alt="Imagen para representar que no hay notificaciones"
+				/>
+			</div>
+		</div>
+	</div>
 </div>

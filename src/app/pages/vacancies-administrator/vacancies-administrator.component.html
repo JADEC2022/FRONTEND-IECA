@@ -54,7 +54,10 @@
 		</div>
 
 		<section class="section profile" *ngIf="vacantes.length > 0">
-			<div class="row" *ngFor="let vacante of vacantes | paginate:page_size:page_number">
+			<div
+				class="row"
+				*ngFor="let vacante of vacantes | paginate: page_size:page_number"
+			>
 				<div class="col-xl-4">
 					<div class="card">
 						<div
@@ -64,7 +67,7 @@
 								class="card-avatar"
 								*ngIf="vacante.imagen === null; else noEsNulo"
 							>
-								<img class="img" src="./assets/img/faces/marc.jpg" />
+								<img class="img" src="./assets/img/IECA-Blanco.jpg" />
 							</div>
 							<ng-template class="card-avatar" #noEsNulo>
 								<img class="img" [src]="vacante.imagen" />
@@ -182,21 +185,41 @@
 			*ngIf="vacantes.length === 0 && buscarPalabra === ''"
 			style="text-align: center"
 		>
-			No hay vacantes por el momento
+			<h3 class="font-weight-bold text-center text-primary">
+				¡No se han encontrado resultados!
+			</h3>
+			<img
+				src="../../../assets/img/without_result.svg"
+				class="img-fluid rounded mx-auto d-block"
+				alt="Imagen para representar que no hay resultados"
+			/>
 		</div>
 		<div
 			*ngIf="vacantes.length === 0 && buscarPalabra !== ''"
 			style="text-align: center"
 		>
-			No hay ningún puesto de alguna vacante que coincida con esta búsqueda
+			<h3 class="font-weight-bold text-center text-primary">
+				¡No hay ningún puesto de alguna vacante que coincida con esta búsqueda!
+			</h3>
+			<img
+				src="../../../assets/img/without_result.svg"
+				class="img-fluid rounded mx-auto d-block"
+				alt="Imagen para representar que no hay resultados"
+			/>
 		</div>
 
 		<!-- Paginación -->
-        <div class="row justify-content-end m-t-2" *ngIf="vacantes.length > 0">
-            <div class="col-md-12">
-                <mat-paginator [length]="vacantes.length" [pageSize]="page_size" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
-                </mat-paginator>
-            </div>
-        </div>
+		<div class="row justify-content-end m-t-2" *ngIf="vacantes.length > 0">
+			<div class="col-md-12">
+				<mat-paginator
+					[length]="vacantes.length"
+					[pageSize]="page_size"
+					[pageSizeOptions]="pageSizeOptions"
+					showFirstLastButtons
+					(page)="handlePage($event)"
+				>
+				</mat-paginator>
+			</div>
+		</div>
 	</div>
 </div>

@@ -1,109 +1,132 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-        </div>
-        <div *ngIf="usuario" class="row justify-content-md-center">
-            <div class="col-md-4">
-                <div class="row justify-content-md-center">
-                    <div class="card-avatar">
-                        <img *ngIf="!usuario.foto_perfil" class="img-fluid" src="./assets/img/faces/marc.jpg" />
-                        <img *ngIf="usuario.foto_perfil" class="img-fluid" [src]="usuario.foto_perfil" />
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 50px;">
-                    <div class="col-md-12 text-center">
-                        <h1>{{usuario.nombre}} {{usuario.apellido_paterno}} {{usuario.apellido_materno}}</h1>
-                        <br>
-                        <h2>Contacto</h2>
-                        <hr>
-                        <h3>{{usuario.telefono}}</h3>
-                        <h4>{{usuario.email}}</h4>
-                        <h4>{{usuario.domicilio}}</h4>
-                    </div>
-                </div>
+	<div class="container-fluid">
+		<div class="row"></div>
+		<div *ngIf="usuario" class="row justify-content-md-center">
+			<div class="col-md-4">
+				<div class="row justify-content-md-center">
+					<div class="card-avatar">
+						<img
+							*ngIf="!usuario.foto_perfil"
+							class="img-fluid"
+							src="./assets/img/unknown-user.jpg"
+						/>
+						<img
+							*ngIf="usuario.foto_perfil"
+							class="img-fluid"
+							[src]="usuario.foto_perfil"
+						/>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 50px">
+					<div class="col-md-12 text-center">
+						<h1>
+							{{ usuario.nombre }} {{ usuario.apellido_paterno }}
+							{{ usuario.apellido_materno }}
+						</h1>
+						<br />
+						<h2>Contacto</h2>
+						<hr />
+						<h3>{{ usuario.telefono }}</h3>
+						<h4>{{ usuario.email }}</h4>
+						<h4>{{ usuario.domicilio }}</h4>
+					</div>
+				</div>
 
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <button *ngIf="!postulante.rechazada" type="submit" class="btn btn-danger btn-sm m-r" (click)="confirmarRechazarPostulacion()">
-                            <i class="material-icons">cancel</i> Rechazar
-                        </button>
-                        <button *ngIf="!postulante.aceptada" type="submit" class="btn btn-primary btn-sm m-r" (click)="confirmarAceptarPostulacion()">
-                            <i class="material-icons">done</i> Aceptar
-                        </button>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<button
+							*ngIf="!postulante.rechazada"
+							type="submit"
+							class="btn btn-danger btn-sm m-r"
+							(click)="confirmarRechazarPostulacion()"
+						>
+							<i class="material-icons">cancel</i> Rechazar
+						</button>
+						<button
+							*ngIf="!postulante.aceptada"
+							type="submit"
+							class="btn btn-primary btn-sm m-r"
+							(click)="confirmarAceptarPostulacion()"
+						>
+							<i class="material-icons">done</i> Aceptar
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="col-md-12">
+						<h3 class="font-weight-bold">Experiencia Laboral</h3>
+						<hr />
+						<div *ngFor="let expLab of expLaborales" class="card card-body">
+							<h4 class="font-weight-bold">{{ expLab.puesto }}</h4>
+							<hr />
+							<h4>
+								{{ expLab.empresa }} | {{ expLab.fecha_entrada }} -
+								{{ expLab.fecha_salida }}
+							</h4>
+							<hr />
+							<h4>{{ expLab.actividades }}</h4>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<h3 class="font-weight-bold">Formación Académica</h3>
+						<hr />
+						<div *ngFor="let expAca of expAcademicas" class="card card-body">
+							<h4 class="font-weight-bold">{{ expAca.carrera }}</h4>
+							<hr />
+							<h4>
+								{{ expAca.institucion }} | {{ expAca.anio_entrada }} -
+								{{ expAca.anio_salida }}
+							</h4>
+						</div>
+					</div>
 
+					<div class="col-md-12">
+						<h3 class="font-weight-bold">Actualizaciones</h3>
+						<hr />
+						<div *ngFor="let cur of cursoCertificados" class="card card-body">
+							<h4 class="font-weight-bold">{{ cur.nombre }}</h4>
+							<hr />
+							<h4>{{ cur.descripcion }}</h4>
+							<hr />
+							<h4>{{ cur.link }}</h4>
+						</div>
+					</div>
 
-            </div>
-            <div class="col-md-7">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 class="font-weight-bold">Experiencia Laboral</h3>
-                        <hr>
-                        <div *ngFor="let expLab of expLaborales" class="card card-body">
-                            <h4 class="font-weight-bold">{{expLab.puesto}}</h4>
-                            <hr>
-                            <h4>{{expLab.empresa}} | {{expLab.fecha_entrada}} - {{expLab.fecha_salida}}</h4>
-                            <hr>
-                            <h4>{{expLab.actividades}}</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h3 class="font-weight-bold">Formación Académica</h3>
-                        <hr>
-                        <div *ngFor="let expAca of expAcademicas" class="card card-body">
-                            <h4 class="font-weight-bold">{{expAca.carrera}}</h4>
-                            <hr>
-                            <h4>{{expAca.institucion}} | {{expAca.anio_entrada}} - {{expAca.anio_salida}}</h4>
-                        </div>
-                    </div>
+					<div class="col-md-6">
+						<h3 class="font-weight-bold">Habilidades</h3>
+						<hr />
+						<div *ngFor="let hab of habilidades" class="card card-body">
+							<h4>{{ hab.descripcion }}</h4>
+						</div>
+					</div>
 
-                    <div class="col-md-12">
-                        <h3 class="font-weight-bold">Actualizaciones</h3>
-                        <hr>
-                        <div *ngFor="let cur of cursoCertificados" class="card card-body">
-                            <h4 class="font-weight-bold">{{cur.nombre}}</h4>
-                            <hr>
-                            <h4>{{cur.descripcion}}</h4>
-                            <hr>
-                            <h4>{{cur.link}}</h4>
-                        </div>
-                    </div>
+					<div class="col-md-6">
+						<h3 class="font-weight-bold">Perfil</h3>
+						<hr />
+						<div *ngFor="let per of perfiles" class="card card-body">
+							<h4>{{ per.descripcion }}</h4>
+						</div>
+					</div>
 
-                    <div class="col-md-6">
-                        <h3 class="font-weight-bold">Habilidades</h3>
-                        <hr>
-                        <div *ngFor="let hab of habilidades" class="card card-body">
-                            <h4>{{hab.descripcion}}</h4>
-                        </div>
-                    </div>
+					<div class="col-md-6">
+						<h3 class="font-weight-bold">Idiomas</h3>
+						<hr />
+						<div *ngFor="let idi of idiomas" class="card card-body">
+							<h4>{{ idi.descripcion }}</h4>
+						</div>
+					</div>
 
-                    <div class="col-md-6">
-                        <h3 class="font-weight-bold">Perfil</h3>
-                        <hr>
-                        <div *ngFor="let per of perfiles" class="card card-body">
-                            <h4>{{per.descripcion}}</h4>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h3 class="font-weight-bold">Idiomas</h3>
-                        <hr>
-                        <div *ngFor="let idi of idiomas" class="card card-body">
-                            <h4>{{idi.descripcion}}</h4>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <h3 class="font-weight-bold">Valores</h3>
-                        <hr>
-                        <div *ngFor="let val of valores" class="card card-body">
-                            <h4>{{val.descripcion}}</h4>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="col-md-6">
+						<h3 class="font-weight-bold">Valores</h3>
+						<hr />
+						<div *ngFor="let val of valores" class="card card-body">
+							<h4>{{ val.descripcion }}</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

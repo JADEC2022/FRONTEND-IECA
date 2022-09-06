@@ -1,225 +1,338 @@
 <div class="main-content">
+	<!-- Spinner -->
+	<div
+		*ngIf="!company"
+		class="row justify-content-center align-items-center vh-100"
+	>
+		<mat-spinner></mat-spinner>
+	</div>
 
-    <!-- Spinner -->
-    <div *ngIf="!company" class="row justify-content-center align-items-center vh-100">
-        <mat-spinner></mat-spinner>
-    </div>
+	<!-- Content here -->
+	<div *ngIf="company" class="container-fluid">
+		<!-- === Titulo === -->
+		<div class="row justify-content-md-center">
+			<!-- ==== Encabezado de la página-->
+			<div class="col-md-auto">
+				<h1 class="font-weight-bold">{{ company.nombre }}</h1>
+			</div>
+		</div>
 
-    <!-- Content here -->
-    <div *ngIf="company" class="container-fluid">
+		<!-- === Subtitulo === -->
+		<div class="row justify-content-md-center">
+			<div class="col-md-auto">
+				<h2 class="font-weight-bold">{{ company.giro }}</h2>
+			</div>
+		</div>
 
-        <!-- === Titulo === -->
-        <div class="row justify-content-md-center">
-            <!-- ==== Encabezado de la página-->
-            <div class="col-md-auto">
-                <h1 class="font-weight-bold"> {{company.nombre}} </h1>
-            </div>
-        </div>
+		<!-- ===== Card de Perfil ===== -->
+		<hr />
+		<div class="row align-items-center m-t-3">
+			<!-- ===== Foto de Perfil ====== -->
+			<div class="col-md-4">
+				<!-- ===== Foto de Perfil ====== -->
+				<div class="card card-profile">
+					<div class="card-avatar" *ngIf="!foto_perfil">
+						<p (click)="inputFotoPerfil.click()">Cambiar</p>
+						<img
+							class="img"
+							src="./assets/img/unknown-user.jpg"
+							(click)="inputFotoPerfil.click()"
+						/>
+					</div>
+					<div class="card-avatar" *ngIf="foto_perfil">
+						<p (click)="inputFotoPerfil.click()">Cambiar</p>
+						<img
+							class="img"
+							[src]="foto_perfil"
+							(click)="inputFotoPerfil.click()"
+						/>
+					</div>
+					<!-- Cuerpo del card -->
+					<div class="card-body">
+						<h4 class="card-category text-gray font-weight-bold">
+							{{ company.nombre }}
+						</h4>
+						<h4 class="card-title text-primary font-weight-bold">
+							{{ company.pagina_web }}
+						</h4>
+						<h4 class="card-description font-weight-bold">
+							{{ company.telefono }}
+						</h4>
 
-        <!-- === Subtitulo === -->
-        <div class="row justify-content-md-center">
-            <div class="col-md-auto">
-                <h2 class="font-weight-bold">{{company.giro}}</h2>
-            </div>
-        </div>
+						<input
+							type="file"
+							accept=".png, .jpg, .jpeg"
+							hidden
+							#inputFotoPerfil
+							(change)="capturarImage($event)"
+						/>
+						<p *ngIf="extensionValid" class="text-danger">
+							Formatos válidos '.png' '.jpg' '.jpeg'
+						</p>
+						<p *ngIf="tamnioValid" class="text-danger">
+							El archivo no debe exceder los 75 Kilobytes
+						</p>
+						<button
+							*ngIf="changeFoto"
+							class="btn btn-rose"
+							(click)="guardarFoto()"
+						>
+							Guardar foto
+						</button>
+					</div>
+				</div>
+			</div>
 
-        <!-- ===== Card de Perfil ===== -->
-        <hr>
-        <div class="row align-items-center m-t-3">
-            <!-- ===== Foto de Perfil ====== -->
-            <div class="col-md-4">
-                <!-- ===== Foto de Perfil ====== -->
-                <div class="card card-profile">
-                    <div class="card-avatar" *ngIf="!foto_perfil">
-                        <p (click)="inputFotoPerfil.click()">Cambiar</p>
-                        <img class="img" src="./assets/img/faces/marc.jpg" (click)="inputFotoPerfil.click()" />
-                    </div>
-                    <div class="card-avatar" *ngIf="foto_perfil">
-                        <p (click)="inputFotoPerfil.click()">Cambiar</p>
-                        <img class="img" [src]="foto_perfil" (click)="inputFotoPerfil.click()" />
-                    </div>
-                    <!-- Cuerpo del card -->
-                    <div class="card-body">
-                        <h4 class="card-category text-gray font-weight-bold">{{ company.nombre }}</h4>
-                        <h4 class="card-title text-primary font-weight-bold">{{ company.pagina_web }}</h4>
-                        <h4 class="card-description font-weight-bold">{{ company.telefono }}</h4>
+			<!-- Card Editar Perfil -->
+			<div class="col-md-8">
+				<div class="card">
+					<!-- Encabezado de Card -->
+					<div class="card-header card-header-bblue">
+						<h4 class="card-title">Perfil</h4>
+						<p class="card-category">Actualiza tu información</p>
+					</div>
 
-                        <input type="file" accept=".png, .jpg, .jpeg" hidden #inputFotoPerfil (change)="capturarImage($event)">
-                        <p *ngIf="extensionValid" class="text-danger">Formatos válidos '.png' '.jpg' '.jpeg'</p>
-                        <p *ngIf="tamnioValid" class="text-danger">El archivo no debe exceder los 75 Kilobytes</p>
-                        <button *ngIf="changeFoto" class="btn btn-rose" (click)="guardarFoto()">Guardar foto</button>
-                    </div>
-                </div>
-            </div>
+					<!-- Formulario -->
+					<div class="card-body">
+						<form (ngSubmit)="updateCompany()" [formGroup]="companyForm">
+							<!-- Nombre de la empresa y administrador -->
+							<div class="row">
+								<!-- Nombre de la empresa -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Nombre de la Empresa"
+											type="text"
+											formControlName="nombre"
+											required
+										/>
+									</mat-form-field>
+									<small
+										*ngIf="controlNoValid('nombre')"
+										class="form-text text-danger"
+										>* Este campo es obligatorio</small
+									>
+								</div>
 
-            <!-- Card Editar Perfil -->
-            <div class="col-md-8">
-                <div class="card">
+								<!-- Nombre del administrador -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Nombre del(a) Administrador(a)"
+											type="text"
+											formControlName="administrador"
+											required
+										/>
+									</mat-form-field>
+									<small
+										*ngIf="controlNoValid('administrador')"
+										class="form-text text-danger"
+										>* Este campo es obligatorio</small
+									>
+								</div>
+							</div>
 
-                    <!-- Encabezado de Card -->
-                    <div class="card-header card-header-bblue">
-                        <h4 class="card-title">Perfil</h4>
-                        <p class="card-category">Actualiza tu información</p>
-                    </div>
+							<!-- Ubicación y Giro -->
+							<div class="row">
+								<!-- Ubicación -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											ngx-google-places-autocomplete
+											matInput
+											#placesRef="ngx-places"
+											(onAddressChange)="handleAddressChange($event)"
+											type="text"
+											placeholder="Dirección"
+											formControlName="ubicacion"
+										/>
+									</mat-form-field>
+									<small
+										*ngIf="controlNoValid('ubicacion')"
+										class="form-text text-danger"
+										>* Este campo es obligatorio</small
+									>
+								</div>
 
-                    <!-- Formulario -->
-                    <div class="card-body">
-                        <form (ngSubmit)="updateCompany()" [formGroup]="companyForm">
+								<!-- Giro -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Giro"
+											type="tel"
+											formControlName="giro"
+											required
+										/>
+									</mat-form-field>
+									<small
+										*ngIf="controlNoValid('giro')"
+										class="form-text text-danger"
+										>* Este campo es obligatorio</small
+									>
+								</div>
+							</div>
 
-                            <!-- Nombre de la empresa y administrador -->
-                            <div class="row">
-                                <!-- Nombre de la empresa -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Nombre de la Empresa" type="text" formControlName="nombre" required>
-                                    </mat-form-field>
-                                    <small *ngIf="controlNoValid( 'nombre')" class="form-text text-danger">* Este campo es obligatorio</small>
-                                </div>
+							<!-- Teléfono, Página Web -->
+							<div class="row">
+								<!-- Página Web -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Página web"
+											type="url"
+											formControlName="pagina_web"
+										/>
+									</mat-form-field>
+								</div>
 
-                                <!-- Nombre del administrador -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Nombre del(a) Administrador(a)" type="text" formControlName="administrador" required>
-                                    </mat-form-field>
-                                    <small *ngIf="controlNoValid( 'administrador')" class="form-text text-danger">* Este campo es obligatorio</small>
-                                </div>
-                            </div>
+								<!-- Teléfono -->
+								<div class="col-md-6">
+									<mat-form-field class="example-full-width">
+										<input
+											matInput
+											placeholder="Teléfono"
+											type="tel"
+											pattern="\d*"
+											maxlength="10"
+											formControlName="telefono"
+											required
+										/>
+									</mat-form-field>
+									<small
+										*ngIf="controlNoValid('telefono')"
+										class="form-text text-danger"
+										>* En este campo no se aceptan letras</small
+									>
+								</div>
+							</div>
 
-                            <!-- Ubicación y Giro -->
-                            <div class="row">
-                                <!-- Ubicación -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input ngx-google-places-autocomplete matInput #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" type="text" placeholder="Dirección" formControlName="ubicacion" />
-                                    </mat-form-field>
-                                    <small *ngIf="controlNoValid( 'ubicacion')" class="form-text text-danger">* Este campo es obligatorio</small>
-                                </div>
+							<!-- Boton de Guardar y Sucursales -->
+							<div class="row">
+								<!-- Renglón justificado al inicio -->
+								<div class="col-md-6">
+									<!-- Switcher icon -->
+									<mat-slide-toggle
+										id="sucuarsales"
+										class="justify-content-start"
+										(change)="haveBranches = $event.checked"
+										[checked]="haveBranches"
+										[disabled]="company.numero_sucursales > 0"
+									>
+										¿Hay más sucursales en la empresa?
+									</mat-slide-toggle>
+								</div>
 
-                                <!-- Giro -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Giro" type="tel" formControlName="giro" required>
-                                    </mat-form-field>
-                                    <small *ngIf="controlNoValid( 'giro')" class="form-text text-danger">* Este campo es obligatorio</small>
-                                </div>
-                            </div>
+								<!-- Renglón justificado al final -->
+								<div class="col-md-6">
+									<div class="row justify-content-end">
+										<!-- Restaurar el formulario -->
+										<button
+											type="button"
+											matTooltip="Restaurar"
+											(click)="loadData()"
+											class="btn btn-warning btn-sm btn-just-icon m-r"
+										>
+											<i class="material-icons md-36"
+												>settings_backup_restore</i
+											>
+										</button>
 
-                            <!-- Teléfono, Página Web -->
-                            <div class="row">
-                                <!-- Página Web -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Página web" type="url" formControlName="pagina_web">
-                                    </mat-form-field>
-                                </div>
+										<!-- Guardar cambios -->
+										<button
+											type="submit"
+											matTooltip="Guardar"
+											matTooltipClass="tooltip-gray"
+											class="btn btn-success btn-sm btn-just-icon m-r"
+										>
+											<i class="material-icons md-36">save</i>
+										</button>
+									</div>
+								</div>
+							</div>
 
-                                <!-- Teléfono -->
-                                <div class="col-md-6">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Teléfono" type="tel" pattern="\d*" maxlength="10" formControlName="telefono" required>
-                                    </mat-form-field>
-                                    <small *ngIf="controlNoValid( 'telefono')" class="form-text text-danger">* En este campo no se aceptan letras</small>
-                                </div>
-                            </div>
+							<div class="clearfix"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                            <!-- Boton de Guardar y Sucursales -->
-                            <div class="row ">
+		<!-- sucursales -->
+		<div *ngIf="haveBranches" class="row">
+			<!-- Formulario -->
+			<div class="col-md-8">
+				<div class="card">
+					<!-- ===== Encabezado de Card ===== -->
+					<div class="card-header card-header-bdark">
+						<h4 class="card-title">Sucursales</h4>
+						<p class="card-catergory">Lista de sucursales</p>
+					</div>
 
-                                <!-- Renglón justificado al inicio -->
-                                <div class="col-md-6 ">
-                                    <!-- Switcher icon -->
-                                    <mat-slide-toggle id="sucuarsales" class="justify-content-start" (change)="haveBranches = $event.checked" [checked]="haveBranches" [disabled]="company.numero_sucursales > 0">
-                                        ¿Hay más sucursales en la empresa?
-                                    </mat-slide-toggle>
-                                </div>
+					<!-- ===== Cuerpo del Card ===== -->
+					<div class="card-body">
+						<mat-accordion class="example-headers-align" multi>
+							<mat-expansion-panel
+								hideToggle
+								[expanded]="panel"
+								(opened)="panel = true"
+								(closed)="panel = false"
+							>
+								<mat-expansion-panel-header>
+									<mat-panel-title> Nombre </mat-panel-title>
+									<mat-panel-description>
+										Ubicación
+										<mat-icon class="text-primary justify-content-md-end"
+											>add</mat-icon
+										>
+									</mat-panel-description>
+								</mat-expansion-panel-header>
+								<!-- ===== Formulario para agregar una sucursal ===== -->
+								<app-sucursales></app-sucursales>
+							</mat-expansion-panel>
 
-                                <!-- Renglón justificado al final -->
-                                <div class="col-md-6">
-                                    <div class="row justify-content-end">
+							<div *ngFor="let branch of branches">
+								<mat-expansion-panel
+									class="m-t"
+									(opened)="panelOpenState = true"
+									(closed)="panelOpenState = false"
+								>
+									<mat-expansion-panel-header>
+										<mat-panel-title>
+											{{ branch.nombre }}
+										</mat-panel-title>
+										<mat-panel-description [hidden]="panelOpenState">
+											{{ branch.ubicacion }}
+											<mat-icon *ngIf="branch.ubicacion" class="text-primary"
+												>done</mat-icon
+											>
+										</mat-panel-description>
+									</mat-expansion-panel-header>
 
-                                        <!-- Restaurar el formulario -->
-                                        <button type="button" matTooltip="Restaurar" (click)="loadData()" class="btn btn-warning btn-sm btn-just-icon m-r">
-                                            <i class="material-icons md-36">settings_backup_restore</i>
-                                        </button>
+									<app-sucursales
+										[branch]="branch"
+										[update]="true"
+										[id_sucursal]="branch.id_sucursal"
+									></app-sucursales>
+									<!--(tipo)="prueba($event)"-->
+								</mat-expansion-panel>
+							</div>
+						</mat-accordion>
+					</div>
+				</div>
+			</div>
 
-                                        <!-- Guardar cambios -->
-                                        <button type="submit" matTooltip="Guardar" matTooltipClass="tooltip-gray" class="btn btn-success btn-sm btn-just-icon m-r">
-                                            <i class="material-icons md-36">save</i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="clearfix"></div>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-
-        <!-- sucursales -->
-        <div *ngIf="haveBranches" class="row">
-
-            <!-- Formulario -->
-            <div class="col-md-8">
-                <div class="card">
-
-                    <!-- ===== Encabezado de Card ===== -->
-                    <div class="card-header card-header-bdark">
-                        <h4 class="card-title"> Sucursales </h4>
-                        <p class="card-catergory">
-                            Lista de sucursales
-                        </p>
-                    </div>
-
-                    <!-- ===== Cuerpo del Card ===== -->
-                    <div class="card-body">
-                        <mat-accordion class="example-headers-align" multi>
-                            <mat-expansion-panel hideToggle [expanded]="panel" (opened)="panel = true" (closed)="panel = false">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Nombre
-                                    </mat-panel-title>
-                                    <mat-panel-description>
-                                        Ubicación
-                                        <mat-icon class="text-primary justify-content-md-end">add</mat-icon>
-                                    </mat-panel-description>
-                                </mat-expansion-panel-header>
-                                <!-- ===== Formulario para agregar una sucursal ===== -->
-                                <app-sucursales></app-sucursales>
-                            </mat-expansion-panel>
-
-                            <div *ngFor="let branch of branches">
-                                <mat-expansion-panel class="m-t" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                                    <mat-expansion-panel-header>
-                                        <mat-panel-title>
-                                            {{branch.nombre}}
-                                        </mat-panel-title>
-                                        <mat-panel-description [hidden]="panelOpenState">
-                                            {{branch.ubicacion}}
-                                            <mat-icon *ngIf="branch.ubicacion" class="text-primary">done</mat-icon>
-                                        </mat-panel-description>
-                                    </mat-expansion-panel-header>
-
-                                    <app-sucursales [branch]="branch" [update]="true" [id_sucursal]="branch.id_sucursal"></app-sucursales>
-                                    <!--(tipo)="prueba($event)"-->
-                                </mat-expansion-panel>
-                            </div>
-
-                        </mat-accordion>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Imagen -->
-            <div class="col-md-4">
-                <img src="../../../assets/img/bussiness.svg" alt="..." class="img-thumbnail">
-            </div>
-        </div>
-
-
-    </div>
+			<!-- Imagen -->
+			<div class="col-md-4">
+				<img
+					src="../../../assets/img/bussiness.svg"
+					alt="..."
+					class="img-thumbnail"
+				/>
+			</div>
+		</div>
+	</div>
 </div>
