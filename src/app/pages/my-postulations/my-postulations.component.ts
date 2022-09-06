@@ -89,5 +89,4 @@ export class MyPostulationsComponent implements OnInit {
       timer: 2700
     });
   }
-
 }

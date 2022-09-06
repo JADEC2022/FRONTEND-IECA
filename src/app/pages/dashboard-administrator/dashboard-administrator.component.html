@@ -146,7 +146,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let empresaAceptada of empresasRechazadas">
+                      <tr *ngFor="let empresaAceptada of empresasAceptadas">
                         <th scope="row"><a href="#"><img src= "../../../assets/img/unknown-user.jpg" alt=""></a></th>
                         <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
                         <th scope="row"><a href="#">{{empresaAceptada.id_empresa}}</a></th>
@@ -192,36 +192,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/desarrollador-web.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#189</a></th>
-                        <td><a href="#" class="text-primary">Desarrollador web</a></td>
-                        <td><span class="badge bg-warning">En espera</span></td>
-                      </tr>
-                      
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/full-stack.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#765</a></th>
-                        <td><a href="#" class="text-primary">Full Stack Developer</a></td>
-                        <td><span class="badge bg-success">Aprobada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/contable.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#786</a></th>
-                        <td><a href="#" class="text-primary">Auxiliar contable</a></td>
-                        <td><span class="badge bg-success">Aprobada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/electrico.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#108</a></th>
-                        <td><a href="#" class="text-primary">Operario eléctrico</a></td>
-                        <td><span class="badge bg-danger">Rechazada</span></td>
-                      </tr>
-                      <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/manager.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">#520</a></th>
-                        <td><a href="#" class="text-primary">Growth Manager</a></td>
-                        <td><span class="badge bg-warning">En espera</span></td>
+                      <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
+                        <th scope="row"><a href="#"><img src= "../../../assets/img/unknown-user.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
+                        <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
+                        <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
                       </tr>
                     </tbody>
                   </table>

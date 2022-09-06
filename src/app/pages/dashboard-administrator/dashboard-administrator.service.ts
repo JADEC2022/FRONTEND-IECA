@@ -20,7 +20,7 @@ export class DashboardAdministratorService {
 	}
 
     getVacanciesByEstado(formData) {
-		return this.http.put(`${baseUrlVacantesRechazadas}/vacantes`, formData);
+		return this.http.put(`${baseUrlVacantesRechazadas}/estado`, formData);
 	}
 
 	getActionsByAdministrator(){
