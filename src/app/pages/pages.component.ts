@@ -10,6 +10,7 @@ import * as $ from 'jquery';
 import { AuthUserService } from '../auth/auth-user.service';
 import Swal from 'sweetalert2';
 import { UserProfileService } from './user-profile/user-profile.service';
+import { GuardsService } from '../services/guards.service';
 
 @Component({
     selector: 'app-admin-layout',
@@ -24,6 +25,7 @@ export class PagesComponent implements OnInit {
     constructor(public location: Location,
                 public authService: AuthUserService,
                 private userProfileService: UserProfileService,
+                private guardService: GuardsService,
                 private router: Router) {
     }
 
@@ -138,7 +140,7 @@ export class PagesComponent implements OnInit {
             }
         });
 
-        this.empresaSinEstado();
+        this.mensajesDeInicio();
     }
 
     // tslint:disable-next-line:use-life-cycle-interface
@@ -172,23 +174,59 @@ export class PagesComponent implements OnInit {
         return bool;
     }
 
-    empresaSinEstado(): void {
+    mensajesDeInicio(): void {
         if (localStorage.getItem('tipo_usuario') === 'Empresa') {
-            this.userProfileService.getUsuario().subscribe((resp: AuthResponseI) => {
-                let divTexto: string = `Actualmente su empresa está EN REVISIÓN. Espere a que los administradores validen su información y se le avise por correo.`;
-                let html: string = `
-                    <style type="text/css">
-                      div{
-                        text-align: justify;
-                      }
-                    </style>
-                    <div>${divTexto}</div>`;
-                if (resp.status && !resp.data.estado) {
-                    this.infoMassage(html);
+            this.guardService.validarPerfil().subscribe((resp: any) => {
+                if (!resp.status) {
+                    let errors = `
+                        <style type="text/css">
+                          .justificado{
+                            text-align: justify;
+                          }
+                        </style>
+                        <p class="justificado">
+                            Para que la cuenta de su empresa sea ACEPTADA y pueda usarse con normalidad debe de haber llenado toda su información. 
+                            Actualmente hay algunos apartados que requieren ser completados. Si no se completan estos campos no se podrá revisar su cuenta para ser aceptada.
+                        </p>
+                        <p>Apartados faltantes: </p>
+                    `;
+                    resp.data.forEach((error) => {
+                      errors += `<div>${error}</div>`;
+                    });
+                    this.validatedEmpresaMessage(errors);
+                } else {
+                    this.userProfileService.getUsuario().subscribe((resp: AuthResponseI) => {
+                        let divTexto: string = `Actualmente su empresa está EN REVISIÓN. Espere a que los administradores validen su información y se le avise por correo.`;
+                        let html: string = `
+                            <style type="text/css">
+                              div{
+                                text-align: justify;
+                              }
+                            </style>
+                            <div>${divTexto}</div>`;
+                        if (resp.status && !resp.data.estado) {
+                            this.infoMassage(html);
+                        }
+                    });
                 }
             });
         }
     }
+
+    validatedEmpresaMessage(errors): void {
+        Swal.fire({
+          icon: "info",
+          title: "Complete la información faltante de su perfil",
+          html: errors,
+          showCancelButton: true,
+          confirmButtonText: "!Completar ahora!",
+          cancelButtonText: "Entendido"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/company-profile');
+          }
+        });
+      }
 
     infoMassage(html: string): void {
         Swal.fire({

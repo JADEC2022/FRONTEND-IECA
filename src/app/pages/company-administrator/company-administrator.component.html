@@ -83,6 +83,11 @@
 							<h4>
 								<b>{{ empresa.estado }}</b>
 							</h4>
+
+							<h3 *ngIf="empresa.dias_transcurridos">Días transcurridos:</h3>
+							<h4 *ngIf="empresa.dias_transcurridos">
+								<b>{{ empresa.dias_transcurridos }}</b>
+							</h4>
 						</div>
 					</div>
 				</div>
@@ -154,8 +159,11 @@
 										>
 											Página web:
 										</div>
-										<div class="col-lg-9 col-md-8 text-primary">
-											<a href=" ">{{ empresa.pagina_web }}</a>
+										<div *ngIf="empresa.pagina_web" class="col-lg-9 col-md-8 text-primary">
+											<a href="{{empresa.pagina_web}}">{{ empresa.pagina_web }}</a>
+										</div>
+										<div *ngIf="!empresa.pagina_web" class="col-lg-9 col-md-8 text-primary">
+											<a>Sin página web</a>
 										</div>
 									</div>
 								</div>

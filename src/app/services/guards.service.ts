@@ -45,10 +45,6 @@ export class GuardsService {
     const id = localStorage.getItem('id_usuario');
     return this.http.get(`${baseUrl2}/usuarios/${id}`)
     .pipe(map((resp: any) => {
-      /*if (resp.status && resp.data.estado === 'ACEPTADA') {
-        return true;
-      }
-      return false;*/
       return resp;
     }));
   }

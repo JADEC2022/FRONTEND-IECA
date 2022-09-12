@@ -112,23 +112,31 @@
 									id="profile-overview"
 								>
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label">
+										<div class="col-lg-3 col-md-4 label" style="text-align: right">
 											Fecha de publicación:
 										</div>
-										<div class="col-lg-9 col-md-8">
+										<div *ngIf="vacante.fecha_publicacion" class="col-lg-9 col-md-8">
 											{{ vacante.fecha_publicacion }}
+										</div>
+										<div *ngIf="!vacante.fecha_publicacion" class="col-lg-9 col-md-8">
+											No publicada
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label">Sueldo:</div>
-										<div class="col-lg-9 col-md-8">
+										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+											Sueldo:
+										</div>
+										<div *ngIf="vacante.sueldo === 'Negociable'" class="col-lg-9 col-md-8">
+											{{ vacante.sueldo }}
+										</div>
+										<div *ngIf="vacante.sueldo !== 'Negociable'" class="col-lg-9 col-md-8">
 											$ {{ vacante.sueldo | number }}
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label">
+										<div class="col-lg-3 col-md-4 label" style="text-align: right">
 											Descripción del puesto:
 										</div>
 										<div class="col-lg-9 col-md-8">
@@ -137,12 +145,16 @@
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label">Modalidad:</div>
+										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+											Modalidad:
+										</div>
 										<div class="col-lg-9 col-md-8">{{ vacante.modalidad }}</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label">Nivel:</div>
+										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+											Nivel:
+										</div>
 										<div class="col-lg-9 col-md-8">{{ vacante.nivel }}</div>
 									</div>
 								</div>
