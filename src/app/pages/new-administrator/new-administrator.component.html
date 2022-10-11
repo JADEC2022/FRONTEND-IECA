@@ -1,0 +1,174 @@
+<div class="main-content">
+	<div>
+		<div class="container-fluid">
+			<section class="section profile">
+				<div class="row">
+					<div>
+						<div class="card">
+							<!-- ===== Encabezado de Card ===== -->
+							<div class="card-header card-header-bblue">
+								<h4 class="card-title">Llenar nuevo Perfil</h4>
+								<p class="card-category">Ingresa los datos del perfil</p>
+							</div>
+							<!-- ===== Contenido de Card ===== -->
+							<div class="card-body">
+								<form [formGroup]="userForm" (ngSubmit)="registerAdministrator(userForm)">
+                                    <div class="row">
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Correo electrónico"
+													type="text"
+													formControlName="email"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('email')"
+													>Este campo debe de estar lleno con un correo válido*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Contraseña"
+													type="password"
+													formControlName="pass"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('pass')"
+													>Este campo debe estar lleno con al menos 6 caracteres*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Confirmar contraseña"
+													type="password"
+													formControlName="password"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('password')"
+													>Los dos campos de contraseña deben ser iguales*</mat-error
+												>
+												<small *ngIf="validarPassword(userForm)" class="form-text text-danger">
+													La contraseña no coincide*
+												</small>
+											</mat-form-field>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Nombre(s)"
+													type="text"
+													formControlName="nombre"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('nombre')"
+													>Este campo es obligatorio*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-3">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Apellido Paterno"
+													type="text"
+													formControlName="apellido_paterno"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('apellido_paterno')"
+													>Este campo es obligatorio*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-3">
+											<mat-form-field class="example-full-width">
+												<input
+													matInput
+													placeholder="Apellido Materno"
+													type="text"
+													formControlName="apellido_materno"
+													required
+												/>
+												<mat-error *ngIf="campoNoValido('apellido_materno')"
+													>Este campo es obligatorio*</mat-error
+												>
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width m-t">
+												<mat-label>Fecha de Nacimiento</mat-label>
+												<input
+													matInput
+													[matDatepicker]="picker"
+													formControlName="fecha_nacimiento"
+													required
+												/>
+												<mat-datepicker-toggle
+													matSuffix
+													[for]="picker"
+												></mat-datepicker-toggle>
+												<mat-datepicker #picker></mat-datepicker>
+												<mat-error *ngIf="campoNoValido('fecha_nacimiento')"
+													>Este campo es obligatorio*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width m-t">
+												<input
+													matInput
+													placeholder="Teléfono"
+													type="tel"
+													formControlName="telefono"
+													pattern="\d*"
+													maxlength="10"
+												/>
+												<mat-error *ngIf="campoNoValido('telefono')"
+													>Este campo no acepta letras*</mat-error
+												>
+											</mat-form-field>
+										</div>
+										<div class="col-md-4">
+											<mat-form-field class="example-full-width m-t">
+												<mat-label>Sexo</mat-label>
+												<mat-select
+													formControlName="sexo"
+													required
+													[(value)]="selected"
+												>
+													<mat-option value="H">Hombre</mat-option>
+													<mat-option value="M">Mujer</mat-option>
+													<mat-option value="X">Prefiero no decir</mat-option>
+												</mat-select>
+												<mat-error *ngIf="campoNoValido('sexo')"
+													>Este campo es obligatorio*</mat-error
+												>
+											</mat-form-field>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary btn-success">
+											Registrar nuevo administrador
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>

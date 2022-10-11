@@ -64,6 +64,16 @@ export class SidebarComponent implements OnInit {
                 ];
                 break;
 
+            case 'Superadministrador':
+                ROUTES = [
+                    { path: '/dashboard-administrator', title: 'Inicio', icon: 'dashboard', class: ''},
+                    { path: '/company-administrator', title: 'Empresas', icon: 'person', class: '' },
+                    { path: '/vacancies-administrator', title: 'Vacantes', icon: 'work', class: '' },
+                    { path: '/new-administrator', title: 'Nuevo administrador', icon: 'person', class: '' },
+                    { path: '/perfil-administrator', title: 'Perfil del Administrador', icon: 'account_circle', class: ''},
+                ];
+                break;
+
             default:
                 console.log(`Tipo no encontrado`);
         }

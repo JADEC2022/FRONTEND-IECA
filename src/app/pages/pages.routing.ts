@@ -30,6 +30,7 @@ import { CompanyAdministratorComponent } from './company-administrator/company-a
 import { DashboardAdministratorComponent } from './dashboard-administrator/dashboard-administrator.component';
 import { PerfilAdministratorComponent } from './perfil-administrator/perfil-administrator.component';
 import { VacanciesAdministratorComponent } from './vacancies-administrator/vacancies-administrator.component';
+import { NewAdministratorComponent } from './new-administrator/new-administrator.component';
 
 const tipo_usuario = localStorage.getItem("tipo_usuario") || "";
 export let ruta = "auth";
@@ -39,8 +40,8 @@ if (tipo_usuario == "Postulante") {
 if (tipo_usuario == "Empresa") {
     ruta = "my-vacancies";
 }
-if (tipo_usuario == "Administrador") {
-  ruta = "vacancies-administrator";
+if (tipo_usuario == "Administrador" || tipo_usuario == "Superadministrador") {
+  ruta = "dashboard-administrator";
 }
 
 export const routes: Routes = [
@@ -75,6 +76,7 @@ export const routes: Routes = [
       { path: "dashboard-administrator", component: DashboardAdministratorComponent},
       { path: "perfil-administrator", component: PerfilAdministratorComponent},
       { path: "vacancies-administrator", component: VacanciesAdministratorComponent},
+      { path: "new-administrator", component: NewAdministratorComponent}
     ],
   },
 ];

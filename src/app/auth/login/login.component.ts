@@ -202,7 +202,7 @@ export class LoginComponent implements OnInit {
 					if (resp.data.tipo_usuario == "Empresa") {
 						ruta = "/my-vacancies";
 					}
-					if (resp.data.tipo_usuario == "Administrador") {
+					if (resp.data.tipo_usuario == "Administrador" || resp.data.tipo_usuario == "Superadministrador") {
 						ruta = "/dashboard-administrator";
 					}
 					loginForm.reset();
