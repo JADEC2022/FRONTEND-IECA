@@ -44,6 +44,18 @@
 											class="card-img-bottom"
 										/>
 									</div>
+									<div *ngIf="notificacion.Usuario" class="col-2">
+										<img
+											*ngIf="!notificacion.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Usuario.foto_perfil"
+											[src]="notificacion.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
 									<div class="col-10">
 										<h4 style="margin-top: 10px">{{ notificacion.titulo }}</h4>
 										<p>{{ notificacion.mensaje }}</p>
@@ -89,6 +101,18 @@
 										<img
 											*ngIf="notificacion.Postulacione.Usuario.foto_perfil"
 											[src]="notificacion.Postulacione.Usuario.foto_perfil"
+											class="card-img-bottom"
+										/>
+									</div>
+									<div *ngIf="notificacion.Usuario" class="col-2">
+										<img
+											*ngIf="!notificacion.Usuario.foto_perfil"
+											src="../../../assets/img/IECA-Blanco.jpg"
+											class="card-img-bottom"
+										/>
+										<img
+											*ngIf="notificacion.Usuario.foto_perfil"
+											[src]="notificacion.Usuario.foto_perfil"
 											class="card-img-bottom"
 										/>
 									</div>

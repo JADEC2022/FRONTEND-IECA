@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 import { PageEvent } from "@angular/material/paginator";
+import { UsuarioI } from "../../models/usuario";
 
 @Component({
 	selector: "app-vacancies-administrator",
@@ -63,6 +64,7 @@ export class VacanciesAdministratorComponent implements OnInit {
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.addAccionVacante("ACEPTADA", vacante.estado, vacante.id_vacante);
+					this.addNotificacion(vacante, "ACEPTADA");
 					this.vacantes = [];
 					this.getVacantesByEstado(this.estado);
 					this.doneMassage(
@@ -85,6 +87,7 @@ export class VacanciesAdministratorComponent implements OnInit {
 						vacante.estado,
 						vacante.id_vacante
 					);
+					this.addNotificacion(vacante, "RECHAZADA");
 					this.vacantes = [];
 					this.getVacantesByEstado(this.estado);
 					this.doneMassage(
@@ -106,6 +109,7 @@ export class VacanciesAdministratorComponent implements OnInit {
 						vacante.estado,
 						vacante.id_vacante
 					);
+					this.addNotificacion(vacante, "EN ESPERA");
 					this.vacantes = [];
 					this.getVacantesByEstado(this.estado);
 					this.doneMassage(
@@ -174,6 +178,59 @@ export class VacanciesAdministratorComponent implements OnInit {
 		this.page_number = e.pageIndex + 1;
 	}
 
+	// Método para crear una nueva notificación
+	addNotificacion(vacante: VacantesI, estado: string) {
+		let url: string;
+		let titulo: string;
+		let mensaje: string;
+
+		switch (estado) {
+			case "ACEPTADA":
+				url = "/my-vacancies";
+				titulo =
+					"La vacante para el puesto de " +
+					vacante.puesto +
+					" a sido aceptada.";
+				mensaje =
+					"Ahora esta publica la vacante y los postulantes pueden interactuar con ella.";
+				break;
+
+			case "RECHAZADA":
+				url = "/my-vacancies";
+				titulo =
+					"La vacante para el puesto de " +
+					vacante.puesto +
+					" a sido rechazada.";
+				mensaje =
+					"Los datos de la vacante son erróneos. Revisa que los datos sean correctos y comunicate con el administrador.";
+				break;
+
+			case "EN ESPERA":
+				url = "/my-vacancies";
+				titulo =
+					"La vacante para el puesto de " +
+					vacante.puesto +
+					" a sido puesta en espera.";
+				mensaje = `Revisa que los datos de la vacante sean correctos. Tienes ${this.diasEnEspera} días para actualizar los datos, de lo contrario la vacante será rechazada.`;
+				break;
+		}
+
+		this.vacantesAdministradorService
+			.addNotificacion(
+				url,
+				titulo,
+				mensaje,
+				vacante.id_vacante,
+				vacante.id_usuario_fk
+			)
+			.subscribe((resp: AuthResponseI) => {
+				if (!resp.status) {
+					console.log(resp);
+				}
+			});
+	}
+
+	// Mensajes
 	doneMassage(message: string): void {
 		Swal.fire({
 			icon: "success",

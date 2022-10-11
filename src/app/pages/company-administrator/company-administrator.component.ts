@@ -63,6 +63,7 @@ export class CompanyAdministratorComponent implements OnInit {
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.addAccionEmpresa("ACEPTADA", empresa.estado, empresa.id_empresa);
+					this.addNotificacion(empresa, "ACEPTADA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -85,6 +86,7 @@ export class CompanyAdministratorComponent implements OnInit {
 						empresa.estado,
 						empresa.id_empresa
 					);
+					this.addNotificacion(empresa, "RECHAZADA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -106,6 +108,7 @@ export class CompanyAdministratorComponent implements OnInit {
 						empresa.estado,
 						empresa.id_empresa
 					);
+					this.addNotificacion(empresa, "EN ESPERA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -172,6 +175,54 @@ export class CompanyAdministratorComponent implements OnInit {
 		this.page_number = e.pageIndex + 1;
 	}
 
+	// Método para crear una nueva notificación
+	addNotificacion(empresa: EmpresaI, estado: string) {
+		let url: string;
+		let titulo: string;
+		let mensaje: string;
+		switch (estado) {
+			case "ACEPTADA":
+				url = "/create-vacancie";
+				titulo =
+					"El registro de la empresa " + empresa.nombre + " a sido aceptado.";
+				mensaje =
+					"Ahora puedes crear nuevas vacantes. Da click aqui para crear una nueva vacante.";
+				break;
+
+			case "RECHAZADA":
+				url = "/company-profile";
+				titulo =
+					"El registro de la empresa " + empresa.nombre + " a sido rechazado.";
+				mensaje =
+					"Los datos de la empresa son erróneos. Revisa que los datos sean correctos y comunicate con el administrador.";
+				break;
+
+			case "EN ESPERA":
+				url = "/company-profile";
+				titulo =
+					"El registro de la empresa " +
+					empresa.nombre +
+					" a sido puesto en espera.";
+				mensaje = `Revisa que la información de la empresa sea correcta. Tienes ${this.diasEnEspera} días para actualizar los datos, de lo contrario el registro será rechazado. Da click aquí para revisar el perfil de la empresa.`;
+				break;
+		}
+
+		this.companyAdministratorService
+			.addNotificacion(
+				url,
+				titulo,
+				mensaje,
+				empresa.id_empresa,
+				empresa.id_empresa
+			)
+			.subscribe((resp: AuthResponseI) => {
+				if (!resp.status) {
+					console.log(resp);
+				}
+			});
+	}
+
+	// Mensajes
 	doneMassage(message: string): void {
 		Swal.fire({
 			icon: "success",
