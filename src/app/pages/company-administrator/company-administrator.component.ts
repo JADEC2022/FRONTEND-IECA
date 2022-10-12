@@ -6,6 +6,8 @@ import { EmpresaI } from "../../models/empresa";
 import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 import { PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute } from "@angular/router";
+import { UsuarioI } from "app/models/usuario";
 
 @Component({
 	selector: "app-company-administrator",
@@ -14,6 +16,7 @@ import { PageEvent } from "@angular/material/paginator";
 })
 export class CompanyAdministratorComponent implements OnInit {
 	empresas: EmpresaI[] = [];
+	idEmpresa: number;
 	estado: String = null;
 	diasEnEspera: number = 15;
 	buscarPalabra: string = "";
@@ -25,11 +28,17 @@ export class CompanyAdministratorComponent implements OnInit {
 	search = new FormControl("");
 
 	constructor(
-		private companyAdministratorService: CompanyAdministratorService
+		private companyAdministratorService: CompanyAdministratorService,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
-		this.getEmpresasByEstado(this.estado);
+		this.idEmpresa = parseInt(this.activatedRoute.snapshot.paramMap.get("id"));
+		if (!Number.isNaN(this.idEmpresa)) {
+			this.checkURL(this.idEmpresa);
+		} else {
+			this.getEmpresasByEstado(this.estado);
+		}
 		this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
 			this.buscarPalabra = value;
 			this.buscarEmpresas(value);
@@ -63,6 +72,7 @@ export class CompanyAdministratorComponent implements OnInit {
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
 					this.addAccionEmpresa("ACEPTADA", empresa.estado, empresa.id_empresa);
+					this.addNotificacion(empresa, "ACEPTADA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -85,6 +95,7 @@ export class CompanyAdministratorComponent implements OnInit {
 						empresa.estado,
 						empresa.id_empresa
 					);
+					this.addNotificacion(empresa, "RECHAZADA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -106,6 +117,7 @@ export class CompanyAdministratorComponent implements OnInit {
 						empresa.estado,
 						empresa.id_empresa
 					);
+					this.addNotificacion(empresa, "EN ESPERA");
 					this.empresas = [];
 					this.getEmpresasByEstado(this.estado);
 					this.doneMassage(
@@ -172,6 +184,69 @@ export class CompanyAdministratorComponent implements OnInit {
 		this.page_number = e.pageIndex + 1;
 	}
 
+	checkURL(idEmpresa: number) {
+		let empresa: UsuarioI;
+		this.companyAdministratorService
+			.getCompany(idEmpresa)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					empresa = resp.data;
+					this.search.setValue(empresa.nombre);
+					this.buscarEmpresas(empresa.nombre);
+				} else {
+					this.getEmpresasByEstado(this.estado);
+				}
+			});
+	}
+
+	// Método para crear una nueva notificación
+	addNotificacion(empresa: EmpresaI, estado: string) {
+		let url: string;
+		let titulo: string;
+		let mensaje: string;
+		switch (estado) {
+			case "ACEPTADA":
+				url = "/create-vacancie";
+				titulo =
+					"El registro de la empresa " + empresa.nombre + " a sido aceptado.";
+				mensaje =
+					"Ahora puedes crear nuevas vacantes. Da click aqui para crear una nueva vacante.";
+				break;
+
+			case "RECHAZADA":
+				url = "/company-profile";
+				titulo =
+					"El registro de la empresa " + empresa.nombre + " a sido rechazado.";
+				mensaje =
+					"Los datos de la empresa son erróneos. Revisa que los datos sean correctos y comunicate con el administrador.";
+				break;
+
+			case "EN ESPERA":
+				url = "/company-profile";
+				titulo =
+					"El registro de la empresa " +
+					empresa.nombre +
+					" a sido puesto en espera.";
+				mensaje = `Revisa que la información de la empresa sea correcta. Tienes ${this.diasEnEspera} días para actualizar los datos, de lo contrario el registro será rechazado. Da click aquí para revisar el perfil de la empresa.`;
+				break;
+		}
+
+		this.companyAdministratorService
+			.addNotificacion(
+				url,
+				titulo,
+				mensaje,
+				empresa.id_empresa,
+				empresa.id_empresa
+			)
+			.subscribe((resp: AuthResponseI) => {
+				if (!resp.status) {
+					console.log(resp);
+				}
+			});
+	}
+
+	// Mensajes
 	doneMassage(message: string): void {
 		Swal.fire({
 			icon: "success",

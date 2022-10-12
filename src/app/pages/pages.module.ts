@@ -30,6 +30,7 @@ import { CompanyAdministratorComponent } from './company-administrator/company-a
 import { DashboardAdministratorComponent } from './dashboard-administrator/dashboard-administrator.component';
 import { PerfilAdministratorComponent } from './perfil-administrator/perfil-administrator.component';
 import { VacanciesAdministratorComponent } from './vacancies-administrator/vacancies-administrator.component';
+import { NewAdministratorComponent } from './new-administrator/new-administrator.component';
 
 
 @NgModule({
@@ -56,6 +57,8 @@ import { VacanciesAdministratorComponent } from './vacancies-administrator/vacan
         DashboardAdministratorComponent,
         PerfilAdministratorComponent,
         VacanciesAdministratorComponent,
+
+        NewAdministratorComponent
     ],
     imports: [
         CommonModule,

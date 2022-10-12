@@ -151,6 +151,18 @@ export class NavbarComponent implements OnInit {
 				return this.listTitles[item].title;
 			}
 		}
-		return "Notificaciones";
+
+		switch (titlee.slice(1, 8)) {
+			case "company":
+				return "Empresas";
+
+			case "vacanci":
+				return "Vacantes";
+
+			case "notific":
+				return "Notificaciones";
+		}
+
+		return "";
 	}
 }
