@@ -55,7 +55,7 @@ import { VacanciesAdministratorComponent } from './vacancies-administrator/vacan
         CompanyAdministratorComponent,
         DashboardAdministratorComponent,
         PerfilAdministratorComponent,
-        VacanciesAdministratorComponent
+        VacanciesAdministratorComponent,
     ],
     imports: [
         CommonModule,

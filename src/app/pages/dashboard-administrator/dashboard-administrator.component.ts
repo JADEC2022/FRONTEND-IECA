@@ -22,6 +22,10 @@ export class DashboardAdministratorComponent implements OnInit {
 
   administradorAcciones: AdministradorAccionI [] = [];
 
+  page_size: number = 5;
+  page_number: number = 1;
+  pageSizeOptions: number[] = [5, 10, 20];
+
   constructor(private dashboardAdministratorService: DashboardAdministratorService) { }
 
   ngOnInit(): void {
@@ -35,41 +39,42 @@ export class DashboardAdministratorComponent implements OnInit {
     this.getVacantesByEstadoRechazada('RECHAZADA');
 
 	this.getAdministradorAcciones();
+
   }
 
-  getEmpresasByEstadoAceptada(estado: "ACEPTADA"): void {
+  getEmpresasByEstadoAceptada(estado): void {
 		const formData = { estado: estado };
 		this.dashboardAdministratorService
 			.getCompanysByEstado(formData)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
-            this.empresasAceptadas = resp.data
+            		this.empresasAceptadas = resp.data
 				}
 
 			});
 	}
 
-  getEmpresasByEstadoEnEspera(estado: "EN ESPERA"): void {
-		const formData = { estado: estado };
-		this.dashboardAdministratorService
-			.getCompanysByEstado(formData)
-			.subscribe((resp: AuthResponseI) => {
-				if (resp.status) {
-            this.empresasEnEspera = resp.data
-				}
-			});
-	}
+   getEmpresasByEstadoEnEspera(estado: "EN ESPERA"): void {
+ 		const formData = { estado: estado };
+ 		this.dashboardAdministratorService
+ 			.getCompanysByEstado(formData)
+ 			.subscribe((resp: AuthResponseI) => {
+ 				if (resp.status) {
+             		this.empresasEnEspera = resp.data
+ 				}
+ 			});
+ 	}
 
-  getEmpresasByEstadoRechazada(estado: "RECHAZADA"): void {
-		const formData = { estado: estado };
-		this.dashboardAdministratorService
-			.getCompanysByEstado(formData)
-			.subscribe((resp: AuthResponseI) => {
-				if (resp.status) {
-            this.empresasRechazadas = resp.data
-				}
-			});
-	}
+   getEmpresasByEstadoRechazada(estado: "RECHAZADA"): void {
+ 		const formData = { estado: estado };
+ 		this.dashboardAdministratorService
+ 			.getCompanysByEstado(formData)
+ 			.subscribe((resp: AuthResponseI) => {
+ 				if (resp.status) {
+             		this.empresasRechazadas = resp.data
+ 				}
+ 			});
+ 	}
 
    getVacantesByEstadoAceptada(estado: "ACEPTADA"): void {
 	 	const formData = { estado: estado };
@@ -77,7 +82,7 @@ export class DashboardAdministratorComponent implements OnInit {
 	 		.getVacanciesByEstado(formData)
 	 		.subscribe((resp: AuthResponseI) => {
 	 			if (resp.status) {
-             this.vacantesAceptadas = resp.data
+            		this.vacantesAceptadas = resp.data
 	 			}
 	 		});
 	 }
@@ -88,7 +93,7 @@ export class DashboardAdministratorComponent implements OnInit {
 	 		.getVacanciesByEstado(formData)
 	 		.subscribe((resp: AuthResponseI) => {
 	 			if (resp.status) {
-             this.vacantesEnEspera = resp.data
+            		this.vacantesEnEspera = resp.data
 	 			}
 	 		});
 	 }
@@ -99,7 +104,7 @@ export class DashboardAdministratorComponent implements OnInit {
 	 		.getVacanciesByEstado(formData)
 	 		.subscribe((resp: AuthResponseI) => {
 	 			if (resp.status) {
-             this.vacantesRechazadas = resp.data
+            		this.vacantesRechazadas = resp.data
 	 			}
 	 		});
 	 }
@@ -108,21 +113,8 @@ export class DashboardAdministratorComponent implements OnInit {
 		this.dashboardAdministratorService.getActionsByAdministrator()
 		.subscribe((resp: AuthResponseI) => {
 			if (resp.status) {
-		this.administradorAcciones = resp.data
+				this.administradorAcciones = resp.data
 			}
 		});
 	 }
-
-	 getDate(date): Date{					
-
-			let dateTimeParts= date.split(/[- :]/); // regular expression split that creates array with: year, month, day, hour, minutes, seconds values
-			dateTimeParts[1]--; // monthIndex begins with 0 for January and ends with 11 for December so we need to decrement by one
-
-			const dateObject = new Date(dateTimeParts); // our Date object
-			console.log(dateObject)
-			return dateObject;
-
-
-		
-	}
 }

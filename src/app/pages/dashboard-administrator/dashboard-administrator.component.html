@@ -1,5 +1,5 @@
 <div class="main-content">
-	<div class="container-fluid">
+  <div class="container-fluid">
     <!-- <main id="main" class="main"> -->
 
     <section class="section dashboard">
@@ -13,8 +13,8 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card sales-card">
 
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <!--<div class="filter">
+                  <a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
                       <h6>Filtro</h6>
@@ -23,22 +23,39 @@
                     <li><a class="dropdown-item" href="#">Empresas</a></li>
                     <li><a class="dropdown-item" href="#">Vacantes</a></li>
                   </ul>
-                </div>
+                </div>-->
 
                 <div class="card-body">
-                  <h5 class="card-title">Aprobadas <span>| Empresas</span></h5>
-
-                  <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen7.png');">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-check-square-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{empresasAceptadas.length}}</h6>
-                      <span class="text-success small pt-1 fw-bold"></span> <span
-                        class="text-muted small pt-2 ps-1"></span>
-
-                    </div>
-                  </div>
+                  <h5 class="card-title">Aprobadas<span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Empresas" class="mat-tab-label">
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen7.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-check-square-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{empresasAceptadas.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Vacantes" class="mat-tab-label">
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen7.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-check-square-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{vacantesAceptadas.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
                 </div>
 
               </div>
@@ -49,7 +66,7 @@
             <div class="col-xxl-4 col-md-6">
               <div class="card info-card revenue-card">
 
-                <div class="filter">
+                <!-- <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -59,68 +76,56 @@
                     <li><a class="dropdown-item" href="#">Vacantes</a></li>
 
                   </ul>
-                </div>
+                </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Rechazadas <span>| Empresas</span></h5>
+                  <h5 class="card-title">Rechazadas <span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Empresas" class="mat-tab-label">
 
-                  <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen8.png')">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-file-excel-fill"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{empresasRechazadas.length}}</h6>
-                      <span class="text-success small pt-1 fw-bold"></span> <span
-                        class="text-muted small pt-2 ps-1"></span>
 
-                    </div>
-                  </div>
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen8.png')">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-file-excel-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{empresasRechazadas.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+
+                            </div>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Vacantes" class="mat-tab-label">
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen8.png')">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-file-excel-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{vacantesRechazadas.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+
+                            </div>
+                          </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
                 </div>
 
               </div>
             </div><!-- End Rechazadas -->
 
 
-            <!-- En espera -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card espera">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filtro</h6>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Empresas</a></li>
-                    <li><a class="dropdown-item" href="#">Vacantes</a></li>
-
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">En Espera <span>| Empresas</span></h5>
-
-                  <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen9.png')">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-hourglass-split"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{empresasEnEspera.length}}</h6>
-                      <span class="text-success small pt-1 fw-bold"></span> <span
-                        class="text-muted small pt-2 ps-1"></span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End En Espera -->
+            <!-- Contador "En espera" -->
 
             <!-- Tabla de Empresas -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
-                <div class="filter">
+                <!-- <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -131,31 +136,81 @@
                     <li><a class="dropdown-item" href="#">En espera</a></li>
                     <li><a class="dropdown-item" href="#">Rechazadas</a></li>
                   </ul>
-                </div>
+                </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Empresas recientes <span>| Aprobadas</span></h5>
+                  <h5 class="card-title">Empresas recientes <span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Aprobadas" class="mat-tab-label">
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">Foto de Perfil</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Empresa</th>
-                        <th scope="col">Estado</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let empresaAceptada of empresasAceptadas">
-                        <th scope="row"><a href="#"><img src= "../../../assets/img/unknown-user.jpg" alt=""></a></th>
-                        <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
-                        <th scope="row"><a href="#">{{empresaAceptada.id_empresa}}</a></th>
-                        <td><a href="#" class="text-primary">{{empresaAceptada.nombre}}</a></td>
-                        <td><span class="badge bg-success">{{empresaAceptada.estado}}</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
 
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="empresa">Empresa</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let empresaAceptada of empresasAceptadas">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
+                                <th scope="row"><a href="#">{{empresaAceptada.id_empresa}}</a></th>
+                                <td><a href="#" class="text-primary">{{empresaAceptada.nombre}}</a></td>
+                                <td><span class="badge bg-success">{{empresaAceptada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                        <mat-tab label="En Espera" class="mat-tab-label">
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="empresa">Empresa</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let empresaEnEspera of empresasEnEspera">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
+                                <th scope="row"><a href="#">{{empresaEnEspera.id_empresa}}</a></th>
+                                <td><a href="#" class="text-primary">{{empresaEnEspera.nombre}}</a></td>
+                                <td><span class="badge bg-success">{{empresaEnEspera.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                        <mat-tab label="Rechazadas" class="mat-tab-label">
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="empresa">Empresa</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let empresaRechazada of empresasRechazadas">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
+                                <th scope="row"><a href="#">{{empresaRechazada.id_empresa}}</a></th>
+                                <td><a href="#" class="text-primary">{{empresaRechazada.nombre}}</a></td>
+                                <td><span class="badge bg-success">{{empresaRechazada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
                 </div>
 
               </div>
@@ -166,7 +221,7 @@
             <div class="col-12">
               <div class="card top-selling overflow-auto">
 
-                <div class="filter">
+                <!-- <div class="filter">
                   <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <li class="dropdown-header text-start">
@@ -177,30 +232,82 @@
                     <li><a class="dropdown-item" href="#">En espera</a></li>
                     <li><a class="dropdown-item" href="#">Rechazadas</a></li>
                   </ul>
-                </div>
+                </div> -->
 
                 <div class="card-body">
-                  <h5 class="card-title">Vacantes recientes <span>| Aprobadas</span></h5>
+                  <h5 class="card-title">Vacantes recientes <span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Aprobadas" class="mat-tab-label">
 
-                  <table class="table table-borderless datatable">
-                    <thead>
-                      <tr>
-                        <th scope="col">Foto de Perfil</th>
-                        <th scope="col">Número</th>
-                        <th scope="col">Vacante</th>
-                        <th scope="col">Estado</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
-                        <th scope="row"><a href="#"><img src= "../../../assets/img/unknown-user.jpg" alt=""></a></th>
-                        <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
-                        <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
-                        <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
 
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="vacante">Vacante</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
+                                <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
+                                <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                        <mat-tab label="En Espera" class="mat-tab-label">
+
+
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="vacante">Vacante</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
+                                <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
+                                <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                        <mat-tab label="Rechazadas" class="mat-tab-label">
+
+
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr>
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="vacante">Vacante</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
+                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
+                                </th>
+                                <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
+                                <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
+                                <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
                 </div>
 
               </div>
@@ -212,9 +319,62 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
+          <!-- En espera -->
+          <div class="card info-card espera">
+            <!-- <div class="card info-card espera"> -->
+
+            <!-- <div class="filter">
+                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                  <li class="dropdown-header text-start">
+                    <h6>Filtro</h6>
+                  </li>
+                  <li><a class="dropdown-item" href="#">Empresas</a></li>
+                  <li><a class="dropdown-item" href="#">Vacantes</a></li>
+
+                </ul>
+              </div> -->
+
+            <div class="card-body">
+              <h5 class="card-title">En Espera<span>
+                  <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                    <mat-tab label="Empresas" class="mat-tab-label">
+
+                      <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen9.png')">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>{{empresasEnEspera.length}}</h6>
+                          <span class="text-success small pt-1 fw-bold"></span> <span
+                            class="text-muted small pt-2 ps-1"></span>
+
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Vacantes" class="mat-tab-label">
+                      <div class="d-flex align-items-center" style="background-image: url('assets/img/Imagen9.png')">
+                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                          <i class="bi bi-hourglass-split"></i>
+                        </div>
+                        <div class="ps-3">
+                          <h6>{{vacantesEnEspera.length}}</h6>
+                          <span class="text-success small pt-1 fw-bold"></span> <span
+                            class="text-muted small pt-2 ps-1"></span>
+
+                        </div>
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+                </span></h5>
+            </div>
+
+            <!-- </div> -->
+          </div><!-- End En Espera -->
+
           <!-- Actividad reciente -->
           <div class="card">
-            <div class="filter">
+            <!-- <div class="filter">
               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
               <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 <li class="dropdown-header text-start">
@@ -225,30 +385,52 @@
                 <li><a class="dropdown-item" href="#">Esta semana</a></li>
                 <li><a class="dropdown-item" href="#">Este mes</a></li>
               </ul>
-            </div>
+            </div> -->
 
-            <div class="card-body">
-              <h5 class="card-title">Actividad Reciente <span>| Hoy</span></h5>
+            <div class="card-body"
+              *ngFor="administradorAccion of administradorAcciones| paginate: page_size:page_number">
+              <h5 class="card-title">Actividad Reciente<span>
+                  <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                    <mat-tab label="Hoy" class="mat-tab-label">
+                      <div class="activity">
 
-              <div class="activity">
+                        <div class="activity-item d-flex"
+                          *ngFor="let administradorAccion of administradorAcciones.reverse()">
+                          <div class="activite-label">{{administradorAccion.fecha_modificacion}}</div>
+                          <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                          <div class="activity-content">
+                            {{administradorAccion.estado_actual}} <a href="#" class="fw-bold text-dark"
+                              *ngIf="administradorAccion.id_usuario_empresa_fk">{{administradorAccion.Usuario.nombre}}</a>
+                            <a href="#" class="fw-bold text-dark"
+                              *ngIf="administradorAccion.id_vacante_fk">{{administradorAccion.Vacante.puesto}}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab label="Ayer">
+                      <div class="activity">
 
-                <div class="activity-item d-flex" *ngFor="let administradorAccion of administradorAcciones">
-                  <div class="activite-label">{{administradorAccion.fecha_modificacion}}</div>
-                  <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                  <div class="activity-content">
-                    {{administradorAccion.estado_actual}} <a href="#" class="fw-bold text-dark" *ngIf="administradorAccion.id_usuario_empresa_fk">{{administradorAccion.Usuario.nombre}}</a>
-                    <a href="#" class="fw-bold text-dark" *ngIf="administradorAccion.id_vacante_fk">{{administradorAccion.Vacante.puesto}}</a>
-                  </div>
+                      </div>
+                    </mat-tab>
+                  </mat-tab-group>
+                </span></h5>
+              <!-- Paginación -->
+              <div class="row justify-content-end m-t-2" *ngIf="administradorAcciones.length > 0">
+                <div class="col-md-12">
+                  <mat-paginator 
+                    [length]="administradorAcciones.length" 
+                    [pageSize]="page_size" 
+                    [pageSizeOptions]="pageSizeOptions"
+                    showFirstLastButtons 
+                    (page)="handlePage($event)">
+                  </mat-paginator>
                 </div>
-
               </div>
-
             </div>
           </div><!-- End Actividad reciente -->
-
         </div>
+        <!--End Right side columns -->
       </div><!-- End Left side columns -->
-
     </section>
   </div>
 </div>
