@@ -99,6 +99,6 @@ export class EmpresaService {
 	}
 
 	getNotificacionesAdmin() {
-		return this.http.get(`${baseNotificacion}/135`); // 135 debe de cambiarse por el id del SuperAdministrador
+		return this.http.get(`${baseNotificacion}/2`); // 2 es el id del SuperAdministrador
 	}
 }

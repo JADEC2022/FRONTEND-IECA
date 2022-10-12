@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "environments/environment";
+import { Observable } from "rxjs";
 
 const baseUrlUsuario = environment.baseUrl + "/usuarios";
 const baseUrlAccion = environment.baseUrl + "/administrador-acciones";
@@ -65,5 +66,9 @@ export class CompanyAdministratorService {
 			id_empresa: idEmpresa,
 		};
 		return this.http.post(baseUrlNotificacion, data);
+	}
+
+	getCompany(id) {
+		return this.http.get(`${baseUrlUsuario}/${id}`);
 	}
 }

@@ -14,7 +14,7 @@ export class NotificationsService {
 		const id = localStorage.getItem("id_usuario");
 		const tipo = localStorage.getItem("tipo_usuario");
 		if (tipo === "Administrador") {
-			return this.http.get(`${baseUrl}/135`); // 135 debe de cambiarse por el id del SuperAdministrador
+			return this.http.get(`${baseUrl}/2`); // 2 debe ser el id del SuperAdministrador
 		} else {
 			return this.http.get(`${baseUrl}/${id}`);
 		}

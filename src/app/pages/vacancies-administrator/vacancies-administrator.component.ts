@@ -7,6 +7,7 @@ import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 import { PageEvent } from "@angular/material/paginator";
 import { UsuarioI } from "../../models/usuario";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
 	selector: "app-vacancies-administrator",
@@ -15,6 +16,7 @@ import { UsuarioI } from "../../models/usuario";
 })
 export class VacanciesAdministratorComponent implements OnInit {
 	vacantes: VacantesI[] = [];
+	idVacante: number;
 	estado: String = null;
 	diasEnEspera: number = 15;
 	buscarPalabra: string = "";
@@ -26,11 +28,17 @@ export class VacanciesAdministratorComponent implements OnInit {
 	search = new FormControl("");
 
 	constructor(
-		private vacantesAdministradorService: VacanciesAdministratorService
+		private vacantesAdministradorService: VacanciesAdministratorService,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
-		this.getVacantesByEstado();
+		this.idVacante = parseInt(this.activatedRoute.snapshot.paramMap.get("id"));
+		if (!Number.isNaN(this.idVacante)) {
+			this.checkURL(this.idVacante);
+		} else {
+			this.getVacantesByEstado(this.estado);
+		}
 		this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
 			this.buscarPalabra = value;
 			this.buscarVacantes(value);
@@ -176,6 +184,21 @@ export class VacanciesAdministratorComponent implements OnInit {
 	handlePage(e: PageEvent) {
 		this.page_size = e.pageSize;
 		this.page_number = e.pageIndex + 1;
+	}
+
+	checkURL(idVacante: number) {
+		let vacante: VacantesI;
+		this.vacantesAdministradorService
+			.getVacante(idVacante)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					vacante = resp.data;
+					this.search.setValue(vacante.puesto);
+					this.buscarVacantes(vacante.puesto);
+				} else {
+					this.getVacantesByEstado(this.estado);
+				}
+			});
 	}
 
 	// Método para crear una nueva notificación

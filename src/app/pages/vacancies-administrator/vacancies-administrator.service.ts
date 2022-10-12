@@ -66,4 +66,8 @@ export class VacanciesAdministratorService {
 		};
 		return this.http.post(baseUrlNotificacion, data);
 	}
+
+	getVacante(id: number) {
+		return this.http.get(`${baseUrlVacante}/vacante/${id}`);
+	}
 }

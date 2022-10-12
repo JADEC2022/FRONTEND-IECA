@@ -305,7 +305,7 @@ export class CompanyProfileComponent implements OnInit {
 
 		switch (estado) {
 			case "EN REVISION":
-				url = "/company-administrator";
+				url = `/company-administrator/${this.company.id_usuario}`;
 				titulo = this.company.nombre + " a completado su registro.";
 				mensaje =
 					this.company.nombre +
@@ -313,7 +313,7 @@ export class CompanyProfileComponent implements OnInit {
 				break;
 
 			case "EN ESPERA":
-				url = "/company-administrator";
+				url = `/company-administrator/${this.company.id_usuario}`;
 				titulo = this.company.nombre + " a actualizado sus datos.";
 				mensaje =
 					this.company.nombre +
@@ -322,7 +322,7 @@ export class CompanyProfileComponent implements OnInit {
 		}
 
 		this.empresaSvc
-			.addNotificacion(url, titulo, mensaje, 135, this.company.id_usuario) // 135 debe de cambiarse por el id del SuperAdministrador
+			.addNotificacion(url, titulo, mensaje, 2, this.company.id_usuario) // 2 debe ser el id del SuperAdministrador
 			.subscribe((resp: AuthResponseI) => {
 				if (!resp.status) {
 					console.log(resp);

@@ -149,7 +149,7 @@ export class VacanteComponent implements OnInit {
 			}
 			company = resp.data;
 			if (vacante.estado === "EN ESPERA") {
-				let url = "/vacancies-administrator";
+				let url = `/vacancies-administrator/${vacante.id_vacante}`;
 				let titulo =
 					"La vacante para el puesto de " +
 					vacante.puesto +
@@ -161,7 +161,7 @@ export class VacanteComponent implements OnInit {
 					".\n Actualmente está en la lista de vacantes en espera, aceptala para que la vean los postulantes.";
 
 				this.vacanteService
-					.addNotificacion(url, titulo, mensaje, vacante.id_vacante, 135) // 135 debe de cambiarse por el id del SuperAdministrador
+					.addNotificacion(url, titulo, mensaje, vacante.id_vacante, 2) // 2 debe ser el id del SuperAdministrador
 					.subscribe((resp: AuthResponseI) => {
 						if (!resp.status) {
 							console.log(resp);

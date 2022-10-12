@@ -6,6 +6,8 @@ import { EmpresaI } from "../../models/empresa";
 import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
 import { PageEvent } from "@angular/material/paginator";
+import { ActivatedRoute } from "@angular/router";
+import { UsuarioI } from "app/models/usuario";
 
 @Component({
 	selector: "app-company-administrator",
@@ -14,6 +16,7 @@ import { PageEvent } from "@angular/material/paginator";
 })
 export class CompanyAdministratorComponent implements OnInit {
 	empresas: EmpresaI[] = [];
+	idEmpresa: number;
 	estado: String = null;
 	diasEnEspera: number = 15;
 	buscarPalabra: string = "";
@@ -25,11 +28,17 @@ export class CompanyAdministratorComponent implements OnInit {
 	search = new FormControl("");
 
 	constructor(
-		private companyAdministratorService: CompanyAdministratorService
+		private companyAdministratorService: CompanyAdministratorService,
+		private activatedRoute: ActivatedRoute
 	) {}
 
 	ngOnInit(): void {
-		this.getEmpresasByEstado(this.estado);
+		this.idEmpresa = parseInt(this.activatedRoute.snapshot.paramMap.get("id"));
+		if (!Number.isNaN(this.idEmpresa)) {
+			this.checkURL(this.idEmpresa);
+		} else {
+			this.getEmpresasByEstado(this.estado);
+		}
 		this.search.valueChanges.pipe(debounceTime(300)).subscribe((value) => {
 			this.buscarPalabra = value;
 			this.buscarEmpresas(value);
@@ -173,6 +182,21 @@ export class CompanyAdministratorComponent implements OnInit {
 	handlePage(e: PageEvent) {
 		this.page_size = e.pageSize;
 		this.page_number = e.pageIndex + 1;
+	}
+
+	checkURL(idEmpresa: number) {
+		let empresa: UsuarioI;
+		this.companyAdministratorService
+			.getCompany(idEmpresa)
+			.subscribe((resp: AuthResponseI) => {
+				if (resp.status) {
+					empresa = resp.data;
+					this.search.setValue(empresa.nombre);
+					this.buscarEmpresas(empresa.nombre);
+				} else {
+					this.getEmpresasByEstado(this.estado);
+				}
+			});
 	}
 
 	// Método para crear una nueva notificación

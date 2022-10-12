@@ -236,7 +236,7 @@ export class CreateVacancyComponent implements OnInit {
 					}
 				});
 
-				let url = "/vacancies-administrator";
+				let url = `/vacancies-administrator/${vacanteGuardada.id_vacante}`;
 				let titulo = this.company.nombre + " a creado una nueva vacante.";
 				let mensaje =
 					this.company.nombre +
@@ -245,13 +245,7 @@ export class CreateVacancyComponent implements OnInit {
 					".\n Actualmente esta en la lista de vacantes en revisión, aceptala para que la vean los postulantes.";
 
 				this.vacanteService
-					.addNotificacion(
-						url,
-						titulo,
-						mensaje,
-						vacanteGuardada.id_vacante,
-						135
-					) // 135 debe de cambiarse por el id del SuperAdministrador
+					.addNotificacion(url, titulo, mensaje, vacanteGuardada.id_vacante, 2) // 2 debe ser el id del SuperAdministrador
 					.subscribe((resp: AuthResponseI) => {
 						if (!resp.status) {
 							console.log(resp);
