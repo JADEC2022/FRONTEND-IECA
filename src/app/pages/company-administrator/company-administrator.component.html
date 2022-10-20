@@ -33,7 +33,7 @@
 									formControlName="estadoEmpresa"
 									(selectionChange)="changeEstado($event.value)"
 								>
-									<mat-option [value]="null">Sin estado</mat-option>
+									<mat-option [value]="null">En revisión</mat-option>
 									<mat-option value="ACEPTADA">Aceptadas</mat-option>
 									<mat-option value="EN ESPERA">En espera</mat-option>
 									<mat-option value="RECHAZADA">Rechazadas</mat-option>
@@ -74,12 +74,12 @@
 								<img class="img" [src]="empresa.foto_empresa" />
 							</ng-template>
 							<h2>{{ empresa.nombre }}</h2>
+							<h3><b>Correo:</b></h3>
+							<h4>{{ empresa.email }}</h4>
 							<h3>Estatus:</h3>
-
 							<h4 *ngIf="empresa.estado === null">
-								<b>SIN ESTADO</b>
+								<b>EN REVISIÓN</b>
 							</h4>
-
 							<h4>
 								<b>{{ empresa.estado }}</b>
 							</h4>
@@ -115,7 +115,7 @@
 											class="col-lg-3 col-md-4 label"
 											style="text-align: right"
 										>
-											Nombre del(a) administrador(a):
+											Nombre del(a) encargado(a):
 										</div>
 										<div class="col-lg-9 col-md-8">
 											{{ empresa.administrador }}
@@ -159,10 +159,18 @@
 										>
 											Página web:
 										</div>
-										<div *ngIf="empresa.pagina_web" class="col-lg-9 col-md-8 text-primary">
-											<a href="{{empresa.pagina_web}}">{{ empresa.pagina_web }}</a>
+										<div
+											*ngIf="empresa.pagina_web"
+											class="col-lg-9 col-md-8 text-primary"
+										>
+											<a href="{{ empresa.pagina_web }}">{{
+												empresa.pagina_web
+											}}</a>
 										</div>
-										<div *ngIf="!empresa.pagina_web" class="col-lg-9 col-md-8 text-primary">
+										<div
+											*ngIf="!empresa.pagina_web"
+											class="col-lg-9 col-md-8 text-primary"
+										>
 											<a>Sin página web</a>
 										</div>
 									</div>
