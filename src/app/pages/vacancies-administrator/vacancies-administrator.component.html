@@ -32,7 +32,7 @@
 									formControlName="estadoVacante"
 									(selectionChange)="changeEstado($event.value)"
 								>
-									<mat-option [value]="null">Sin estado</mat-option>
+									<mat-option [value]="null">En revisión</mat-option>
 									<mat-option value="ACEPTADA">Aceptadas</mat-option>
 									<mat-option value="EN ESPERA">En espera</mat-option>
 									<mat-option value="RECHAZADA">Rechazadas</mat-option>
@@ -65,26 +65,29 @@
 						>
 							<div
 								class="card-avatar"
-								*ngIf="vacante.imagen === null; else noEsNulo"
+								*ngIf="vacante.Usuario.foto_perfil === null; else noEsNulo"
 							>
 								<img class="img" src="./assets/img/IECA-Blanco.jpg" />
 							</div>
 							<ng-template class="card-avatar" #noEsNulo>
-								<img class="img" [src]="vacante.imagen" />
+								<img class="img" [src]="vacante.Usuario.foto_perfil" />
 							</ng-template>
 
 							<h2>{{ vacante.puesto }}</h2>
-							<h3>Estatus:</h3>
-							<h4 *ngIf="vacante.estado === null">
-								<b>SIN ESTADO</b>
-							</h4>
-							<h4>
-								<b>{{ vacante.estado }}</b>
-							</h4>
 							<h3>Empresa:</h3>
 							<h4>
 								<b>{{ vacante.Usuario.nombre | uppercase }}</b>
 							</h4>
+							<h3><b>Correo:</b></h3>
+							<h4>{{ vacante.Usuario.email }}</h4>
+							<h3>Estatus:</h3>
+							<h4 *ngIf="vacante.estado === null">
+								<b>EN REVISIÓN</b>
+							</h4>
+							<h4>
+								<b>{{ vacante.estado }}</b>
+							</h4>
+
 							<h3 *ngIf="vacante.dias_transcurridos">Días transcurridos:</h3>
 							<h4 *ngIf="vacante.dias_transcurridos">
 								<b>{{ vacante.dias_transcurridos }}</b>
@@ -112,31 +115,52 @@
 									id="profile-overview"
 								>
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+										<div
+											class="col-lg-3 col-md-4 label"
+											style="text-align: right"
+										>
 											Fecha de publicación:
 										</div>
-										<div *ngIf="vacante.fecha_publicacion" class="col-lg-9 col-md-8">
+										<div
+											*ngIf="vacante.fecha_publicacion"
+											class="col-lg-9 col-md-8"
+										>
 											{{ vacante.fecha_publicacion }}
 										</div>
-										<div *ngIf="!vacante.fecha_publicacion" class="col-lg-9 col-md-8">
+										<div
+											*ngIf="!vacante.fecha_publicacion"
+											class="col-lg-9 col-md-8"
+										>
 											No publicada
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+										<div
+											class="col-lg-3 col-md-4 label"
+											style="text-align: right"
+										>
 											Sueldo:
 										</div>
-										<div *ngIf="vacante.sueldo === 'Negociable'" class="col-lg-9 col-md-8">
+										<div
+											*ngIf="vacante.sueldo === 'Negociable'"
+											class="col-lg-9 col-md-8"
+										>
 											{{ vacante.sueldo }}
 										</div>
-										<div *ngIf="vacante.sueldo !== 'Negociable'" class="col-lg-9 col-md-8">
+										<div
+											*ngIf="vacante.sueldo !== 'Negociable'"
+											class="col-lg-9 col-md-8"
+										>
 											$ {{ vacante.sueldo | number }}
 										</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+										<div
+											class="col-lg-3 col-md-4 label"
+											style="text-align: right"
+										>
 											Descripción del puesto:
 										</div>
 										<div class="col-lg-9 col-md-8">
@@ -145,14 +169,20 @@
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+										<div
+											class="col-lg-3 col-md-4 label"
+											style="text-align: right"
+										>
 											Modalidad:
 										</div>
 										<div class="col-lg-9 col-md-8">{{ vacante.modalidad }}</div>
 									</div>
 
 									<div class="row">
-										<div class="col-lg-3 col-md-4 label" style="text-align: right">
+										<div
+											class="col-lg-3 col-md-4 label"
+											style="text-align: right"
+										>
 											Nivel:
 										</div>
 										<div class="col-lg-9 col-md-8">{{ vacante.nivel }}</div>
