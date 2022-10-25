@@ -843,6 +843,14 @@
     max-width: 60px;
   }
 
+  .mat-mdc-paginator-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0%;
+    flex-wrap: wrap-reverse;
+    width: 100%;
+  }
   /*--------------------------------------------------------------
   # Profile Page
   --------------------------------------------------------------*/

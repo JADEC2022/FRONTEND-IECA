@@ -23,6 +23,11 @@ export class DashboardAdministratorService {
 		return this.http.put(`${baseUrlVacantesRechazadas}/estado`, formData);
 	}
 
+	getActionsByAdministratorFiltroDia(filtrodia){
+		const idAdministrator = localStorage.getItem("id_usuario");
+		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}/${filtrodia}`);
+	}
+
 	getActionsByAdministrator(){
 		const idAdministrator = localStorage.getItem("id_usuario");
 		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}`);

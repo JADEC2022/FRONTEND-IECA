@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardAdministratorService } from "./dashboard-administrator.service";
 import { EmpresaI } from 'app/models/empresa';
 import { AuthResponseI } from '../../models/auth-response';
-import { EmpresaService } from '../company-profile/empresa.service';
+import { PageEvent } from "@angular/material/paginator";
 import { VacantesI } from 'app/models/vacante';
 import { AdministradorAccionI } from '../../models/administrador-acciones';
 
@@ -20,91 +20,63 @@ export class DashboardAdministratorComponent implements OnInit {
   vacantesEnEspera: VacantesI[] = [];
   vacantesRechazadas: VacantesI[] = [];
 
-  administradorAcciones: AdministradorAccionI [] = [];
+  administradorAccionesHoy: AdministradorAccionI [] = [];
+  administradorAccionesAyer: AdministradorAccionI [] = [];
+  administradorAccionesTodas: AdministradorAccionI [] = [];
 
   page_size: number = 5;
   page_number: number = 1;
-  pageSizeOptions: number[] = [5, 10, 20];
+  pageSizeOptions: number[] = [5, 10];
 
   constructor(private dashboardAdministratorService: DashboardAdministratorService) { }
 
   ngOnInit(): void {
-    this.getEmpresasByEstadoAceptada('ACEPTADA');
-    this.getEmpresasByEstadoEnEspera('EN ESPERA');
-    this.getEmpresasByEstadoRechazada('RECHAZADA');
+    this.getEmpresasByEstado('ACEPTADA');
+    this.getEmpresasByEstado('RECHAZADA');
+	this.getEmpresasByEstado('EN ESPERA');
    
 
-    this.getVacantesByEstadoAceptada('ACEPTADA');
-    this.getVacantesByEstadoEnEspera('EN ESPERA');
-    this.getVacantesByEstadoRechazada('RECHAZADA');
+    this.getVacantesByEstado('ACEPTADA');
+	this.getVacantesByEstado('RECHAZADA');
+	this.getVacantesByEstado('EN ESPERA');
+    
 
 	this.getAdministradorAcciones();
+	this.getAdministradorAccionesFiltroDia('hoy');
+	this.getAdministradorAccionesFiltroDia('ayer');
 
   }
 
-  getEmpresasByEstadoAceptada(estado): void {
+  getEmpresasByEstado(estado): void {
 		const formData = { estado: estado };
 		this.dashboardAdministratorService
 			.getCompanysByEstado(formData)
 			.subscribe((resp: AuthResponseI) => {
 				if (resp.status) {
-            		this.empresasAceptadas = resp.data
+					if(estado === 'ACEPTADA'){
+						this.empresasAceptadas = resp.data;
+					} else if (estado === 'RECHAZADA'){
+						this.empresasRechazadas = resp.data;
+					} else if (estado === 'EN ESPERA') {
+						this.empresasEnEspera = resp.data;
+					}
 				}
-
 			});
 	}
 
-   getEmpresasByEstadoEnEspera(estado: "EN ESPERA"): void {
- 		const formData = { estado: estado };
- 		this.dashboardAdministratorService
- 			.getCompanysByEstado(formData)
- 			.subscribe((resp: AuthResponseI) => {
- 				if (resp.status) {
-             		this.empresasEnEspera = resp.data
- 				}
- 			});
- 	}
-
-   getEmpresasByEstadoRechazada(estado: "RECHAZADA"): void {
- 		const formData = { estado: estado };
- 		this.dashboardAdministratorService
- 			.getCompanysByEstado(formData)
- 			.subscribe((resp: AuthResponseI) => {
- 				if (resp.status) {
-             		this.empresasRechazadas = resp.data
- 				}
- 			});
- 	}
-
-   getVacantesByEstadoAceptada(estado: "ACEPTADA"): void {
+   getVacantesByEstado(estado): void {
 	 	const formData = { estado: estado };
 	 	this.dashboardAdministratorService
 	 		.getVacanciesByEstado(formData)
 	 		.subscribe((resp: AuthResponseI) => {
 	 			if (resp.status) {
-            		this.vacantesAceptadas = resp.data
-	 			}
-	 		});
-	 }
-
-   getVacantesByEstadoEnEspera(estado: "EN ESPERA"): void {
-	 	const formData = { estado: estado };
-	 	this.dashboardAdministratorService
-	 		.getVacanciesByEstado(formData)
-	 		.subscribe((resp: AuthResponseI) => {
-	 			if (resp.status) {
-            		this.vacantesEnEspera = resp.data
-	 			}
-	 		});
-	 }
-
-   getVacantesByEstadoRechazada(estado: "RECHAZADA"): void {
-	 	const formData = { estado: estado };
-	 	this.dashboardAdministratorService
-	 		.getVacanciesByEstado(formData)
-	 		.subscribe((resp: AuthResponseI) => {
-	 			if (resp.status) {
-            		this.vacantesRechazadas = resp.data
+            		if(estado === 'ACEPTADA'){
+						this.vacantesAceptadas = resp.data;
+					} else if (estado === 'RECHAZADA'){
+						this.vacantesRechazadas = resp.data;
+					} else if (estado === 'EN ESPERA') {
+						this.vacantesEnEspera = resp.data;
+					}
 	 			}
 	 		});
 	 }
@@ -113,8 +85,26 @@ export class DashboardAdministratorComponent implements OnInit {
 		this.dashboardAdministratorService.getActionsByAdministrator()
 		.subscribe((resp: AuthResponseI) => {
 			if (resp.status) {
-				this.administradorAcciones = resp.data
+				this.administradorAccionesTodas = resp.data
 			}
 		});
 	 }
+
+	 getAdministradorAccionesFiltroDia(filtrodia): void{
+		this.dashboardAdministratorService.getActionsByAdministratorFiltroDia(filtrodia)
+		.subscribe((resp: AuthResponseI) => {
+			if (resp.status) {
+				if(filtrodia === 'hoy'){
+					this.administradorAccionesHoy = resp.data;
+				} else {
+					this.administradorAccionesAyer = resp.data;
+				}
+			}
+		});
+	 }
+
+	 handlePage(e: PageEvent) {
+		this.page_size = e.pageSize;
+		this.page_number = e.pageIndex + 1;
+	}
 }
