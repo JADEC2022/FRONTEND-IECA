@@ -12,21 +12,29 @@ import { AdministradorAccionI } from '../../models/administrador-acciones';
   styleUrls: ['./dashboard-administrator.component.css']
 })
 export class DashboardAdministratorComponent implements OnInit {
-  empresasAceptadas: EmpresaI[] = [];
-  empresasEnEspera: EmpresaI[] = [];
-  empresasRechazadas: EmpresaI[] = [];
+	empresasAceptadas: EmpresaI[] = [];
+	empresasEnEspera: EmpresaI[] = [];
+	empresasRechazadas: EmpresaI[] = [];
 
-  vacantesAceptadas: VacantesI[] = [];
-  vacantesEnEspera: VacantesI[] = [];
-  vacantesRechazadas: VacantesI[] = [];
+	vacantesAceptadas: VacantesI[] = [];
+	vacantesEnEspera: VacantesI[] = [];
+	vacantesRechazadas: VacantesI[] = [];
 
-  administradorAccionesHoy: AdministradorAccionI [] = [];
-  administradorAccionesAyer: AdministradorAccionI [] = [];
-  administradorAccionesTodas: AdministradorAccionI [] = [];
+	administradorAccionesHoy: AdministradorAccionI[] = [];
+	administradorAccionesAyer: AdministradorAccionI[] = [];
+	administradorAccionesTodas: AdministradorAccionI[] = [];
 
-  page_size: number = 5;
-  page_number: number = 1;
-  pageSizeOptions: number[] = [5, 10];
+	page_size_recent_activitys: number = 5;
+	page_number_recent_activitys: number = 1;
+	pageSizeOptionsRecentActivitys: number[] = [5, 10];
+
+	page_size_recent_companys: number = 5;
+	page_number_recent_companys: number = 1;
+	pageSizeOptionsRecentCompanys: number[] = [5, 10];
+
+    page_size_recent_vacancies: number = 5;
+    page_number_recent_vacancies: number = 1;
+    pageSizeOptionsRecentVacancies: number[] = [5, 10];
 
   constructor(private dashboardAdministratorService: DashboardAdministratorService) { }
 
@@ -103,8 +111,26 @@ export class DashboardAdministratorComponent implements OnInit {
 		});
 	 }
 
-	 handlePage(e: PageEvent) {
-		this.page_size = e.pageSize;
-		this.page_number = e.pageIndex + 1;
+	 urlEmpresa(id: number){
+		return `#/company-administrator/${id}`
+	 }
+
+	 urlVacante(id: number){
+		return `#/vacancies-administrator/${id}`
+	 }
+
+	 handlePageRecentActivitys(e: PageEvent) {
+		this.page_size_recent_activitys = e.pageSize;
+		this.page_number_recent_activitys = e.pageIndex + 1;
+	}
+
+	handlePageRecentCompanys(e: PageEvent) {
+		this.page_size_recent_companys = e.pageSize;
+		this.page_number_recent_companys = e.pageIndex + 1;
+	}
+
+	handlePageRecentVacancies(e: PageEvent) {
+		this.page_size_recent_vacancies = e.pageSize;
+		this.page_number_recent_vacancies = e.pageIndex + 1;
 	}
 }

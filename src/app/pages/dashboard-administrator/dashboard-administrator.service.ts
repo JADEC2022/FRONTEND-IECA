@@ -33,4 +33,7 @@ export class DashboardAdministratorService {
 		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}`);
 	}
 	
+	verEmpresa(idEmpresa) {
+		return this.http.get(`${baseUrlEmpresasAprobadas}/ver/${idEmpresa}`);
+	}
 }

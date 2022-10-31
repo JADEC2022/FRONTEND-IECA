@@ -16,8 +16,7 @@
                   <h5 class="card-title">Aprobadas<span>
                       <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
                         <mat-tab label="Empresas" class="mat-tab-label">
-                          <div class="d-flex align-items-center"
-                            style="background-image: url('assets/img/Imagen7.png');">
+                          <div class="d-flex align-items-center"style="background-image: url('assets/img/Imagen7.png');">
                             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                               <i class="bi bi-check-square-fill"></i>
                             </div>
@@ -98,7 +97,7 @@
                         <mat-tab label="Aprobadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="empresa">Empresa</th>
@@ -106,27 +105,27 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let empresaAceptada of empresasAceptadas | paginate: page_size:page_number">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
-                                </th>
-                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
-                                <th scope="row"><a href="#">{{empresaAceptada.id_empresa}}</a></th>
-                                <td><a href="#" class="text-dark">{{empresaAceptada.nombre}}</a></td>
+                              <tr align="center" 
+                                *ngFor="let empresaAceptada of empresasAceptadas | paginate: page_size_recent_companys:page_number_recent_companys">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlEmpresa(empresaAceptada.id_empresa)"><img [src]= "empresaAceptada.foto_empresa" alt=""></a></th>
+                                <th scope="row"><a [href]="urlEmpresa(empresaAceptada.id_empresa)">{{empresaAceptada.id_empresa}}</a></th>
+                                <td><a [href]="urlEmpresa(empresaAceptada.id_empresa)" class="text-dark">{{empresaAceptada.nombre}}</a></td>
                                 <td><span class="badge bg-success text-dark">{{empresaAceptada.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="empresasAceptadas.length > 0">
-                            <mat-paginator [length]="empresasAceptadas.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="empresasAceptadas.length > 0">
+                            <mat-paginator [length]="empresasAceptadas.length" [pageSize]="page_size_recent_companys"
+                              [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons (page)="handlePageRecentCompanys($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
                         <mat-tab label="En Espera" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="empresa">Empresa</th>
@@ -134,27 +133,28 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let empresaEnEspera of empresasEnEspera  | paginate: page_size:page_number">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
-                                </th>
-                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
-                                <th scope="row"><a href="#">{{empresaEnEspera.id_empresa}}</a></th>
-                                <td><a href="#" class="text-dark">{{empresaEnEspera.nombre}}</a></td>
+                              <tr align="center"
+                                *ngFor="let empresaEnEspera of empresasEnEspera  | paginate: page_size_recent_companys:page_number_recent_companys">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlEmpresa(empresaEnEspera.id_empresa)"><img [src]= "empresaEnEspera.foto_empresa" alt=""></a></th>
+                                <th scope="row"><a [href]="urlEmpresa(empresaEnEspera.id_empresa)">{{empresaEnEspera.id_empresa}}</a></th>
+                                <td><a [href]="urlEmpresa(empresaEnEspera.id_empresa)" class="text-dark">{{empresaEnEspera.nombre}}</a></td>
                                 <td><span class="badge bg-warning text-dark">{{empresaEnEspera.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="empresasEnEspera.length > 0">
-                            <mat-paginator [length]="empresasEnEspera.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="empresasEnEspera.length > 0">
+                            <mat-paginator [length]="empresasEnEspera.length" [pageSize]="page_size_recent_activitys"
+                              [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons
+                              (page)="handlePageRecentCompanys($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
                         <mat-tab label="Rechazadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="empresa">Empresa</th>
@@ -162,20 +162,20 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let empresaRechazada of empresasRechazadas | paginate: page_size:page_number">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
-                                </th>
-                                <!-- <th scope="row" *ngIf="!empresaAcepta.foto_perfil"><a href="#"><img src= "empresaAceptada.foto_perfil" alt=""></a></th> -->
-                                <th scope="row"><a href="#">{{empresaRechazada.id_empresa}}</a></th>
-                                <td><a href="#" class="text-dark">{{empresaRechazada.nombre}}</a></td>
+                              <tr align="center" 
+                                *ngFor="let empresaRechazada of empresasRechazadas | paginate: page_size_recent_companys:page_number_recent_companys">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)"><img [src]= "empresaRechazada.foto_empresa" alt=""></a></th>
+                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)">{{empresaRechazada.id_empresa}}</a></th>
+                                <td><a [href]="urlEmpresa(empresaRechazada.id_empresa)" class="text-dark">{{empresaRechazada.nombre}}</a></td>
                                 <td><span class="badge bg-danger text-dark">{{empresaRechazada.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="empresasRechazadas.length > 0">
-                            <mat-paginator [length]="empresasRechazadas.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="empresasRechazadas.length > 0">
+                            <mat-paginator [length]="empresasRechazadas.length" [pageSize]="page_size_recent_companys"
+                              [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons (page)="handlePageRecentCompanys($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
@@ -195,7 +195,7 @@
                         <mat-tab label="Aprobadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="vacante">Vacante</th>
@@ -203,25 +203,29 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let vacanteAceptada of vacantesAceptadas">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th>
-                                <th scope="row"><a href="#">{{vacanteAceptada.id_vacante}}</a></th>
-                                <td><a href="#" class="text-primary">{{vacanteAceptada.puesto}}</a></td>
-                                <td><span class="badge bg-success">{{vacanteAceptada.estado}}</span></td>
+                              <tr align="center"
+                                *ngFor="let vacanteAceptada of vacantesAceptadas | paginate: page_size_recent_vacancies:page_number_recent_vacancies">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlVacante(vacanteAceptada.id_vacante)">
+                                  <img *ngIf="vacanteAceptada.imagen !== 'null'" src="../../../assets/img/unknown-user.jpg" alt="">
+                                  <img [src]= "vacanteAceptada.imagen" alt=""></a></th>
+                                <th scope="row"><a [href]="urlVacante(vacanteAceptada.id_vacante)">{{vacanteAceptada.id_vacante}}</a></th>
+                                <td><a [href]="urlVacante(vacanteAceptada.id_vacante)" class="text-dark">{{vacanteAceptada.puesto}}</a></td>
+                                <td><span class="badge bg-success text-dark">{{vacanteAceptada.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="vacantesAceptadas.length > 0">
-                            <mat-paginator [length]="empresasEnEspera.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="vacantesAceptadas.length > 0">
+                            <mat-paginator [length]="vacantesAceptadas.length" [pageSize]="page_size_recent_vacancies"
+                              [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
                         <mat-tab label="En Espera" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="vacante">Vacante</th>
@@ -229,26 +233,29 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let vacanteEnEspera of vacantesEnEspera">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
-                                </th>
-                                <th scope="row"><a href="#">{{vacanteEnEspera.id_vacante}}</a></th>
-                                <td><a href="#" class="text-primary">{{vacanteEnEspera.puesto}}</a></td>
-                                <td><span class="badge bg-warning">{{vacanteEnEspera.estado}}</span></td>
+                              <tr align="center" 
+                                *ngFor="let vacanteEnEspera of vacantesEnEspera | paginate: page_size_recent_vacancies:page_number_recent_vacancies">
+                                <!-- <img *ngIf="vacanteEnEspera.imagen === 'null'" src="../../../assets/img/unknown-user.jpg" alt=""> -->
+                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">
+                                  <img *ngIf="vacanteEnEspera.imagen !== 'null'" src="../../../assets/img/unknown-user.jpg" alt="">
+                                  <img [src]= "vacanteEnEspera.imagen" alt=""></a></th>
+                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">{{vacanteEnEspera.id_vacante}}</a></th>
+                                <td><a [href]="urlVacante(vacanteEnEspera.id_vacante)" class="text-dark">{{vacanteEnEspera.puesto}}</a></td>
+                                <td><span class="badge bg-warning text-dark">{{vacanteEnEspera.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="vacantesEnEspera.length > 0">
-                            <mat-paginator [length]="vacantesEnEspera.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="vacantesEnEspera.length > 0">
+                            <mat-paginator [length]="vacantesEnEspera.length" [pageSize]="page_size_recent_vacancies"
+                              [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
                         <mat-tab label="Rechazadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
-                              <tr>
+                              <tr align="center">
                                 <th scope="fotoDePerfil">Foto de Perfil</th>
                                 <th scope="numero">Número</th>
                                 <th scope="vacante">Vacante</th>
@@ -256,19 +263,22 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr *ngFor="let vacanteRechazada of vacantesRechazadas">
-                                <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a>
-                                </th>
-                                <th scope="row"><a href="#">{{vacanteRechazada.id_vacante}}</a></th>
-                                <td><a href="#" class="text-primary">{{vacanteRechazada.puesto}}</a></td>
-                                <td><span class="badge bg-danger">{{vacanteRechazada.estado}}</span></td>
+                              <tr align="center"
+                                *ngFor="let vacanteRechazada of vacantesRechazadas | paginate: page_size_recent_vacancies:page_number_recent_vacancies">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlVacante(vacanteRechazada.id_vacante)">
+                                  <img *ngIf="vacanteRechazada.imagen !== 'null'" src="../../../assets/img/unknown-user.jpg" alt="">
+                                  <img [src]= "vacanteRechazada.imagen" alt=""></a></th>
+                                <th scope="row"><a [href]="urlVacante(vacanteRechazada.id_vacante)">{{vacanteRechazada.id_vacante}}</a></th>
+                                <td><a [href]="urlVacante(vacanteRechazada.id_vacante)" class="text-dark">{{vacanteRechazada.puesto}}</a></td>
+                                <td><span class="badge bg-danger text-dark">{{vacanteRechazada.estado}}</span></td>
                               </tr>
                             </tbody>
                           </table>
                           <!-- Paginación -->
-                          <div class="row justify-content-end m-t-2" *ngIf="vacantesRechazadas.length > 0">
-                            <mat-paginator [length]="vacantesRechazadas.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
+                          <div class="row justify-content-end mw-100" *ngIf="vacantesRechazadas.length > 0">
+                            <mat-paginator [length]="vacantesRechazadas.length" [pageSize]="page_size_recent_vacancies"
+                              [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
@@ -319,89 +329,113 @@
           </div><!-- End En Espera -->
 
           <!-- Actividad reciente -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Actividad Reciente<span>
-                  <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
-                    <mat-tab label="Hoy" class="mat-tab-label">
-                      <div class="activity">
-                        <div *ngIf="administradorAccionesHoy.length > 0">
-                          <div class="activity-item d-flex"
-                            *ngFor="let administradorAccionHoy of administradorAccionesHoy.reverse() | paginate: page_size:page_number">
-                            <div class="activite-label">{{administradorAccionHoy.hora_modificacion}}</div>
-                            <i *ngIf="administradorAccionHoy.estado_actual === 'ACEPTADA'" class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                            <i *ngIf="administradorAccionHoy.estado_actual === 'EN ESPERA'" class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                            <i *ngIf="administradorAccionHoy.estado_actual === 'RECHAZADA'" class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                            <div class="activity-content">
-                              {{administradorAccionHoy.estado_actual}} <a href="#" class="fw-bold text-dark" 
-                              *ngIf="administradorAccionHoy.id_usuario_empresa_fk">| {{administradorAccionHoy.Usuario.nombre}}</a>
-                              <a href="#" class="fw-bold text-dark"
-                                *ngIf="administradorAccionHoy.id_vacante_fk">{{administradorAccionHoy.Vacante.puesto}}</a>
-                            </div>
-                          </div>
-                          <!-- Paginación -->
-                          <div class="row justify-content-end">
-                            <mat-paginator [length]="administradorAccionesHoy.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
-                            </mat-paginator>
-                          </div>
-                        </div>
-                      </div>
-                    </mat-tab>
-                    <mat-tab label="Ayer">
-                      <div class="activity">
-                        <div *ngIf="administradorAccionesAyer.length > 0">
-                          <div class="activity-item d-flex"
-                            *ngFor="let administradorAccionAyer of administradorAccionesAyer.reverse() | paginate: page_size:page_number">
-                            <div class="activite-label" *ngIf="administradorAccionAyer.hora_modificacion">{{administradorAccionAyer.hora_modificacion}}</div>
-                            <i *ngIf="administradorAccionAyer.estado_actual === 'ACEPTADA'" class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                            <i *ngIf="administradorAccionAyer.estado_actual === 'EN ESPERA'" class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                            <i *ngIf="administradorAccionAyer.estado_actual === 'RECHAZADA'" class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                            <div class="activity-content">
-                              {{administradorAccionAyer.estado_actual}} <a href="#" class="fw-bold text-dark"
-                                *ngIf="administradorAccionAyer.id_usuario_empresa_fk">| {{administradorAccionAyer.Usuario.nombre}}</a>
-                              <a href="#" class="fw-bold text-dark"
-                                *ngIf="administradorAccionAyer.id_vacante_fk">{{administradorAccionAyer.Vacante.puesto}}</a>
-                            </div>
-                          </div>
-                          <!-- Paginación -->
-                          <div class="row justify-content-end">
-                            <mat-paginator [length]="administradorAccionesAyer.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
-                            </mat-paginator>
-                          </div>
-                        </div>
-                      </div>
-                    </mat-tab>
-                    <mat-tab label="Todas">
-                      <div class="activity">
-                        <div *ngIf="administradorAccionesTodas.length > 0">
-                          <div class="activity">
+          <div class="d-inline-block">
+            <div class="card top-selling overflow-auto">
+              <div class="card-body">
+                <h5 class="card-title">Actividad Reciente<span>
+                    <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                      <mat-tab label="Hoy" class="mat-tab-label">
+                        <div class="activity">
+                          <div *ngIf="administradorAccionesHoy.length > 0">
                             <div class="activity-item d-flex"
-                              *ngFor="let administradorAccionTodas of administradorAccionesTodas.reverse() | paginate: page_size:page_number">
-                              <div class="activite-label">{{administradorAccionTodas.fecha_modificacion}}</div>
-                              <i *ngIf="administradorAccionTodas.estado_actual === 'ACEPTADA'" class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                            <i *ngIf="administradorAccionTodas.estado_actual === 'EN ESPERA'" class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                            <i *ngIf="administradorAccionTodas.estado_actual === 'RECHAZADA'" class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                              *ngFor="let administradorAccionHoy of administradorAccionesHoy.reverse() | paginate: page_size_recent_activitys:page_number_recent_activitys">
+                              <div class="activite-label">{{administradorAccionHoy.hora_modificacion}}</div>
+                              <i *ngIf="administradorAccionHoy.estado_actual === 'ACEPTADA'"
+                                class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                              <i *ngIf="administradorAccionHoy.estado_actual === 'EN ESPERA'"
+                                class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                              <i *ngIf="administradorAccionHoy.estado_actual === 'RECHAZADA'"
+                                class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
                               <div class="activity-content">
-                                {{administradorAccionTodas.estado_actual}} <a href="#" class="fw-bold text-dark"
-                                  *ngIf="administradorAccionTodas.id_usuario_empresa_fk">| {{administradorAccionTodas.Usuario.nombre}}</a>
-                                <a href="#" class="fw-bold text-dark"
-                                  *ngIf="administradorAccionTodas.id_vacante_fk">{{administradorAccionTodas.Vacante.puesto}}</a>
+                                {{administradorAccionHoy.estado_actual}} 
+                                <a [href]="urlEmpresa(administradorAccionHoy.id_usuario_empresa_fk)" class="fw-bold text-dark"
+                                  *ngIf="administradorAccionHoy.id_usuario_empresa_fk">
+                                  | {{administradorAccionHoy.Usuario.nombre}}</a>
+                                <a [href]="urlVacante(administradorAccionHoy.id_vacante_fk)" class="fw-bold text-dark"
+                                  *ngIf="administradorAccionHoy.id_vacante_fk">
+                                  | {{administradorAccionHoy.Vacante.puesto}}</a>
                               </div>
                             </div>
-                          </div>
-                          <!-- Paginación -->
-                          <div class="row justify-content-end">
-                            <mat-paginator [length]="administradorAccionesTodas.length" [pageSize]="page_size"
-                              [pageSizeOptions]="pageSizeOptions" showFirstLastButtons (page)="handlePage($event)">
-                            </mat-paginator>
+                            <!-- Paginación -->
+                            <div class="mw-100">
+                              <mat-paginator [length]="administradorAccionesHoy.length" [pageSize]="page_size_recent_activitys"
+                                [pageSizeOptions]="pageSizeOptionsRecentActivitys" (page)="handlePageRecentActivitys($event)">
+                              </mat-paginator>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </mat-tab>
-                  </mat-tab-group>
-                </span></h5>
+                      </mat-tab>
+                      <mat-tab label="Ayer">
+                        <div class="activity">
+                          <div *ngIf="administradorAccionesAyer.length > 0">
+                            <div class="activity-item d-flex"
+                              *ngFor="let administradorAccionAyer of administradorAccionesAyer.reverse() | paginate: page_size_recent_activitys:page_number_recent_activitys">
+                              <div class="activite-label" *ngIf="administradorAccionAyer.hora_modificacion">
+                                {{administradorAccionAyer.hora_modificacion}}</div>
+                              <i *ngIf="administradorAccionAyer.estado_actual === 'ACEPTADA'"
+                                class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                              <i *ngIf="administradorAccionAyer.estado_actual === 'EN ESPERA'"
+                                class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                              <i *ngIf="administradorAccionAyer.estado_actual === 'RECHAZADA'"
+                                class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                              <div class="activity-content">
+                                {{administradorAccionAyer.estado_actual}} 
+                                <a [href]="urlEmpresa(administradorAccionAyer.id_usuario_empresa_fk)" class="fw-bold text-dark"
+                                  *ngIf="administradorAccionAyer.id_usuario_empresa_fk">
+                                  | {{administradorAccionAyer.Usuario.nombre}}</a>
+                                <a [href]="urlVacante(administradorAccionAyer.id_vacante_fk)" class="fw-bold text-dark"
+                                  *ngIf="administradorAccionAyer.id_vacante_fk">
+                                  | {{administradorAccionAyer.Vacante.puesto}}</a>
+                              </div>
+                            </div>
+                            <!-- Paginación -->
+                            <div class="mw-100">
+                              <mat-paginator [length]="administradorAccionesAyer.length" [pageSize]="page_size_recent_activitys"
+                                [pageSizeOptions]="pageSizeOptionsRecentActivitys" (page)="handlePageRecentActivitys($event)">
+                              </mat-paginator>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-tab>
+                      <mat-tab label="Todas">
+                        <div class="activity">
+                          <div *ngIf="administradorAccionesTodas.length > 0">
+                            <div class="activity">
+                              <div class="activity-item d-flex"
+                                *ngFor="let administradorAccionTodas of administradorAccionesTodas.reverse() | paginate: page_size_recent_activitys:page_number_recent_activitys">
+                                <div class="activite-label">{{administradorAccionTodas.solo_fecha_modificacion}} </div>
+                                <i *ngIf="administradorAccionTodas.estado_actual === 'ACEPTADA'"
+                                  class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                <i *ngIf="administradorAccionTodas.estado_actual === 'EN ESPERA'"
+                                  class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+                                <i *ngIf="administradorAccionTodas.estado_actual === 'RECHAZADA'"
+                                  class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+                                <div class="activity-content">
+                                  {{administradorAccionTodas.estado_actual}} 
+                                  <a [href]="urlEmpresa(administradorAccionTodas.id_usuario_empresa_fk)" class="fw-bold text-dark"
+                                    *ngIf="administradorAccionTodas.id_usuario_empresa_fk">|
+                                    | {{administradorAccionTodas.Usuario.nombre}}</a>
+                                  <a [href]="urlVacante(administradorAccionTodas.id_vacante_fk)" class="fw-bold text-dark"
+                                    *ngIf="administradorAccionTodas.id_vacante_fk">
+                                    | {{administradorAccionTodas.Vacante.puesto}}</a>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- Paginación -->
+                            <div class="mw-100">
+                              <mat-paginator [length]="administradorAccionesTodas.length"
+                                [pageSize]="page_size_recent_activitys"
+                                [pageSizeOptions]="pageSizeOptionsRecentActivitys"
+                                showFirstLastButtons
+                                (page)="handlePageRecentActivitys($event)">
+                              </mat-paginator>
+                            </div>
+                          </div>
+                        </div>
+                      </mat-tab>
+                    </mat-tab-group>
+                  </span></h5>
+              </div>
             </div>
           </div>
           <!-- End Actividad reciente -->

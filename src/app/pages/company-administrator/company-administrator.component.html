@@ -78,10 +78,30 @@
 							<h4>{{ empresa.email }}</h4>
 							<h3>Estatus:</h3>
 							<h4 *ngIf="empresa.estado === null">
+								
 								<b>EN REVISIÓN</b>
+										
 							</h4>
 							<h4>
-								<b>{{ empresa.estado }}</b>
+								
+								<b *ngIf="empresa.estado === 'ACEPTADA'" class="badge bg-success text-dark">
+									
+									{{ empresa.estado }}
+										
+								</b>	
+
+								<b *ngIf="empresa.estado === 'RECHAZADA'" class="badge bg-danger text-dark">
+
+									{{ empresa.estado }}
+
+								</b>
+
+								<b *ngIf="empresa.estado === 'EN ESPERA'" class="badge bg-warning text-dark">
+
+									{{ empresa.estado }}
+
+								</b>
+										
 							</h4>
 
 							<h3 *ngIf="empresa.dias_transcurridos">Días transcurridos:</h3>
