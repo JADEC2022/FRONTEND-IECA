@@ -122,6 +122,34 @@
                             </mat-paginator>
                           </div>
                         </mat-tab>
+                        <mat-tab label="Rechazadas" class="mat-tab-label">
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr align="center">
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="empresa">Empresa</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr align="center" 
+                                *ngFor="let empresaRechazada of empresasRechazadas | paginate: page_size_recent_companys:page_number_recent_companys">
+                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
+                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)"><img [src]= "empresaRechazada.foto_empresa" alt=""></a></th>
+                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)">{{empresaRechazada.id_empresa}}</a></th>
+                                <td><a [href]="urlEmpresa(empresaRechazada.id_empresa)" class="text-dark">{{empresaRechazada.nombre}}</a></td>
+                                <td><span class="badge bg-danger text-dark">{{empresaRechazada.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <!-- Paginación -->
+                          <div class="row justify-content-end mw-100" *ngIf="empresasRechazadas.length > 0">
+                            <mat-paginator [length]="empresasRechazadas.length" [pageSize]="page_size_recent_companys"
+                              [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons (page)="handlePageRecentCompanys($event)">
+                            </mat-paginator>
+                          </div>
+                        </mat-tab>
                         <mat-tab label="En Espera" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
@@ -148,34 +176,6 @@
                             <mat-paginator [length]="empresasEnEspera.length" [pageSize]="page_size_recent_activitys"
                               [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons
                               (page)="handlePageRecentCompanys($event)">
-                            </mat-paginator>
-                          </div>
-                        </mat-tab>
-                        <mat-tab label="Rechazadas" class="mat-tab-label">
-                          <table class="table table-borderless datatable">
-                            <thead>
-                              <tr align="center">
-                                <th scope="fotoDePerfil">Foto de Perfil</th>
-                                <th scope="numero">Número</th>
-                                <th scope="empresa">Empresa</th>
-                                <th scope="estado">Estado</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr align="center" 
-                                *ngFor="let empresaRechazada of empresasRechazadas | paginate: page_size_recent_companys:page_number_recent_companys">
-                                <!-- <th scope="row"><a href="#"><img src="../../../assets/img/unknown-user.jpg" alt=""></a></th> -->
-                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)"><img [src]= "empresaRechazada.foto_empresa" alt=""></a></th>
-                                <th scope="row"><a [href]="urlEmpresa(empresaRechazada.id_empresa)">{{empresaRechazada.id_empresa}}</a></th>
-                                <td><a [href]="urlEmpresa(empresaRechazada.id_empresa)" class="text-dark">{{empresaRechazada.nombre}}</a></td>
-                                <td><span class="badge bg-danger text-dark">{{empresaRechazada.estado}}</span></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!-- Paginación -->
-                          <div class="row justify-content-end mw-100" *ngIf="empresasRechazadas.length > 0">
-                            <mat-paginator [length]="empresasRechazadas.length" [pageSize]="page_size_recent_companys"
-                              [pageSizeOptions]="pageSizeOptionsRecentCompanys" showFirstLastButtons (page)="handlePageRecentCompanys($event)">
                             </mat-paginator>
                           </div>
                         </mat-tab>
@@ -222,36 +222,6 @@
                             </mat-paginator>
                           </div>
                         </mat-tab>
-                        <mat-tab label="En Espera" class="mat-tab-label">
-                          <table class="table table-borderless datatable">
-                            <thead>
-                              <tr align="center">
-                                <th scope="fotoDePerfil">Foto de Perfil</th>
-                                <th scope="numero">Número</th>
-                                <th scope="vacante">Vacante</th>
-                                <th scope="estado">Estado</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr align="center" 
-                                *ngFor="let vacanteEnEspera of vacantesEnEspera | paginate: page_size_recent_vacancies:page_number_recent_vacancies">
-                                <!-- <img *ngIf="vacanteEnEspera.imagen === 'null'" src="../../../assets/img/unknown-user.jpg" alt=""> -->
-                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">
-                                  <img *ngIf="vacanteEnEspera.imagen !== 'null'" src="../../../assets/img/unknown-user.jpg" alt="">
-                                  <img [src]= "vacanteEnEspera.imagen" alt=""></a></th>
-                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">{{vacanteEnEspera.id_vacante}}</a></th>
-                                <td><a [href]="urlVacante(vacanteEnEspera.id_vacante)" class="text-dark">{{vacanteEnEspera.puesto}}</a></td>
-                                <td><span class="badge bg-warning text-dark">{{vacanteEnEspera.estado}}</span></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <!-- Paginación -->
-                          <div class="row justify-content-end mw-100" *ngIf="vacantesEnEspera.length > 0">
-                            <mat-paginator [length]="vacantesEnEspera.length" [pageSize]="page_size_recent_vacancies"
-                              [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
-                            </mat-paginator>
-                          </div>
-                        </mat-tab>
                         <mat-tab label="Rechazadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
                             <thead>
@@ -278,6 +248,36 @@
                           <!-- Paginación -->
                           <div class="row justify-content-end mw-100" *ngIf="vacantesRechazadas.length > 0">
                             <mat-paginator [length]="vacantesRechazadas.length" [pageSize]="page_size_recent_vacancies"
+                              [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
+                            </mat-paginator>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="En Espera" class="mat-tab-label">
+                          <table class="table table-borderless datatable">
+                            <thead>
+                              <tr align="center">
+                                <th scope="fotoDePerfil">Foto de Perfil</th>
+                                <th scope="numero">Número</th>
+                                <th scope="vacante">Vacante</th>
+                                <th scope="estado">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr align="center" 
+                                *ngFor="let vacanteEnEspera of vacantesEnEspera | paginate: page_size_recent_vacancies:page_number_recent_vacancies">
+                                <!-- <img *ngIf="vacanteEnEspera.imagen === 'null'" src="../../../assets/img/unknown-user.jpg" alt=""> -->
+                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">
+                                  <img *ngIf="vacanteEnEspera.imagen !== 'null'" src="../../../assets/img/unknown-user.jpg" alt="">
+                                  <img [src]= "vacanteEnEspera.imagen" alt=""></a></th>
+                                <th scope="row"><a [href]="urlVacante(vacanteEnEspera.id_vacante)">{{vacanteEnEspera.id_vacante}}</a></th>
+                                <td><a [href]="urlVacante(vacanteEnEspera.id_vacante)" class="text-dark">{{vacanteEnEspera.puesto}}</a></td>
+                                <td><span class="badge bg-warning text-dark">{{vacanteEnEspera.estado}}</span></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <!-- Paginación -->
+                          <div class="row justify-content-end mw-100" *ngIf="vacantesEnEspera.length > 0">
+                            <mat-paginator [length]="vacantesEnEspera.length" [pageSize]="page_size_recent_vacancies"
                               [pageSizeOptions]="pageSizeOptionsRecentVacancies" showFirstLastButtons (page)="handlePageRecentVacancies($event)">
                             </mat-paginator>
                           </div>
@@ -329,7 +329,7 @@
           </div><!-- End En Espera -->
 
           <!-- Actividad reciente -->
-          <div class="d-inline-block mw-100" style="width: auto" alt="Max-width 100%">
+          <div class="d-inline-block">
             <div class="card top-selling overflow-auto">
               <div class="card-body">
                 <h5 class="card-title">Actividad Reciente<span>
@@ -413,7 +413,7 @@
                                 <div class="activity-content">
                                   {{administradorAccionTodas.estado_actual}} 
                                   <a [href]="urlEmpresa(administradorAccionTodas.id_usuario_empresa_fk)" class="fw-bold text-dark"
-                                    *ngIf="administradorAccionTodas.id_usuario_empresa_fk">|
+                                    *ngIf="administradorAccionTodas.id_usuario_empresa_fk">
                                     | {{administradorAccionTodas.Usuario.nombre}}</a>
                                   <a [href]="urlVacante(administradorAccionTodas.id_vacante_fk)" class="fw-bold text-dark"
                                     *ngIf="administradorAccionTodas.id_vacante_fk">

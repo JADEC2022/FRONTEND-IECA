@@ -85,7 +85,23 @@
 								<b>EN REVISIÓN</b>
 							</h4>
 							<h4>
-								<b>{{ vacante.estado }}</b>
+								<b *ngIf="vacante.estado === 'ACEPTADA'" class="badge bg-success text-dark">
+									
+									{{ vacante.estado }}
+										
+								</b>	
+
+								<b *ngIf="vacante.estado === 'RECHAZADA'" class="badge bg-danger text-dark">
+
+									{{ vacante.estado }}
+
+								</b>
+
+								<b *ngIf="vacante.estado === 'EN ESPERA'" class="badge bg-warning text-dark">
+
+									{{ vacante.estado }}
+
+								</b>
 							</h4>
 
 							<h3 *ngIf="vacante.dias_transcurridos">Días transcurridos:</h3>
