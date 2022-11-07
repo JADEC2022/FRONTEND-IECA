@@ -57,7 +57,9 @@
 		<section class="section profile">
 			<div
 				class="row"
-				*ngFor="let empresa of empresas | paginate: page_size:page_number"
+				*ngFor="
+					let empresa of empresas.reverse() | paginate: page_size:page_number
+				"
 			>
 				<div class="col-xl-4">
 					<div class="card">
@@ -78,30 +80,29 @@
 							<h4>{{ empresa.email }}</h4>
 							<h3>Estatus:</h3>
 							<h4 *ngIf="empresa.estado === null">
-								
 								<b>EN REVISIÓN</b>
-										
 							</h4>
 							<h4>
-								
-								<b *ngIf="empresa.estado === 'ACEPTADA'" class="badge bg-success text-dark">
-									
+								<b
+									*ngIf="empresa.estado === 'ACEPTADA'"
+									class="badge bg-success text-dark"
+								>
 									{{ empresa.estado }}
-										
-								</b>	
-
-								<b *ngIf="empresa.estado === 'RECHAZADA'" class="badge bg-danger text-dark">
-
-									{{ empresa.estado }}
-
 								</b>
 
-								<b *ngIf="empresa.estado === 'EN ESPERA'" class="badge bg-warning text-dark">
-
+								<b
+									*ngIf="empresa.estado === 'RECHAZADA'"
+									class="badge bg-danger text-dark"
+								>
 									{{ empresa.estado }}
-
 								</b>
-										
+
+								<b
+									*ngIf="empresa.estado === 'EN ESPERA'"
+									class="badge bg-warning text-dark"
+								>
+									{{ empresa.estado }}
+								</b>
 							</h4>
 
 							<h3 *ngIf="empresa.dias_transcurridos">Días transcurridos:</h3>

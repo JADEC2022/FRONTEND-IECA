@@ -56,7 +56,9 @@
 		<section class="section profile" *ngIf="vacantes.length > 0">
 			<div
 				class="row"
-				*ngFor="let vacante of vacantes | paginate: page_size:page_number"
+				*ngFor="
+					let vacante of vacantes.reverse() | paginate: page_size:page_number
+				"
 			>
 				<div class="col-xl-4">
 					<div class="card">
@@ -85,22 +87,25 @@
 								<b>EN REVISIÓN</b>
 							</h4>
 							<h4>
-								<b *ngIf="vacante.estado === 'ACEPTADA'" class="badge bg-success text-dark">
-									
+								<b
+									*ngIf="vacante.estado === 'ACEPTADA'"
+									class="badge bg-success text-dark"
+								>
 									{{ vacante.estado }}
-										
-								</b>	
-
-								<b *ngIf="vacante.estado === 'RECHAZADA'" class="badge bg-danger text-dark">
-
-									{{ vacante.estado }}
-
 								</b>
 
-								<b *ngIf="vacante.estado === 'EN ESPERA'" class="badge bg-warning text-dark">
-
+								<b
+									*ngIf="vacante.estado === 'RECHAZADA'"
+									class="badge bg-danger text-dark"
+								>
 									{{ vacante.estado }}
+								</b>
 
+								<b
+									*ngIf="vacante.estado === 'EN ESPERA'"
+									class="badge bg-warning text-dark"
+								>
+									{{ vacante.estado }}
 								</b>
 							</h4>
 
