@@ -25,12 +25,17 @@ export class DashboardAdministratorService {
 
 	getActionsByAdministratorFiltroDia(filtrodia){
 		const idAdministrator = localStorage.getItem("id_usuario");
-		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}/${filtrodia}`);
+		return this.http.get(`${baseUrlAdministradorAcciones}/filtrar/${idAdministrator}/${filtrodia}`);
 	}
 
 	getActionsByAdministrator(){
 		const idAdministrator = localStorage.getItem("id_usuario");
 		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}`);
+	}
+
+	putCantidadResultados(cantidadResultados){
+		const idAdministrator = localStorage.getItem("id_usuario");
+		return this.http.get(`${baseUrlAdministradorAcciones}/${idAdministrator}/${cantidadResultados}`);
 	}
 	
 	verEmpresa(idEmpresa) {

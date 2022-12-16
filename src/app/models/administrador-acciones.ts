@@ -6,6 +6,7 @@ export class AdministradorAccionI {
     estado_anterior?: string;
     estado_actual?: string;
     fecha_modificacion?: string;
+    cantidadResultados?: number;
     id_vacante_fk?: number;
     id_usuario_administrador_fk?: number;
     id_usuario_empresa_fk?: number;

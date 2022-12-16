@@ -88,11 +88,95 @@
               </div>
             </div><!-- End Rechazadas -->
 
+            <!-- En Revision -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revision">
+                <div class="card-body">
+                  <h5 class="card-title">En Revisión<span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Empresas" class="mat-tab-label">
+                          <div class="d-flex align-items-center"style="background-image: url('assets/img/Imagen10.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{empresasEnRevision.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Vacantes" class="mat-tab-label">
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen10.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-gear-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{vacantesEnRevision.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
+                </div>
+
+              </div>
+            </div><!-- End En Revision -->
+
+            <!-- Total Empresas - Vacantes -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card total">
+                <div class="card-body">
+                  <h5 class="card-title">Total<span>
+                      <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
+                        <mat-tab label="Empresas" class="mat-tab-label">
+                          <div class="d-flex align-items-center"style="background-image: url('assets/img/Imagen11.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-bar-chart-line-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{empresasAceptadas.length + empresasRechazadas.length + empresasEnEspera.length + empresasEnRevision.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                        <mat-tab label="Vacantes" class="mat-tab-label">
+                          <div class="d-flex align-items-center"
+                            style="background-image: url('assets/img/Imagen11.png');">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-bar-chart-line-fill"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6>{{vacantesAceptadas.length + vacantesRechazadas.length + vacantesEnEspera.length + vacantesEnRevision.length}}</h6>
+                              <span class="text-success small pt-1 fw-bold"></span> <span
+                                class="text-muted small pt-2 ps-1"></span>
+                            </div>
+                          </div>
+                        </mat-tab>
+                      </mat-tab-group>
+                    </span></h5>
+                </div>
+
+              </div>
+            </div><!-- End Total Empresas - Vacantes -->
+
             <!-- Tabla de Empresas -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
                 <div class="card-body">
                   <h5 class="card-title">Empresas recientes <span>
+
+                
+                      <!-- <button mat-raised-button style="margin-left: 20px;" (click)="agregarCantidadResultados()">Agregar la cantidad de resultados</button> -->
+              
+                    <!-- <li *ngIf="cantidadResultados">
+                      You chose: <i>{{cantidadResultados}}</i>
+                    </li> -->
+
                       <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
                         <mat-tab label="Aceptadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
@@ -184,13 +268,14 @@
                 </div>
               </div>
             </div><!-- End Tabla de empresas -->
-
+            
 
             <!-- Tabla de Vacantes -->
             <div class="col-12">
               <div class="card top-selling overflow-auto">
                 <div class="card-body">
-                  <h5 class="card-title">Vacantes recientes <span>
+                  <h5 class="card-title">Vacantes recientes
+                    <span>
                       <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
                         <mat-tab label="Aceptadas" class="mat-tab-label">
                           <table class="table table-borderless datatable">
@@ -332,7 +417,8 @@
           <div class="d-inline-block">
             <div class="card top-selling overflow-auto">
               <div class="card-body">
-                <h5 class="card-title">Actividad Reciente<span>
+                <h5 class="card-title">Actividad Reciente
+                  <span>
                     <mat-tab-group class="mat-tab-group" mat-align-tabs="center">
                       <mat-tab label="Hoy" class="mat-tab-label">
                         <div class="activity">
@@ -402,7 +488,7 @@
                           <div *ngIf="administradorAccionesTodas.length > 0">
                             <div class="activity">
                               <div class="activity-item d-flex"
-                                *ngFor="let administradorAccionTodas of administradorAccionesTodas.reverse() | paginate: page_size_recent_activitys:page_number_recent_activitys">
+                                *ngFor="let administradorAccionTodas of administradorAccionesTodas | paginate: page_size_recent_activitys:page_number_recent_activitys">
                                 <div class="activite-label">{{administradorAccionTodas.solo_fecha_modificacion}} </div>
                                 <i *ngIf="administradorAccionTodas.estado_actual === 'ACEPTADA'"
                                   class='bi bi-circle-fill activity-badge text-success align-self-start'></i>

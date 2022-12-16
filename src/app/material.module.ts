@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -45,6 +45,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatPaginatorModule,
     MatCheckboxModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
   exports: [
     MatAutocompleteModule,

@@ -38,6 +38,16 @@
     margin: 5px;
   }
 
+  .example-form {
+    min-width: 150px;
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
   /*--------------------------------------------------------------
   # Main
   --------------------------------------------------------------*/
@@ -248,7 +258,7 @@
     font-weight: 400;
   }
   .card-body {
-    padding: 0 20px 20px 20px;
+    padding: 0 10px 10px 10px;
   }
   
   .card-img-overlay {
@@ -737,6 +747,14 @@
   .dashboard .espera .card-icon {
     color: #FFC000 ;
     background: #FFD966;
+  }
+  .dashboard .revision .card-icon {
+    color: #3a3938;
+    background: #dfdcda;
+  }
+  .dashboard .total .card-icon {
+    color: #00628b;
+    background: #95dfff;
   }
 
   /* Activity */
