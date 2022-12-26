@@ -21,7 +21,7 @@ export class FormNumberOfResultsComponent {
   ngOnInit(): void {
     this.administradoraccion = new FormGroup({
       cantidadResultados: new FormControl(this.data.value.cantidadResultados, {
-        validators: [Validators.required, Validators.minLength(1)],
+        validators: [Validators.required, Validators.minLength(1)]
       }),
     })
   }
