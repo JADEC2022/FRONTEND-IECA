@@ -145,22 +145,22 @@ export class DashboardAdministratorComponent implements OnInit {
 		this.page_number_recent_vacancies = e.pageIndex + 1;
 	}
 
-	// agregarCantidadResultados(): void {
-	// 	this.administradoraccion.value.cantidadResultados = null;
+	agregarCantidadResultados(): void {
+		// this.administradoraccion.value.cantidadResultados = null;
 		
-	// 	const dialogRef = this.dialog.open(FormNumberOfResultsComponent, {
-	// 		// Abrmimos la ventana emergente
-	// 		width: '500px',
-	// 		data: this.administradoraccion,
-	// 	});
+		const dialogRef = this.dialog.open(FormNumberOfResultsComponent, {
+			// Abrmimos la ventana emergente
+			width: '500px',
+			data: this.administradoraccion,
+		});
 
-	// 	dialogRef.afterClosed().subscribe((result) => {
-	// 		// Despues de cerrarse...
-	// 		console.log('The dialog was closed');
-	// 		//if (result) {
-	// 		this.administradoraccion.value.cantidadResultados = result.catidadResultados;
-	// 		//} 
-	// 	});
-	// 	location.assign('http://localhost:4200/#/dashboard-administrator');
-	// }
+		dialogRef.afterClosed().subscribe((result) => {
+			// Despues de cerrarse...
+			console.log('The dialog was closed');
+			//if (result) {
+			// this.administradoraccion.value.cantidadResultados = result.catidadResultados;
+			//} 
+		});
+		// location.assign('http://localhost:4200/#/dashboard-administrator');
+	}
 }
