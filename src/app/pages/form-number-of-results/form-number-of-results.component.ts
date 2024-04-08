@@ -7,11 +7,12 @@ import { AdministradorAccionI } from '../../models/administrador-acciones';
 @Component({
   selector: 'app-form-number-of-results',
   templateUrl: './form-number-of-results.component.html',
-  styleUrls: ['./form-number-of-results.component.css'],
+  styleUrls: ['./form-number-of-results.component.css']
 })
+
 export class FormNumberOfResultsComponent {
   administradoraccion: FormGroup;
-
+  cantidadResultados: FormControl;
   constructor(
     public dialogRef: MatDialogRef<FormNumberOfResultsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: FormGroup,

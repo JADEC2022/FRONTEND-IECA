@@ -130,8 +130,8 @@
     <!-- Ubicación -->
     <div *ngIf="part" class="input-field">
         <i class="material-icons">room</i>
-        <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" type="text" placeholder="Dirección" formControlName="ubicacion" />
-        <!--<input id="autocomplete" type="text" placeholder="Dirección" formControlName="ubicacion" />-->
+        <!-- <input ngx-google-places-autocomplete #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" type="text" placeholder="Dirección" formControlName="ubicacion" /> -->
+        <input id="autocomplete" type="text" placeholder="Dirección" formControlName="ubicacion" />
         <!--<input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>-->
     </div>
     <small *ngIf="controlNoValid(registerEmpresaForm, 'ubicacion')" class="form-text text-danger">

@@ -26,6 +26,7 @@ import { PaginatePipe } from './pipes/paginate.pipe';
 import { SearchPipe } from './pipes/search.pipe';
 import { PostulationsComponent } from './postulations/postulations.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { FormNumberOfResultsComponent } from './form-number-of-results/form-number-of-results.component';
 import { CompanyAdministratorComponent } from './company-administrator/company-administrator.component';
 import { DashboardAdministratorComponent } from './dashboard-administrator/dashboard-administrator.component';
 import { PerfilAdministratorComponent } from './perfil-administrator/perfil-administrator.component';
@@ -57,7 +58,7 @@ import { NewAdministratorComponent } from './new-administrator/new-administrator
         DashboardAdministratorComponent,
         PerfilAdministratorComponent,
         VacanciesAdministratorComponent,
-
+        FormNumberOfResultsComponent,
         NewAdministratorComponent
     ],
     imports: [
