@@ -12,8 +12,11 @@ export class ComponentsService {
 
   constructor(private http: HttpClient) { }
 
-  getUsuario() {
-    const id = localStorage.getItem('id_usuario');
+  getUsuario(id_usuario = null) {
+    let id = localStorage.getItem('id_usuario');
+    if(!id){
+      id = id_usuario;
+    }
     return this.http.get(`${baseUrl}/${id}`);
   }
 

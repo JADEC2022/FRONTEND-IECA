@@ -14,6 +14,7 @@ export class ValidEmailComponent implements OnInit {
     email_validado: boolean;
     token: string;
     id: number;
+    ruta: string;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -23,11 +24,13 @@ export class ValidEmailComponent implements OnInit {
         this.id = 0;
         this.token = '';
         this.email_validado = false;
+        this.ruta = '';
     }
 
     ngOnInit(): void {
         this.params();
         this.validarEmail();
+        this.getRuta();
     }
 
     //  ---------- MENSAJES ---------- //
@@ -106,9 +109,9 @@ export class ValidEmailComponent implements OnInit {
         })
     }
 
-    getRuta(): string {
+    getRuta(): void {
         let ruta = ''
-        this.componentService.getUsuario().subscribe((resp: any) => {
+        this.componentService.getUsuario(this.id).subscribe((resp: any) => {
             if (!resp.status) {
                 return this.errorMassage();
             }
@@ -119,7 +122,7 @@ export class ValidEmailComponent implements OnInit {
             }
         })
 
-        return ruta;
+        this.ruta = ruta;
     }
 
 }
